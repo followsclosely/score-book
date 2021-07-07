@@ -1,0 +1,61 @@
+<h3>Game Form</h3>
+<form class="formwidth" (ngSubmit)="onSubmit()" #myForm="ngForm">
+    <table class="fullwidth" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="fullwidth">
+                    <input matInput placeholder="Game Type" id="type" [(ngModel)]="game.type" name="type">
+                </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <mat-form-field class="fullwidth">
+                    <input matInput placeholder="Date/Time" id="dateTime" [(ngModel)]="game.dateTime" name="dateTime">
+                </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <mat-form-field class="fullwidth">
+                    <input matInput placeholder="First Name" id="firstname" [(ngModel)]="game.firstname" name="firstname">
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="fullwidth">
+                    <input matInput placeholder="Last Name" id="lastname" [(ngModel)]="game.lastname" name="lastname">
+                </mat-form-field>
+            </td>
+        </tr>
+    </table>
+
+    <!--
+    <p>
+        <mat-form-field class="fullwidth">
+            <textarea matInput placeholder="Address" id="address" [(ngModel)]="game.address" name="address"></textarea>
+        </mat-form-field>
+    </p>
+    <table class="fullwidth" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="fullwidth">
+                    <input matInput placeholder="City" id="city" [(ngModel)]="game.city" name="city">
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="fullwidth">
+                    <input matInput placeholder="State" id="state" [(ngModel)]="game.state" name="state">
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="fullwidth">
+                    <input matInput #postalcode maxlength="5" placeholder="Postal Code" id="postalcode" [(ngModel)]="game.postalcode" name="postalcode">
+                </mat-form-field>
+            </td>
+        </tr>
+    </table>
+-->
+    <p>
+        <button type="submit" md-raised-button>Submit</button>
+    </p>
+</form>
