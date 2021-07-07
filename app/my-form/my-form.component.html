@@ -1,29 +1,24 @@
 <h3>Game Form</h3>
 <form class="formwidth" (ngSubmit)="onSubmit()" #myForm="ngForm">
+
     <table class="fullwidth" cellspacing="0">
         <tr>
             <td>
                 <mat-form-field class="fullwidth">
                     <input matInput placeholder="Game Type" id="type" [(ngModel)]="game.type" name="type">
+                    <mat-hint>Hearts / Rook / Chess</mat-hint>
                 </mat-form-field>
             </td>
-        </tr>
-        <tr>
+            <td>
+                <mat-form-field class="fullwidth">
+                    <input matInput placeholder="Teams / Factions" id="factionCount" [(ngModel)]="game.factionCount" name="factionCount">
+                    <mat-hint>the number of players</mat-hint>
+                </mat-form-field>
+            </td>
             <td>
                 <mat-form-field class="fullwidth">
                     <input matInput placeholder="Date/Time" id="dateTime" [(ngModel)]="game.dateTime" name="dateTime">
-                </mat-form-field>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <mat-form-field class="fullwidth">
-                    <input matInput placeholder="First Name" id="firstname" [(ngModel)]="game.firstname" name="firstname">
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field class="fullwidth">
-                    <input matInput placeholder="Last Name" id="lastname" [(ngModel)]="game.lastname" name="lastname">
+                    <mat-hint>when the game was played</mat-hint>
                 </mat-form-field>
             </td>
         </tr>
