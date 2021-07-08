@@ -9,11 +9,14 @@ import { Game, GameType } from '../game';
 export class MyFormComponent implements OnInit {
   game = new Game();
 
+  //todo: This should be a customizable parameter
   factionOptions = Array.from({length: 20}, (_, i) => i + 1)
+  
+  //This should come from a service
   gameOptions = [
-    new GameType("Chess"), 
+    new GameType("Chess", 2), 
     new GameType("Dr. Mario"), 
-    new GameType("Hearts")
+    new GameType("Hearts", 4)
   ] 
 
   constructor() { }
