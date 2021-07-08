@@ -13,7 +13,7 @@
             </td>
             <td>
                 <mat-form-field class="fullwidth">
-                    <input matInput id="gameTypeNew" [(ngModel)]="game.gameTypeNew" name="gameTypeNew">
+                    <input matInput [(ngModel)]="game.gameTypeNew" name="gameTypeNew">
                     <mat-hint>or a new game</mat-hint>
                 </mat-form-field>
             </td>
@@ -21,25 +21,22 @@
         <tr>
             <td>
                 <mat-form-field>
-                    <mat-select name="factionCount" [(ngModel)]="game.factionCount" placeholder="Teams / Factions">
+                    <input type="number" min="1" max="10" matInput [(ngModel)]="game.factionCount" name="factionCount" placeholder="Teams / Factions">
+                    <!-- <mat-select name="factionCount" [(ngModel)]="game.factionCount" placeholder="Teams / Factions">
                         <mat-option>--</mat-option>
                         <mat-option *ngFor="let option of factionOptions" [value]="option">{{option}}</mat-option>
-                    </mat-select>
+                    </mat-select> -->
                     <mat-hint>the number of players</mat-hint>
                 </mat-form-field>
             </td>
             <td>
                 <mat-form-field class="fullwidth">
-                    <input matInput placeholder="Date/Time" id="dateTime" [(ngModel)]="game.dateTime" name="dateTime">
+                    <input matInput [(ngModel)]="game.dateTime" name="dateTime">
                     <mat-hint>when the game was played</mat-hint>
                 </mat-form-field>
             </td>
         </tr>
-        <tr>
-        <td>
-            
-        </td>
-    </tr>
+   
     </table>
 
     <!--

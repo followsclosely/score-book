@@ -4,7 +4,7 @@ export class Game {
   constructor(
     public type?: string,
     public gameTypeNew?: string,
-    public dateTime: string = formatDate(Date.now(),'yyyy-MM-dd','en-US'),
+    public dateTime: string = formatDate(Date.now(), 'yyyy-MM-dd hh:mm', 'en-US'),
     public factionCount?: number,
   ) {}
 }
