@@ -1,17 +1,30 @@
-<h3>Game Form</h3>
+<h3>New Match</h3>
 <form class="formwidth" (ngSubmit)="onSubmit()" #myForm="ngForm">
 
     <table class="fullwidth" cellspacing="0">
         <tr>
             <td>
-                <mat-form-field class="fullwidth">
-                    <input matInput placeholder="Game Type" id="type" [(ngModel)]="game.type" name="type">
-                    <mat-hint>Hearts / Rook / Chess</mat-hint>
+                <mat-form-field>
+                    <mat-select name="type" [(ngModel)]="game.type" placeholder="Game Type">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let option of gameOptions" [value]="option.name">{{option.name}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </td>
             <td>
                 <mat-form-field class="fullwidth">
-                    <input matInput placeholder="Teams / Factions" id="factionCount" [(ngModel)]="game.factionCount" name="factionCount">
+                    <input matInput id="gameTypeNew" [(ngModel)]="game.gameTypeNew" name="gameTypeNew">
+                    <mat-hint>or a new game</mat-hint>
+                </mat-form-field>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <mat-form-field>
+                    <mat-select name="factionCount" [(ngModel)]="game.factionCount" placeholder="Teams / Factions">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let option of factionOptions" [value]="option">{{option}}</mat-option>
+                    </mat-select>
                     <mat-hint>the number of players</mat-hint>
                 </mat-form-field>
             </td>
@@ -22,6 +35,11 @@
                 </mat-form-field>
             </td>
         </tr>
+        <tr>
+        <td>
+            
+        </td>
+    </tr>
     </table>
 
     <!--

@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 
 import 'hammerjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatButtonModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatSelectModule } from '@angular/material';
 
 
 import { AppComponent } from './app.component';
@@ -23,7 +23,8 @@ import { MyFormComponent } from './my-form/my-form.component';
     FormsModule,
     BrowserAnimationsModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

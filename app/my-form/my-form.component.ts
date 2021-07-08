@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Game } from '../game';
+import { Game, GameType } from '../game';
 
 @Component({
   selector: 'my-form',
@@ -8,6 +8,13 @@ import { Game } from '../game';
 })
 export class MyFormComponent implements OnInit {
   game = new Game();
+
+  factionOptions = Array.from({length: 20}, (_, i) => i + 1)
+  gameOptions = [
+    new GameType("Chess"), 
+    new GameType("Dr. Mario"), 
+    new GameType("Hearts")
+  ] 
 
   constructor() { }
 
