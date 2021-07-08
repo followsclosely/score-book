@@ -4,7 +4,7 @@ import { MatchService } from '../match-service.service';
 import { LogService } from '../log-service.service';
 
 @Component({
-  selector: 'my-form',
+  // selector: 'my-form',
   templateUrl: './my-form.component.html',
   styleUrls: ['./my-form.component.css']
 })

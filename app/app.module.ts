@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 
 import 'hammerjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatButtonModule, MatSelectModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatSelectModule, MatDialogModule } from '@angular/material';
 
 
 import { AppComponent } from './app.component';
@@ -16,6 +16,7 @@ import { LogService } from './log-service.service';
 
 
 @NgModule({
+  entryComponents: [MyFormComponent],
   declarations: [
     AppComponent,
     MyFormComponent
@@ -26,7 +27,8 @@ import { LogService } from './log-service.service';
     BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [MatchService, LogService],
   bootstrap: [AppComponent]
