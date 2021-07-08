@@ -11,6 +11,7 @@ import { MatInputModule, MatButtonModule, MatSelectModule } from '@angular/mater
 import { AppComponent } from './app.component';
 import { MyFormComponent } from './my-form/my-form.component';
 import { MatchServiceService } from './match-service.service';
+import { LogServiceService } from './log-service.service';
 
 
 
@@ -27,7 +28,7 @@ import { MatchServiceService } from './match-service.service';
     MatButtonModule,
     MatSelectModule
   ],
-  providers: [MatchServiceService],
+  providers: [MatchServiceService, LogServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
