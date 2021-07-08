@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { GameType } from './game';
 
 @Injectable()
-export class MatchServiceService {
+export class MatchService {
 
   gameOptions = [
     new GameType("Chess", 2), 

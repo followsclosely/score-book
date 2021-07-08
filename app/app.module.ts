@@ -10,8 +10,8 @@ import { MatInputModule, MatButtonModule, MatSelectModule } from '@angular/mater
 
 import { AppComponent } from './app.component';
 import { MyFormComponent } from './my-form/my-form.component';
-import { MatchServiceService } from './match-service.service';
-import { LogServiceService } from './log-service.service';
+import { MatchService } from './match-service.service';
+import { LogService } from './log-service.service';
 
 
 
@@ -28,7 +28,7 @@ import { LogServiceService } from './log-service.service';
     MatButtonModule,
     MatSelectModule
   ],
-  providers: [MatchServiceService, LogServiceService],
+  providers: [MatchService, LogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
