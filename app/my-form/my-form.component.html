@@ -39,33 +39,7 @@
    
     </table>
 
-    <!--
     <p>
-        <mat-form-field class="fullwidth">
-            <textarea matInput placeholder="Address" id="address" [(ngModel)]="game.address" name="address"></textarea>
-        </mat-form-field>
-    </p>
-    <table class="fullwidth" cellspacing="0">
-        <tr>
-            <td>
-                <mat-form-field class="fullwidth">
-                    <input matInput placeholder="City" id="city" [(ngModel)]="game.city" name="city">
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field class="fullwidth">
-                    <input matInput placeholder="State" id="state" [(ngModel)]="game.state" name="state">
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field class="fullwidth">
-                    <input matInput #postalcode maxlength="5" placeholder="Postal Code" id="postalcode" [(ngModel)]="game.postalcode" name="postalcode">
-                </mat-form-field>
-            </td>
-        </tr>
-    </table>
--->
-    <p>
-        <button type="submit" md-raised-button>Submit</button>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
     </p>
 </form>
