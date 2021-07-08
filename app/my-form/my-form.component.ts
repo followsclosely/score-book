@@ -9,15 +9,16 @@ import { LogService } from '../log-service.service';
   styleUrls: ['./my-form.component.css']
 })
 export class MyFormComponent implements OnInit {
+
   game = new Game();
+  gameOptions = Array<GameType>()
 
   //todo: This should be a customizable parameter
   //factionOptions = Array.from({length: 20}, (_, i) => i + 1)
   
-  gameOptions = []
+  
 
-  constructor(private matchService:MatchService, private logger:LogService) {
-  }
+  constructor(private matchService:MatchService, private logger:LogService) {}
 
   ngOnInit() {
     this.gameOptions = this.matchService.getMyGameOptions()
