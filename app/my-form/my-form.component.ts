@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Game, GameType } from '../game';
-import { MatchServiceService } from '../match-service.service';
+import { MatchService } from '../match-service.service';
+import { LogService } from '../log-service.service';
 
 @Component({
   selector: 'my-form',
@@ -9,23 +10,22 @@ import { MatchServiceService } from '../match-service.service';
 })
 export class MyFormComponent implements OnInit {
   game = new Game();
-  matchServiceService:MatchServiceService
 
   //todo: This should be a customizable parameter
   //factionOptions = Array.from({length: 20}, (_, i) => i + 1)
   
   gameOptions = []
 
-  constructor(matchServiceService:MatchServiceService) {
-    this.matchServiceService = matchServiceService
+  constructor(private matchService:MatchService, private logger:LogService) {
   }
 
   ngOnInit() {
-    this.gameOptions = this.matchServiceService.getMyGameOptions()
+    this.gameOptions = this.matchService.getMyGameOptions()
   }
 
   onSubmit() {
-    alert('Thanks for submitting! Data: ' + JSON.stringify(this.game));
+    //alert('Thanks for submitting! Data: ' + JSON.stringify(this.game));
+    this.logger.log(this.game)
   }
 
 }
