@@ -15,7 +15,7 @@
 <button mat-mini-fab class="action-button one mat-elevation-z8" *ngIf="openMenu" color="basic" (click)="openAddMatchDialog()">
   <i class="material-icons">add</i>
 </button>
-<button mat-raised-button class="label labelone mat-elevation-z8" *ngIf="openMenu" color="basic" (click)="openAddMatchDialog()">
+<button mat-raised-button class="label labelone mat-elevation-z8" *ngIf="showToolTips && openMenu" color="basic" (click)="openAddMatchDialog()">
   Add Match
 </button>
 
@@ -23,7 +23,7 @@
 <button mat-mini-fab class="action-button two mat-elevation-z8" *ngIf="openMenu" color="basic" (click)="hello('test1 button two')">
   <i class="material-icons">query_stats</i>
 </button>
-<button mat-raised-button class="label labeltwo mat-elevation-z8" *ngIf="openMenu" color="basic" (click)="hello('test2 button two')">
+<button mat-raised-button class="label labeltwo mat-elevation-z8" *ngIf="showToolTips && openMenu" color="basic" (click)="hello('test2 button two')">
   Reports
 </button>
 
@@ -31,4 +31,4 @@
 <button mat-mini-fab class="action-button three mat-elevation-z8" *ngIf="openMenu" color="basic">
   <i class="material-icons">settings</i>
 </button>
-<button mat-raised-button class="label labelthree mat-elevation-z8" *ngIf="openMenu" color="basic">Settings</button> 
+<button mat-raised-button class="label labelthree mat-elevation-z8" *ngIf="showToolTips && openMenu" color="basic">Settings</button> 

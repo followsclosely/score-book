@@ -46,6 +46,7 @@ import { AppComponent } from './app.component';
 import { MyFormComponent } from './my-form/my-form.component';
 import { MatchService } from './match-service.service';
 import { LogService } from './log-service.service';
+import { SettingsServiceService } from './settings-service.service';
 
 
 @NgModule({
@@ -66,7 +67,7 @@ import { LogService } from './log-service.service';
     MatSidenavModule,
     MatIconModule,
   ],
-  providers: [MatchService, LogService],
+  providers: [MatchService, LogService, SettingsServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

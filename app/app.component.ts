@@ -9,7 +9,8 @@ import {VERSION, MatDialog, MatDialogRef} from '@angular/material';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent  {
-
+  public showToolTips = false;
+  
   public version = VERSION;
   //Holds if the hamburger menu is opened.
   public openMenu: boolean = false;
