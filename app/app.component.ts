@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { LogService } from './log-service.service';
 
 import { PreferencesService } from './preferences.service';
-//import { PreferencesFormComponent } from './preferences-form/preferences-form.component';
+import { PreferencesFormComponent } from './preferences-form/preferences-form.component';
 
 import { MyFormComponent } from './my-form/my-form.component';
 import {VERSION, MatDialog, MatDialogRef} from '@angular/material';
