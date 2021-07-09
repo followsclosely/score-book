@@ -6,7 +6,7 @@ export class PreferencesService {
   map = new Map<string, any>();
 
   constructor() { 
-    this.map.set("sdfsdf", true);
+    this.map.set("showToolTips", true);
   }
 
   getValue(key:string, defaultValue:any){
