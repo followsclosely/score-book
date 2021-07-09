@@ -28,7 +28,9 @@
 </button>
 
 
-<button mat-mini-fab class="action-button three mat-elevation-z8" *ngIf="openMenu" color="basic">
+<button mat-mini-fab class="action-button three mat-elevation-z8" *ngIf="openMenu" color="basic" (click)="openPreferencesDialog()">
   <i class="material-icons">settings</i>
 </button>
-<button mat-raised-button class="label labelthree mat-elevation-z8" *ngIf="showToolTips && openMenu" color="basic">Settings</button> 
+<button mat-raised-button class="label labelthree mat-elevation-z8" *ngIf="showToolTips && openMenu" color="basic" (click)="openPreferencesDialog()">
+  Settings
+</button> 

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { LogService } from './log-service.service';
+
 import { PreferencesService } from './preferences.service';
+//import { PreferencesFormComponent } from './preferences-form/preferences-form.component';
+
 import { MyFormComponent } from './my-form/my-form.component';
 import {VERSION, MatDialog, MatDialogRef} from '@angular/material';
 
@@ -18,6 +21,7 @@ export class AppComponent  {
   public isOver = false;
 
   fileNameDialogRef: MatDialogRef<MyFormComponent>;
+ // preferencesDialogRef: MatDialogRef<PreferencesFormComponent>;
 
   constructor(
     private logger: LogService, 
@@ -32,7 +36,6 @@ export class AppComponent  {
   }
 
   openAddMatchDialog() {
-    
     this.fileNameDialogRef = this.dialog.open(MyFormComponent,{
       // minHeight:'400px',
       // minWidth:'300px'
@@ -40,6 +43,10 @@ export class AppComponent  {
     this.openMenu = false;
   }
 
+  openPreferencesDialog() {
+    //this.preferencesDialogRef = this.dialog.open(PreferencesFormComponent);
+    this.openMenu = false;
+  }
 
   
 
