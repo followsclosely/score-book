@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PreferencesService } from '../preferences.service';
 
 @Component({
   selector: 'app-preferences-form',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PreferencesFormComponent implements OnInit {
 
-  constructor() { }
+  public showToolTips;
+
+  constructor(private preferences: PreferencesService) {
+    this.showToolTips = preferences.getValue('showToolTips', false);
+  }
 
   ngOnInit() {
   }

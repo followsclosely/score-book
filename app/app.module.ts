@@ -68,6 +68,7 @@ import { PreferencesFormComponent } from './preferences-form/preferences-form.co
     MatMenuModule,
     MatSidenavModule,
     MatIconModule,
+    MatCheckboxModule,
   ],
   providers: [MatchService, LogService, PreferencesService ],
   bootstrap: [AppComponent]
