@@ -5,14 +5,47 @@ import { NgModule } from '@angular/core';
 
 import 'hammerjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatButtonModule, MatSelectModule, MatDialogModule } from '@angular/material';
+
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+} from '@angular/material';
 
 
 import { AppComponent } from './app.component';
 import { MyFormComponent } from './my-form/my-form.component';
 import { MatchService } from './match-service.service';
 import { LogService } from './log-service.service';
-
 
 
 @NgModule({
@@ -28,7 +61,10 @@ import { LogService } from './log-service.service';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatIconModule,
   ],
   providers: [MatchService, LogService],
   bootstrap: [AppComponent]
