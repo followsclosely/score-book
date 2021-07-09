@@ -11,6 +11,7 @@ import {VERSION, MatDialog, MatDialogRef} from '@angular/material';
 export class AppComponent  {
 
   public version = VERSION;
+  //Holds if the hamburger menu is opened.
   public openMenu: boolean = false;
   public isOver = false;
 
@@ -23,10 +24,12 @@ export class AppComponent  {
   }
 
   openAddMatchDialog() {
+    
     this.fileNameDialogRef = this.dialog.open(MyFormComponent,{
       // minHeight:'400px',
       // minWidth:'300px'
     });
+    this.openMenu = false;
   }
 
 
