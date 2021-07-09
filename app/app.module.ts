@@ -47,13 +47,15 @@ import { MyFormComponent } from './my-form/my-form.component';
 import { MatchService } from './match-service.service';
 import { LogService } from './log-service.service';
 import { PreferencesService  } from './preferences.service';
+import { PreferencesFormComponent } from './preferences-form/preferences-form.component';
 
 
 @NgModule({
   entryComponents: [MyFormComponent],
   declarations: [
     AppComponent,
-    MyFormComponent
+    MyFormComponent,
+    PreferencesFormComponent
   ],
   imports: [
     BrowserModule,
