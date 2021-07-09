@@ -18,7 +18,13 @@ export class AppComponent  {
 
   fileNameDialogRef: MatDialogRef<MyFormComponent>;
 
-  constructor(private logger:LogService, private dialog: MatDialog) {}
+  constructor(
+    private logger: LogService, 
+    private dialog: MatDialog
+    private preferences: PreferencesService) 
+  {
+    showToolTips = preferences.getValue('showToolTips', false);
+  }
 
   openDialog(){
     this.logger.log('Stink')
