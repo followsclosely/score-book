@@ -20,7 +20,7 @@ export class AppComponent  {
 
   constructor(
     private logger: LogService, 
-    private dialog: MatDialog
+    private dialog: MatDialog,
     private preferences: PreferencesService) 
   {
     this.showToolTips = preferences.getValue('showToolTips', false);
