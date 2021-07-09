@@ -51,7 +51,7 @@ import { PreferencesFormComponent } from './preferences-form/preferences-form.co
 
 
 @NgModule({
-  entryComponents: [MyFormComponent],
+  entryComponents: [MyFormComponent, PreferencesFormComponent],
   declarations: [
     AppComponent,
     MyFormComponent,
