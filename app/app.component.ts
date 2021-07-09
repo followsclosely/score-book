@@ -21,9 +21,21 @@ export class AppComponent  {
 
   openAddMatchDialog() {
     this.fileNameDialogRef = this.dialog.open(MyFormComponent,{
-      minHeight:'400px',
-      minWidth:'300px'
+      // minHeight:'400px',
+      // minWidth:'300px'
     });
+  }
+
+
+  public openMenu: boolean = false;
+  isOver = false;
+
+  clickMenu(){
+    this.openMenu = !this.openMenu;
+  }
+
+  hello(mex: string){
+      alert(mex);
   }
 
 }
