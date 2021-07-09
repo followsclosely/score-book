@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LogService } from './log-service.service';
+import { PreferencesService } from './preferences.service';
 import { MyFormComponent } from './my-form/my-form.component';
 import {VERSION, MatDialog, MatDialogRef} from '@angular/material';
 
