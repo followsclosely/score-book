@@ -23,7 +23,7 @@ export class AppComponent  {
     private dialog: MatDialog
     private preferences: PreferencesService) 
   {
-    showToolTips = preferences.getValue('showToolTips', false);
+    this.showToolTips = preferences.getValue('showToolTips', false);
   }
 
   openDialog(){
