@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GameType } from './game';
+import { GameType } from './match';
 
 @Injectable()
 export class MatchService {

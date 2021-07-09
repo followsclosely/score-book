@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Game, GameType } from '../game';
+import { Match, GameType } from '../match';
 import { MatchService } from '../match-service.service';
 import { LogService } from '../log-service.service';
 
@@ -10,7 +10,7 @@ import { LogService } from '../log-service.service';
 })
 export class MyFormComponent implements OnInit {
 
-  game = new Game();
+  match = new Match();
   gameOptions = Array<GameType>()
 
   constructor(private matchService:MatchService, private logger:LogService) {}
@@ -21,7 +21,7 @@ export class MyFormComponent implements OnInit {
 
   onSubmit() {
     //alert('Thanks for submitting! Data: ' + JSON.stringify(this.game));
-    this.logger.log(this.game)
+    this.logger.log(this.match)
   }
 
 }

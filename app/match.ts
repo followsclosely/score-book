@@ -1,6 +1,6 @@
 import {formatDate} from '@angular/common';
 
-export class Game {
+export class Match {
   constructor(
     public type?: string,
     public gameTypeNew?: string,
