@@ -21,7 +21,7 @@ export class AppComponent  {
   public isOver = false;
 
   fileNameDialogRef: MatDialogRef<MyFormComponent>;
- // preferencesDialogRef: MatDialogRef<PreferencesFormComponent>;
+  preferencesDialogRef: MatDialogRef<PreferencesFormComponent>;
 
   constructor(
     private logger: LogService, 
@@ -44,7 +44,7 @@ export class AppComponent  {
   }
 
   openPreferencesDialog() {
-    //this.preferencesDialogRef = this.dialog.open(PreferencesFormComponent);
+    this.preferencesDialogRef = this.dialog.open(PreferencesFormComponent);
     this.openMenu = false;
   }
 
