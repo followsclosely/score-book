@@ -13,9 +13,6 @@ export class MyFormComponent implements OnInit {
   game = new Game();
   gameOptions = Array<GameType>()
 
-  //todo: This should be a customizable parameter
-  //factionOptions = Array.from({length: 20}, (_, i) => i + 1)
-
   constructor(private matchService:MatchService, private logger:LogService) {}
 
   ngOnInit() {
