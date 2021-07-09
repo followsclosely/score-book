@@ -9,8 +9,11 @@ import {VERSION, MatDialog, MatDialogRef} from '@angular/material';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent  {
-  name = 'Angular 5';
-  version = VERSION;
+
+  public version = VERSION;
+  public openMenu: boolean = false;
+  public isOver = false;
+
   fileNameDialogRef: MatDialogRef<MyFormComponent>;
 
   constructor(private logger:LogService, private dialog: MatDialog) {}
@@ -27,8 +30,7 @@ export class AppComponent  {
   }
 
 
-  public openMenu: boolean = false;
-  isOver = false;
+  
 
   clickMenu(){
     this.openMenu = !this.openMenu;

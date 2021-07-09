@@ -4,7 +4,8 @@
 
 <button mat-fab color="accent" (click)="clickMenu()" class="menu-button"
     [class.mat-elevation-z2]="!isOver" [class.mat-elevation-z8]="isOver"
-    (mouseover)="isOver = true" (mouseleave)="isOver = false">
+    (mouseover)="isOver = true" (mouseleave)="isOver = false"
+    >
   <i class="material-icons" *ngIf="!openMenu">menu</i>
   <i class="material-icons" *ngIf="openMenu">close</i>
 </button>
@@ -26,3 +27,11 @@
 <button mat-raised-button class="label labeltwo mat-elevation-z8" *ngIf="openMenu" color="basic" (click)="hello('test2 button two')">
   Reports
 </button>
+
+
+<button mat-mini-fab class="action-button three mat-elevation-z8" *ngIf="openMenu" color="basic">
+<i class="material-icons">settings</i>
+</button>
+<button mat-raised-button class="label labelthree mat-elevation-z8" *ngIf="openMenu" color="basic">
+Settings
+</button> 

@@ -8,23 +8,14 @@ p {
   right: 1.5rem;
 }
 
-@keyframes moveOne {
-  from {bottom: 2rem; opacity: 0;}
-  to {bottom: 6rem;}
-}
-@keyframes moveOneLabel {
-  from {bottom: 2rem; opacity: 0;}
-  to {bottom: 6.5rem;}
-}
+@keyframes moveOne        { from {bottom: 2rem; opacity: 0;}  to {bottom: 6rem;} }
+@keyframes moveOneLabel   { from {bottom: 2rem; opacity: 0;}  to {bottom: 6.5rem;} }
 
-@keyframes moveTwo {
-  from {bottom: 2rem; opacity: 0;}
-  to {bottom: 9.5rem;}
-}
-@keyframes moveTwoLabel {
-  from {bottom: 2rem; opacity: 0;}
-  to {bottom: 10rem;}
-}
+@keyframes moveTwo        { from {bottom: 2rem; opacity: 0;}  to {bottom: 9.5rem;} }
+@keyframes moveTwoLabel   { from {bottom: 2rem; opacity: 0;}  to {bottom: 10rem;} }
+
+@keyframes moveThree      { from {bottom: 2rem; opacity: 0;} to {bottom: 13rem;}}
+@keyframes moveThreeLabel { from {bottom: 2rem; opacity: 0;} to {bottom: 13.5rem;}}
 
 .action-button{
   position: fixed;
@@ -45,23 +36,14 @@ p {
   margin: 0;
 }
 
-.one{
-  bottom: 6rem;
-  animation: moveOne 0.2s;
-}
-.labelone{
-  bottom: 6.5rem;
-  animation: moveOneLabel 0.2s;
-}
+.one        { bottom: 6rem;    animation: moveOne 0.2s; }
+.labelone   { bottom: 6.5rem;  animation: moveOneLabel 0.2s;}
   
-.two{
-  bottom: 9.5rem;
-  animation: moveTwo 0.25s;
-}
-.labeltwo{
-  bottom: 10rem;
-  animation: moveTwoLabel 0.25s;
-}
+.two        { bottom: 9.5rem;  animation: moveTwo 0.25s;}
+.labeltwo   { bottom: 10rem;   animation: moveTwoLabel 0.25s;}
+
+.three      { bottom: 13rem;    animation: moveThree 0.25s;}
+.labelthree { bottom: 13.5rem;  animation: moveThreeLabel 0.25s;}
 
 .dialog_scrim {
   background: black;
