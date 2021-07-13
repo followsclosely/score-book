@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialogRef} from '@angular/material';
+
 import { Match, GameType } from '../match';
 import { MatchService } from '../match-service.service';
 import { LogService } from '../log-service.service';
@@ -14,6 +16,7 @@ export class MyFormComponent implements OnInit {
   gameOptions = Array<GameType>()
 
   constructor(
+    private dialogRef:  MatDialogRef<MyFormComponent>,
     private matchService:MatchService, 
     private logger:LogService
     ) {}
@@ -24,7 +27,8 @@ export class MyFormComponent implements OnInit {
 
   onSubmit() {
     //alert('Thanks for submitting! Data: ' + JSON.stringify(this.game));
-    this.logger.log(this.match)
+    this.logger.log(this.match);
+    this.dialogRef.close();
   }
 
 }
