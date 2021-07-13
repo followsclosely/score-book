@@ -1,45 +1,77 @@
 <h3>New Match</h3>
-<form class="formwidth" (ngSubmit)="onSubmit()" #myForm="ngForm">
 
-    <table class="fullwidth" cellspacing="0">
-        <tr>
-            <td>
-                <mat-form-field>
-                    <mat-select name="type" [(ngModel)]="match.type" placeholder="Game Type">
-                        <mat-option>--</mat-option>
-                        <mat-option *ngFor="let option of gameOptions" [value]="option.name">{{option.name}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field class="fullwidth">
-                    <input matInput [(ngModel)]="match.gameTypeNew" name="gameTypeNew">
-                    <mat-hint>or a new game</mat-hint>
-                </mat-form-field>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <mat-form-field>
-                    <input type="number" min="1" max="10" matInput [(ngModel)]="match.factionCount" name="factionCount" placeholder="Teams / Factions">
-                    <!-- <mat-select name="factionCount" [(ngModel)]="match.factionCount" placeholder="Teams / Factions">
-                        <mat-option>--</mat-option>
-                        <mat-option *ngFor="let option of factionOptions" [value]="option">{{option}}</mat-option>
-                    </mat-select> -->
-                    <mat-hint>the number of players</mat-hint>
-                </mat-form-field>
-            </td>
-            <td>
-                <mat-form-field class="fullwidth">
-                    <input matInput [(ngModel)]="match.dateTime" name="dateTime">
-                    <mat-hint>when the game was played</mat-hint>
-                </mat-form-field>
-            </td>
-        </tr>
-   
-    </table>
 
-    <p>
-        <button type="submit" mat-raised-button color="primary">Submit</button>
-    </p>
-</form>
+<mat-horizontal-stepper linear>
+
+    <mat-step label="Step 1" [completed]="step1Complete">
+      <h4>Step 1</h4>
+       <button (click)="toggleStep1Complete()" mat-flat-button color="primary">{{ step1Complete === true ? "Toggle:Complete" : "Toggle:Incomplete"}}
+  </button>
+         <div>
+           <button mat-button matStepperNext>Next</button>
+         </div>
+    </mat-step>
+
+    <mat-step label="Step 2" optional>
+         <p>Step 2</p>
+         <div>
+           <button mat-button matStepperPrevious>Back</button>
+           <button mat-button matStepperNext>Next</button>
+         </div>
+    </mat-step>
+
+    <mat-step label="Step 3">
+        <form class="formwidth" (ngSubmit)="onSubmit()" #myForm="ngForm">
+
+            <table class="fullwidth" cellspacing="0">
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <mat-select name="type" [(ngModel)]="match.type" placeholder="Game Type">
+                                <mat-option>--</mat-option>
+                                <mat-option *ngFor="let option of gameOptions" [value]="option.name">{{option.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="fullwidth">
+                            <input matInput [(ngModel)]="match.gameTypeNew" name="gameTypeNew">
+                            <mat-hint>or a new game</mat-hint>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <input type="number" min="1" max="10" matInput [(ngModel)]="match.factionCount" name="factionCount" placeholder="Teams / Factions">
+                            <!-- <mat-select name="factionCount" [(ngModel)]="match.factionCount" placeholder="Teams / Factions">
+                                <mat-option>--</mat-option>
+                                <mat-option *ngFor="let option of factionOptions" [value]="option">{{option}}</mat-option>
+                            </mat-select> -->
+                            <mat-hint>the number of players</mat-hint>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="fullwidth">
+                            <input matInput [(ngModel)]="match.dateTime" name="dateTime">
+                            <mat-hint>when the game was played</mat-hint>
+                        </mat-form-field>
+                    </td>
+                </tr>
+           
+            </table>
+        
+            <p>
+                <button type="submit" mat-raised-button color="primary">Submit</button>
+            </p>
+        </form> 
+
+
+
+
+    </mat-step>
+
+  </mat-horizontal-stepper> 
+
+
+

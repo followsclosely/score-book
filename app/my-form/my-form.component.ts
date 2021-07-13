@@ -25,10 +25,25 @@ export class MyFormComponent implements OnInit {
     this.gameOptions = this.matchService.getMyGameOptions()
   }
 
+
+  onStepOneSubmit(){
+
+  }
+
+
   onSubmit() {
     //alert('Thanks for submitting! Data: ' + JSON.stringify(this.game));
     this.logger.log(this.match);
     this.dialogRef.close();
   }
 
+  step1Complete =  false;
+  step2Complete = false;
+  toggleStep1Complete() {
+    this.step1Complete = !this.step1Complete;
+  }
+  toggleStep2Complete() {
+    this.step2Complete = !this.step2Complete;
+  }
+  
 }
