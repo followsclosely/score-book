@@ -12,6 +12,10 @@ export class PreferencesService {
     return this.preferences;
   }
 
+  storePreferences(preferences:Preferences){
+    
+  }
+
 }
 
 export class Preferences {

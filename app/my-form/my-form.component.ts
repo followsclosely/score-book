@@ -13,7 +13,10 @@ export class MyFormComponent implements OnInit {
   match = new Match();
   gameOptions = Array<GameType>()
 
-  constructor(private matchService:MatchService, private logger:LogService) {}
+  constructor(
+    private matchService:MatchService, 
+    private logger:LogService
+    ) {}
 
   ngOnInit() {
     this.gameOptions = this.matchService.getMyGameOptions()

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialogRef} from '@angular/material';
 import { Preferences, PreferencesService } from '../preferences.service';
 
 @Component({
@@ -10,7 +11,10 @@ export class PreferencesFormComponent implements OnInit {
 
   public preferences:Preferences;
 
-  constructor(private preferencesService: PreferencesService) {
+  constructor(
+    private preferencesService: PreferencesService,
+    private dialogRef:  MatDialogRef<PreferencesFormComponent>,
+  ) {
     this.preferences = preferencesService.getPreferences();
   }
 
@@ -18,6 +22,7 @@ export class PreferencesFormComponent implements OnInit {
   }
 
   onSubmit(){
-    
+    this.preferencesService.storePreferences(this.preferences);
+    this.dialogRef.close();
   }
 }
