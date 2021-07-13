@@ -17,4 +17,7 @@ export class PreferencesFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSubmit(){
+    
+  }
 }
