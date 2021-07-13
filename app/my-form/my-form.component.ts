@@ -37,13 +37,10 @@ export class MyFormComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  step1Complete =  false;
   step2Complete = false;
-  toggleStep1Complete() {
-    this.step1Complete = !this.step1Complete;
-  }
+
   toggleStep2Complete() {
     this.step2Complete = !this.step2Complete;
   }
-  
+
 }
