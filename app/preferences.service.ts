@@ -3,17 +3,19 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class PreferencesService {
 
-  map = new Map<string, any>();
+  private preferences = new Preferences();
 
   constructor() { 
-    this.map.set("showToolTips", true);
   }
 
-  getValue(key:string, defaultValue:any){
-    return this.map.has(key) ? this.map.get(key) : defaultValue;
+  getPreferences(){
+    return this.preferences;
   }
 
-  setValue(key:string, value:any){
-    this.map.set(key,value);
-  }
+}
+
+export class Preferences {
+  constructor(
+    public showToolTips: boolean = true,
+  ) {}
 }
