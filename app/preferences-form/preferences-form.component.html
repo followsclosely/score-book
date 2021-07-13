@@ -9,12 +9,18 @@
 <h3>Settings</h3>
 <form class="formwidth" (ngSubmit)="onSubmit()" #myForm="ngForm">
 
-  <mat-form-field class="fullwidth">
-    <input matInput [(ngModel)]="preferences.showToolTips" name="gameTypeNew">
-    <mat-hint>or a new game</mat-hint>
-</mat-form-field>
+  <p>
+    <mat-form-field>
+      <mat-select name="type" [(ngModel)]="preferences.showToolTips" placeholder="Game Type">
+        <mat-option [value]="true">Show Button Text</mat-option>
+        <mat-option [value]="false">Hide Button Text</mat-option>
+      </mat-select>
+      <mat-hint>show button text</mat-hint>
+    </mat-form-field>
+  </p>
 
-    <p>
-        <button type="submit" mat-raised-button color="primary">Save</button>
-    </p>
+  <p>
+    <button type="submit" mat-raised-button color="primary">Save</button>
+  </p>
+
 </form>
