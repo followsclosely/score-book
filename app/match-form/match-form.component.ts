@@ -5,6 +5,8 @@ import { Match, GameType } from '../match';
 import { MatchService } from '../match-service.service';
 import { LogService } from '../log-service.service';
 
+import { GroupService } from '../group.service';
+
 @Component({
   selector: 'app-match-form',
   templateUrl: './match-form.component.html',
@@ -16,8 +18,9 @@ export class MatchFormComponent implements OnInit {
   gameOptions = Array<GameType>()
 
   constructor(
-    private dialogRef:  MatDialogRef<MyFormComponent>,
+    private dialogRef:  MatDialogRef<MatchFormComponent>,
     private matchService:MatchService, 
+    private groupService:GroupService,
     private logger:LogService
     ) {}
 
@@ -27,7 +30,6 @@ export class MatchFormComponent implements OnInit {
 
 
   onStepOneSubmit(){
-
   }
 
 

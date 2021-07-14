@@ -48,6 +48,7 @@ import { LogService } from './log-service.service';
 import { PreferencesService  } from './preferences.service';
 import { PreferencesFormComponent } from './preferences-form/preferences-form.component';
 import { MatchFormComponent } from './match-form/match-form.component';
+import { GroupService } from './group.service';
 
 
 @NgModule({
@@ -71,7 +72,7 @@ import { MatchFormComponent } from './match-form/match-form.component';
     MatCheckboxModule,
     MatStepperModule
   ],
-  providers: [MatchService, LogService, PreferencesService ],
+  providers: [MatchService, LogService, PreferencesService, GroupService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

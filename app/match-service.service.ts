@@ -15,4 +15,5 @@ export class MatchService {
   getMyGameOptions(){
     return this.gameOptions
   }
+
 }

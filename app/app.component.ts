@@ -4,6 +4,7 @@ import { LogService } from './log-service.service';
 import { Preferences, PreferencesService } from './preferences.service';
 import { PreferencesFormComponent } from './preferences-form/preferences-form.component';
 
+import { GroupService } from './group.service';
 import { MatchFormComponent } from './match-form/match-form.component';
 import {VERSION, MatDialog, MatDialogRef} from '@angular/material';
 
@@ -26,6 +27,7 @@ export class AppComponent  {
   constructor(
     private logger: LogService, 
     private dialog: MatDialog,
+    private groupService: GroupService,
     private preferencesService: PreferencesService) 
   {
     this.preferences = preferencesService.getPreferences();
