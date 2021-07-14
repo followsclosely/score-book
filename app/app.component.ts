@@ -20,7 +20,7 @@ export class AppComponent  {
   public openMenu: boolean = false;
   public isOver = false;
 
-  fileNameDialogRef: MatDialogRef<MyFormComponent>;
+  matchFormDialogRef: MatDialogRef<MatchFormComponent>;
   preferencesDialogRef: MatDialogRef<PreferencesFormComponent>;
 
   constructor(
@@ -31,12 +31,8 @@ export class AppComponent  {
     this.preferences = preferencesService.getPreferences();
   }
 
-  openDialog(){
-    this.logger.log('Stink')
-  }
-
   openAddMatchDialog() {
-    this.fileNameDialogRef = this.dialog.open(MatchFormComponent,{
+    this.matchFormDialogRef = this.dialog.open(MatchFormComponent,{
       // minHeight:'400px',
       // minWidth:'300px'
     });
