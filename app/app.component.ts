@@ -5,6 +5,7 @@ import { Preferences, PreferencesService } from './preferences.service';
 import { PreferencesFormComponent } from './preferences-form/preferences-form.component';
 
 import { MyFormComponent } from './my-form/my-form.component';
+import { MatchFormComponent } from './match-form/match-form.component';
 import {VERSION, MatDialog, MatDialogRef} from '@angular/material';
 
 @Component({
@@ -36,7 +37,7 @@ export class AppComponent  {
   }
 
   openAddMatchDialog() {
-    this.fileNameDialogRef = this.dialog.open(MyFormComponent,{
+    this.fileNameDialogRef = this.dialog.open(MatchFormComponent,{
       // minHeight:'400px',
       // minWidth:'300px'
     });
