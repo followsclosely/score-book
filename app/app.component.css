@@ -10,6 +10,7 @@
 }
 
 
+
 @keyframes moveOne        { from {bottom: 2rem; opacity: 0;}  to {bottom: 6rem;} }
 @keyframes moveOneLabel   { from {bottom: 2rem; opacity: 0;}  to {bottom: 6.5rem;} }
 

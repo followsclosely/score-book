@@ -5,52 +5,49 @@
 
     <mat-step label="Step 1">
 
-            <table class="fullwidth" cellspacing="0">
-                <tr>
-                    <td>
-                        <mat-form-field>
-                            <mat-select name="type" [(ngModel)]="match.type" placeholder="Game Type">
-                                <mat-option>--</mat-option>
-                                <mat-option *ngFor="let option of gameOptions" [value]="option.name">{{option.name}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </td>
-                    <!-- <td>
-                        <mat-form-field class="fullwidth">
-                            <input matInput [(ngModel)]="match.gameTypeNew" name="gameTypeNew">
-                            <mat-hint>or a new game</mat-hint>
-                        </mat-form-field>
-                    </td> -->
-                </tr>
-                <tr>
-                    <td>
-                        <mat-form-field>
-                            <input type="number" min="1" max="10" matInput [(ngModel)]="match.factionCount" name="factionCount" placeholder="Teams / Factions">
-                            <!-- <mat-select name="factionCount" [(ngModel)]="match.factionCount" placeholder="Teams / Factions">
-                                <mat-option>--</mat-option>
-                                <mat-option *ngFor="let option of factionOptions" [value]="option">{{option}}</mat-option>
-                            </mat-select> -->
-                            <mat-hint>the number of players</mat-hint>
-                        </mat-form-field>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <mat-form-field class="fullwidth">
-                            <input matInput [(ngModel)]="match.dateTime" name="dateTime">
-                            <mat-hint>when the game was played</mat-hint>
-                        </mat-form-field>
-                    </td>
-                </tr>
-           
-            </table>
+        <div class="form-container"> 
+            <mat-form-field>
+                <mat-select name="type" [(ngModel)]="match.type" placeholder="Game Type">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let option of gameOptions" [value]="option.name">{{option.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+                    
+                        <!-- <td>
+                            <mat-form-field class="fullwidth">
+                                <input matInput [(ngModel)]="match.gameTypeNew" name="gameTypeNew">
+                                <mat-hint>or a new game</mat-hint>
+                            </mat-form-field>
+                        </td> -->
+                    
+            <mat-form-field>
+                <input type="number" min="1" max="10" matInput [(ngModel)]="match.factionCount" name="factionCount" placeholder="Teams / Factions">
+                <!-- <mat-select name="factionCount" [(ngModel)]="match.factionCount" placeholder="Teams / Factions">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let option of factionOptions" [value]="option">{{option}}</mat-option>
+                </mat-select> -->
+                <mat-hint>the number of players</mat-hint>
+            </mat-form-field>
 
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+            <div>
+                <mat-form-field class="fullwidth">
+                    <input matInput [(ngModel)]="match.dateTime" name="dateTime">
+                    <mat-hint>when the game was played</mat-hint>
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <input type="text" matInput>
+                    <mat-hint>duration (hh:mm)</mat-hint>
+                </mat-form-field>
+                
+            </div>
             
-          </div>
 
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </div>
     </mat-step>
 
     <mat-step label="Step 2" [completed]="step2Complete">
