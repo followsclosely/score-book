@@ -1,6 +1,11 @@
 import {formatDate} from '@angular/common';
+import { Player } from './player';
 
 export class Match {
+
+  //Array.prototype.push.apply(a, b);
+  availablePlayers = Array<Player>()
+
   constructor(
     public id?: number,
     public type?: string,

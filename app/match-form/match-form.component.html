@@ -62,6 +62,11 @@
 
     <mat-step label="Step 3" optional>
          <p>Step 3</p>
+
+         <div *ngFor="let player of match.availablePlayers">
+            {{ player.name }}
+         </div>
+
          <div>
            <button mat-button matStepperPrevious>Back</button>
            <button mat-button (click)="onSubmit()">Create Match</button>

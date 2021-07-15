@@ -25,7 +25,8 @@ export class MatchFormComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-    this.gameOptions = this.matchService.getMyGameOptions()
+    this.gameOptions = this.matchService.getMyGameOptions();
+    Array.prototype.push.apply(this.match.availablePlayers, this.groupService.getAllPlayers());
   }
 
 
