@@ -63,8 +63,12 @@
     <mat-step label="Step 3" optional>
          <p>Step 3</p>
 
+
+         
+
+
          <div *ngFor="let player of match.availablePlayers">
-            {{ player.name }}
+            <mat-checkbox> {{ player.name }} </mat-checkbox>
          </div>
 
          <div>
