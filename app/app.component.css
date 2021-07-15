@@ -1,12 +1,14 @@
-p {
-  font-family: Lato;
-}
-
 .menu-button{
   position: fixed;
   bottom: 1.5rem;
   right: 1.5rem;
 }
+
+.copyright{
+  position: fixed;
+  bottom: 0.5rem;
+}
+
 
 @keyframes moveOne        { from {bottom: 2rem; opacity: 0;}  to {bottom: 6rem;} }
 @keyframes moveOneLabel   { from {bottom: 2rem; opacity: 0;}  to {bottom: 6.5rem;} }
