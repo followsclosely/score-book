@@ -46,4 +46,8 @@ export class MatchFormComponent implements OnInit {
     this.step2Complete = !this.step2Complete;
   }
 
+  gameTypeChanged(event){
+    this.match.factionCount = this.match.type.defaultFactionCount;
+  }
+
 }
