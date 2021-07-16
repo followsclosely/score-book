@@ -48,6 +48,7 @@ export class MatchFormComponent implements OnInit {
 
   gameTypeChanged(event){
     this.match.factionCount = this.match.type.defaultFactionCount;
+    this.match.sharedFactions = this.match.type.defaultSharedFactions;
   }
 
 }

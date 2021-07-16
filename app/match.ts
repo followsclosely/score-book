@@ -12,12 +12,14 @@ export class Match {
     public gameTypeNew?: string,
     public dateTime: string = formatDate(Date.now(), 'yyyy-MM-dd hh:mm', 'en-US'),
     public factionCount?: number,
+    public sharedFactions?: boolean,
   ) {}
 }
 
 export class GameType {
   constructor(
     public name?: string,
-    public defaultFactionCount?: number
+    public defaultFactionCount?: number,
+    public defaultSharedFactions?: boolean,
   ) {}
 }
