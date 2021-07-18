@@ -56,7 +56,11 @@ export class MatchFormComponent implements OnInit {
     if( isAdd ){
       this.match.addPlayer(player);
     } else {
-
+      for (var i = this.match.factions.length - 1; i >= 0; i--) {
+        if (!this.match.factions[i].players.includes(player)) {
+          this.match.factions.splice(i, 1);
+        }
+      }
     }
   }
 }
