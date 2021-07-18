@@ -6,6 +6,7 @@ import { MatchService } from '../match-service.service';
 import { LogService } from '../log-service.service';
 
 import { GroupService } from '../group.service';
+import { Player } from '../player';
 
 @Component({
   selector: 'app-match-form',
@@ -51,4 +52,11 @@ export class MatchFormComponent implements OnInit {
     this.match.sharedFactions = this.match.type.defaultSharedFactions;
   }
 
+  addPlayer(player, isAdd){
+    if( isAdd ){
+      this.match.addPlayer(player);
+    } else {
+
+    }
+  }
 }

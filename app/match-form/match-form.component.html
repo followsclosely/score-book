@@ -75,11 +75,8 @@
          <p>Step 3</p>
 
 
-         
-
-
          <div *ngFor="let player of match.availablePlayers">
-            <mat-checkbox> {{ player.name }} </mat-checkbox>
+            <mat-checkbox (change)="addPlayer(player, $event.checked)"> {{ player.name }} </mat-checkbox>
          </div>
 
 
