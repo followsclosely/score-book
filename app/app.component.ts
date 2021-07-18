@@ -3,6 +3,7 @@ import { LogService } from './log-service.service';
 
 import { Preferences, PreferencesService } from './preferences.service';
 import { PreferencesFormComponent } from './preferences-form/preferences-form.component';
+import { PlayerFormComponent } from './player-form/player-form.component';
 
 import { GroupService } from './group.service';
 import { MatchFormComponent } from './match-form/match-form.component';
@@ -24,6 +25,7 @@ export class AppComponent  {
 
   matchFormDialogRef: MatDialogRef<MatchFormComponent>;
   preferencesDialogRef: MatDialogRef<PreferencesFormComponent>;
+  playerDialogRef: MatDialogRef<PlayerFormComponent>;
 
   constructor(
     private logger: LogService, 
@@ -32,6 +34,15 @@ export class AppComponent  {
     private preferencesService: PreferencesService) 
   {
     this.preferences = preferencesService.getPreferences();
+  }
+
+  openAddPlayerDialog(){
+    
+    this.playerDialogRef = this.dialog.open(PlayerFormComponent,{
+      // minHeight:'400px',
+      // minWidth:'300px'
+    });
+    this.openMenu = false;
   }
 
   openAddMatchDialog() {

@@ -49,14 +49,16 @@ import { PreferencesService  } from './preferences.service';
 import { PreferencesFormComponent } from './preferences-form/preferences-form.component';
 import { MatchFormComponent } from './match-form/match-form.component';
 import { GroupService } from './group.service';
+import { PlayerFormComponent } from './player-form/player-form.component';
 
 
 @NgModule({
-  entryComponents: [PreferencesFormComponent, MatchFormComponent],
+  entryComponents: [PreferencesFormComponent, MatchFormComponent, PlayerFormComponent],
   declarations: [
     AppComponent,
     PreferencesFormComponent,
-    MatchFormComponent
+    MatchFormComponent,
+    PlayerFormComponent
   ],
   imports: [
     BrowserModule,

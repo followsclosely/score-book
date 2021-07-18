@@ -20,10 +20,10 @@
 </button>
 
 
-<button mat-mini-fab class="action-button two mat-elevation-z8" *ngIf="openMenu" color="basic" (click)="hello('test1 button two')">
+<button mat-mini-fab class="action-button two mat-elevation-z8" *ngIf="openMenu" color="basic" (click)="openAddPlayerDialog()">
   <i class="material-icons">person_add</i>
 </button>
-<button mat-raised-button class="label labeltwo mat-elevation-z8" *ngIf="preferences.showToolTips && openMenu" color="basic" (click)="hello('test2 button two')">
+<button mat-raised-button class="label labeltwo mat-elevation-z8" *ngIf="preferences.showToolTips && openMenu" color="basic" (click)="openAddPlayerDialog()">
   Add Player
 </button>
 
