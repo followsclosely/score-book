@@ -12,7 +12,7 @@ import { MatchService } from '../../match-service.service';
 })
 export class HeartsComponent implements OnInit {
 
-  public match:Match;
+  public match:Match = null;
 
   constructor(
     private logger: LogService,
