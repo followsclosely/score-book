@@ -3,7 +3,6 @@ import { FormsModule }   from '@angular/forms';
 
 import { NgModule } from '@angular/core';
 
-import 'hammerjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
@@ -75,7 +74,7 @@ import { HeartsComponent } from './scorecard/hearts/hearts.component';
     MatIconModule,
     MatCheckboxModule,
     MatStepperModule,
-    MatCardModule
+    MatCardModule,
   ],
   providers: [MatchService, LogService, PreferencesService, GroupService ],
   bootstrap: [AppComponent]
