@@ -6,9 +6,9 @@
     <mat-step label="Step 1" [completed]="match.type != null">
 
 
-    <mat-card>
-    <!-- <mat-card-title>Add Player</mat-card-title> -->
-    <mat-card-content class="form-container">
+        <mat-card>
+        <!-- <mat-card-title>Add Player</mat-card-title> -->
+        <mat-card-content class="form-container">
 
      
             <mat-form-field>
@@ -47,16 +47,16 @@
             </div> -->
             
 
-    </mat-card-content>
+        </mat-card-content>
 
-    <mat-card-actions>
-    <button mat-raised-button matStepperPrevious>
-    <mat-icon>arrow_back</mat-icon>Back
-</button>
-<button mat-raised-button matStepperNext color="primary" [disabled]="match.type == null">
-    Next  <mat-icon>arrow_forward</mat-icon>
-</button>
-  </mat-card-actions>
+        <mat-card-actions>
+            <button mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon>
+                Back
+            </button>
+            <button mat-raised-button matStepperNext color="primary" [disabled]="match.type == null">
+                Next <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </mat-card-actions>
 
     </mat-card>
     </mat-step>
