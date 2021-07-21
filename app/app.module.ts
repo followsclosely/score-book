@@ -72,7 +72,8 @@ import { PlayerFormComponent } from './player-form/player-form.component';
     MatSidenavModule,
     MatIconModule,
     MatCheckboxModule,
-    MatStepperModule
+    MatStepperModule,
+    MatCardModule
   ],
   providers: [MatchService, LogService, PreferencesService, GroupService ],
   bootstrap: [AppComponent]

@@ -1,12 +1,22 @@
-<p>
-player-form works!
-</p>
-
-<div class="form-container"> 
+<mat-card>
+  <mat-card-content>
+  <mat-card-title>Add Player</mat-card-title>
+    <div class="form-container"> 
         
-<mat-form-field appearance="fill">
-<mat-label>Input</mat-label>
-<input matInput>
-</mat-form-field>
+      <mat-form-field >
+        <mat-label>Name</mat-label>
+        <input matInput>
+      </mat-form-field>
 
-</div>
+      <mat-form-field >
+        <mat-label>Email</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="submit">Save</button>
+  </mat-card-actions>
+</mat-card>
