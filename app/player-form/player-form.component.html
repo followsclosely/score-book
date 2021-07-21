@@ -5,7 +5,10 @@
       
       <mat-form-field >
         <mat-label>Name</mat-label>
-        <input matInput required>
+        <input matInput required name="name">
+        <!-- <mat-error *ngIf="!name.valid && name.errors.required">
+          Name is <strong>required</strong>
+        </mat-error> -->
       </mat-form-field>
 
       <mat-form-field>
