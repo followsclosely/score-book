@@ -1,6 +1,6 @@
 <mat-card>
-  <mat-card-content>
   <mat-card-title>Add Player</mat-card-title>
+  <mat-card-content>
     <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="form-container"> 
       
       <mat-form-field >
@@ -24,6 +24,8 @@
   </mat-card-content>
 
   <mat-card-actions>
+    <button mat-raised-button>Cancel</button>
     <button mat-raised-button color="primary" type="submit">Save</button>
   </mat-card-actions>
+
 </mat-card>
