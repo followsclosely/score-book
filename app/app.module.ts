@@ -77,6 +77,7 @@ import { HeartsComponent } from './scorecard/hearts/hearts.component';
     MatCheckboxModule,
     MatStepperModule,
     MatCardModule,
+    MatTableModule,
     RouterModule.forRoot([
       {path: 'scorecard/hearts/:id', component: HeartsComponent},
     ]),
