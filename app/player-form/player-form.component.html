@@ -1,19 +1,23 @@
 <mat-card>
   <mat-card-content>
   <mat-card-title>Add Player</mat-card-title>
-    <div class="form-container"> 
-        
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="form-container"> 
+      
       <mat-form-field >
         <mat-label>Name</mat-label>
-        <input matInput>
+        <input matInput required>
       </mat-form-field>
 
-      <mat-form-field >
-        <mat-label>Email</mat-label>
-        <input matInput>
+      <mat-form-field>
+        <input #emailIdSpy matInput name="emailId" placeholder="Email" type="email" [(ngModel)]="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+        #emailId="ngModel">
+        <mat-error *ngIf="!emailId.valid && emailId.errors.pattern">
+          Entered Email Did not match the pattern of type user@abc.com
+        </mat-error>
+
       </mat-form-field>
 
-    </div>
+    </form> 
   </mat-card-content>
 
   <mat-card-actions>
