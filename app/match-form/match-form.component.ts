@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import {MatDialogRef} from '@angular/material';
 
 import { Match, GameType } from '../match';
@@ -7,6 +9,8 @@ import { LogService } from '../log-service.service';
 
 import { GroupService } from '../group.service';
 import { Player } from '../player';
+
+
 
 @Component({
   selector: 'app-match-form',
@@ -22,7 +26,9 @@ export class MatchFormComponent implements OnInit {
     private dialogRef:  MatDialogRef<MatchFormComponent>,
     private matchService:MatchService, 
     private groupService:GroupService,
-    private logger:LogService
+    private logger:LogService,
+    private location: Location,
+    private router: Router,
     ) {}
 
   ngOnInit() {
@@ -39,7 +45,13 @@ export class MatchFormComponent implements OnInit {
     //alert('Thanks for submitting! Data: ' + JSON.stringify(this.game));
     this.match.availablePlayers.length = 0;
     this.logger.log(this.match);
+    this.matchService.addMatch(this.match);
     this.dialogRef.close();
+    
+    this.router.navigate(['scorecard', this.match.type.path, this.match.id]);
+
+    //this.router.navigateByUrl('/scorecard/'+this.match.type.path+'/1234');
+    this.location.go('/scorecard/'+this.match.type.path+'/'+ this.match.id);
   }
 
   gameTypeChanged(event){

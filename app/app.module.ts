@@ -5,6 +5,8 @@ import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { RouterModule } from '@angular/router';
+
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -75,6 +77,9 @@ import { HeartsComponent } from './scorecard/hearts/hearts.component';
     MatCheckboxModule,
     MatStepperModule,
     MatCardModule,
+    RouterModule.forRoot([
+      {path: 'scorecard/hearts/:id', component: HeartsComponent},
+    ]),
   ],
   providers: [MatchService, LogService, PreferencesService, GroupService ],
   bootstrap: [AppComponent]

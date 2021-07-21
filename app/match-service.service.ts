@@ -11,10 +11,10 @@ export class MatchService {
   //matches: Match[] = [];
 
   gameOptions = [
-    new GameType("Chess", 2), 
-    new GameType("Dr. Mario"), 
-    new GameType("Hearts", 4),
-    new GameType("Rook", 2, true)
+    new GameType("chess",   "Chess",   2), 
+    new GameType("drmario", "Dr. Mario"), 
+    new GameType("hearts",  "Hearts",  4),
+    new GameType("rook",    "Rook",    2, true)
   ] 
 
   constructor() { }
@@ -24,7 +24,8 @@ export class MatchService {
   }
 
   addMatch(match:Match){
-    this.matches.set(this.sequence++, match);
+    match.id = this.sequence++;
+    this.matches.set(match.id, match);
   }
 
   getMatch(id:number){

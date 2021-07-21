@@ -10,6 +10,7 @@ export class Faction {
 
 export class GameType {
   constructor(
+    public path: string,
     public name?: string,
     public defaultFactionCount?: number,
     public defaultSharedFactions?: boolean,
@@ -24,8 +25,8 @@ export class Match {
 
   constructor(
     public id?: number,
-    public type?: string,
-    public gameTypeNew?: string,
+    public type?: GameType,
+    public gameTypeNew?: GameType,
     public dateTime: string = formatDate(Date.now(), 'yyyy-MM-dd hh:mm', 'en-US'),
     public factionCount?: number,
     public sharedFactions?: boolean,
