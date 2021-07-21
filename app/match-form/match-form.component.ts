@@ -36,10 +36,8 @@ export class MatchFormComponent implements OnInit {
     Array.prototype.push.apply(this.match.availablePlayers, this.groupService.getAllPlayers());
   }
 
-
   onStepOneSubmit(){
   }
-
 
   onSubmit() {
     //alert('Thanks for submitting! Data: ' + JSON.stringify(this.game));
