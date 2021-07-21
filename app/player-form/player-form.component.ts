@@ -25,8 +25,6 @@ export class PlayerFormComponent implements OnInit {
   }
 
   onSubmit() {
-    //alert('Thanks for submitting! Data: ' + JSON.stringify(this.game));
-    this.logger.log(this.player);
     this.groupService.addPlayer(this.player);
     this.dialogRef.close();
   }

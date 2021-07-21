@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 
 import { Player } from './player';
 import { GameType } from './match';
+import { LogService } from './log-service.service';
 
 @Injectable()
 export class GroupService {
 
   players: Player[] = [];
 
-  constructor() {
+  constructor(
+    private logger:LogService
+  ) {
     this.players.push(new Player(1, "Matthew", "mlavwilson@gmail.com"));
     this.players.push(new Player(2, "Estella", "7wilsons@gmail.com"));
     this.players.push(new Player(3, "Hannah"));
@@ -23,6 +26,7 @@ export class GroupService {
   }
 
   public addPlayer(player:Player){
+    this.logger.log(player);
     this.players.push(player);
   }
 }
