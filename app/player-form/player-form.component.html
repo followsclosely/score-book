@@ -1,31 +1,33 @@
 <mat-card>
-  <mat-card-title>Add Player</mat-card-title>
-  <mat-card-content>
-    <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="form-container"> 
-      
-      <mat-form-field >
-        <mat-label>Name</mat-label>
-        <input matInput required name="player.name">
-        <!-- <mat-error *ngIf="!name.valid && name.errors.required">
-          Name is <strong>required</strong>
-        </mat-error> -->
-      </mat-form-field>
+  
+    <mat-card-title>Add Player</mat-card-title>
+      <mat-card-content>
 
-      <mat-form-field>
-        <input #emailIdSpy matInput name="emailId" placeholder="Email" type="email" [(ngModel)]="player.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-        #emailId="ngModel">
-        <mat-error *ngIf="!emailId.valid && emailId.errors.pattern">
-          Entered Email Did not match the pattern of type user@abc.com
-        </mat-error>
+      <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="form-container">
+        
+        <mat-form-field >
+          <mat-label>Name</mat-label>
+          <input matInput required name="name" [(ngModel)]="player.name">
+          <!-- <mat-error *ngIf="!name.valid && name.errors.required">
+            Name is <strong>required</strong>
+          </mat-error> -->
+        </mat-form-field>
 
-      </mat-form-field>
+        <mat-form-field>
+          <input #emailIdSpy matInput name="emailId" placeholder="Email" type="email" [(ngModel)]="player.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+          #emailId="ngModel">
+          <mat-error *ngIf="!emailId.valid && emailId.errors.pattern">
+            Entered Email Did not match the pattern of type user@abc.com
+          </mat-error>
 
-    </form> 
-  </mat-card-content>
+        </mat-form-field>
 
-  <mat-card-actions>
-    <button mat-raised-button (click)="onCancel()">Cancel</button>
-    <button mat-raised-button color="primary" type="submit">Save</button>
-  </mat-card-actions>
+      </form> 
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button (click)="onCancel()">Cancel</button>
+      <button mat-raised-button (click)="onSubmit()" color="primary">Save</button>
+    </mat-card-actions>
 
 </mat-card>

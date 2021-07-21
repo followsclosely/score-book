@@ -21,4 +21,8 @@ export class GroupService {
   public getAllPlayers(){
     return this.players;
   }
+
+  public addPlayer(player:Player){
+    this.players.push(player);
+  }
 }

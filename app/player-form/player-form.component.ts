@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Player } from '../player';
 import { LogService } from '../log-service.service';
 import {MatDialogRef} from '@angular/material';
+import { GroupService } from '../group.service';
 
 @Component({
   selector: 'app-player-form',
@@ -10,10 +11,11 @@ import {MatDialogRef} from '@angular/material';
 })
 export class PlayerFormComponent implements OnInit {
 
-  public player:Player;
+  player:Player;
 
   constructor(
     private dialogRef:  MatDialogRef<PlayerFormComponent>,
+    private groupService: GroupService,
     private logger:LogService
   ) { }
 
@@ -25,6 +27,7 @@ export class PlayerFormComponent implements OnInit {
   onSubmit() {
     //alert('Thanks for submitting! Data: ' + JSON.stringify(this.game));
     this.logger.log(this.player);
+    this.groupService.addPlayer(this.player);
     this.dialogRef.close();
   }
 
