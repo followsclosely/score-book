@@ -50,6 +50,7 @@ import { PreferencesFormComponent } from './preferences-form/preferences-form.co
 import { MatchFormComponent } from './match-form/match-form.component';
 import { GroupService } from './group.service';
 import { PlayerFormComponent } from './player-form/player-form.component';
+import { HeartsComponent } from './scorecard/hearts/hearts.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { PlayerFormComponent } from './player-form/player-form.component';
     AppComponent,
     PreferencesFormComponent,
     MatchFormComponent,
-    PlayerFormComponent
+    PlayerFormComponent,
+    HeartsComponent
   ],
   imports: [
     BrowserModule,

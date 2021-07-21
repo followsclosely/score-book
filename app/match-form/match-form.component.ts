@@ -37,14 +37,9 @@ export class MatchFormComponent implements OnInit {
 
   onSubmit() {
     //alert('Thanks for submitting! Data: ' + JSON.stringify(this.game));
+    this.match.availablePlayers.length = 0;
     this.logger.log(this.match);
     this.dialogRef.close();
-  }
-
-  step2Complete = false;
-
-  toggleStep2Complete() {
-    this.step2Complete = !this.step2Complete;
   }
 
   gameTypeChanged(event){
@@ -53,14 +48,16 @@ export class MatchFormComponent implements OnInit {
   }
 
   addPlayer(player, isAdd){
+    // this.logger.log('addPlayer('+player.name+', '+isAdd+')');
     if( isAdd ){
       this.match.addPlayer(player);
     } else {
-      for (var i = this.match.factions.length - 1; i >= 0; i--) {
-        if (!this.match.factions[i].players.includes(player)) {
-          this.match.factions.splice(i, 1);
-        }
-      }
+      this.match.removePlayer(player);
     }
+
+    // for (var i = this.match.factions.length - 1; i >= 0; i--) {
+    //   this.logger.log(' - ' + this.match.factions[i].players[0].name);
+    // }
+
   }
 }

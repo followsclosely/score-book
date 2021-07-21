@@ -5,100 +5,82 @@
 
     <mat-step label="Step 1" [completed]="match.type != null">
 
-
         <mat-card>
-        <!-- <mat-card-title>Add Player</mat-card-title> -->
-        <mat-card-content class="form-container">
+            <!-- <mat-card-title>Step 1</mat-card-title> -->
+            <mat-card-content class="form-container">
 
-     
-            <mat-form-field>
-                <mat-select name="type" [(ngModel)]="match.type" placeholder="Game Type"
-                (selectionChange)="gameTypeChanged($event)">
-                    <mat-option>--</mat-option>
-                    <mat-option *ngFor="let option of gameOptions" [value]="option">{{option.name}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-                    
-                        <!-- <td>
-                            <mat-form-field>
-                                <input matInput [(ngModel)]="match.gameTypeNew" name="gameTypeNew">
-                                <mat-hint>or a new game</mat-hint>
-                            </mat-form-field>
-                        </td> -->
-                    
-            <mat-form-field>
-                <input type="number" min="1" max="10" matInput [(ngModel)]="match.factionCount" name="factionCount" placeholder="Teams / Factions">
-                <mat-hint>the number of players</mat-hint>
-            </mat-form-field>
-
-            <mat-checkbox [(ngModel)]="match.sharedFactions" name="sharedFactions">multiple players per faction</mat-checkbox>
-
-            <!-- <div>
-                <mat-form-field >
-                    <input matInput [(ngModel)]="match.dateTime" name="dateTime">
-                    <mat-hint>when the game was played</mat-hint>
-                </mat-form-field>
-                
                 <mat-form-field>
-                    <input type="text" matInput>
-                    <mat-hint>duration (hh:mm)</mat-hint>
+                    <mat-select name="type" [(ngModel)]="match.type" placeholder="Game Type"
+                    (selectionChange)="gameTypeChanged($event)">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let option of gameOptions" [value]="option">{{option.name}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
+                        
+                            <!-- <td>
+                                <mat-form-field>
+                                    <input matInput [(ngModel)]="match.gameTypeNew" name="gameTypeNew">
+                                    <mat-hint>or a new game</mat-hint>
+                                </mat-form-field>
+                            </td> -->
+                        
+                <mat-form-field>
+                    <input type="number" min="1" max="10" matInput [(ngModel)]="match.factionCount" name="factionCount" placeholder="Teams / Factions">
+                    <mat-hint>the number of players</mat-hint>
+                </mat-form-field>
+
+                <mat-checkbox [(ngModel)]="match.sharedFactions" name="sharedFactions">multiple players per faction</mat-checkbox>
+
+                <!-- <div>
+                    <mat-form-field >
+                        <input matInput [(ngModel)]="match.dateTime" name="dateTime">
+                        <mat-hint>when the game was played</mat-hint>
+                    </mat-form-field>
+                    
+                    <mat-form-field>
+                        <input type="text" matInput>
+                        <mat-hint>duration (hh:mm)</mat-hint>
+                    </mat-form-field>
+                    
+                </div> -->
                 
-            </div> -->
-            
 
-        </mat-card-content>
+            </mat-card-content>
 
-        <mat-card-actions>
-            <button mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon>
-                Back
-            </button>
-            <button mat-raised-button matStepperNext color="primary" [disabled]="match.type == null">
-                Next <mat-icon>arrow_forward</mat-icon>
-            </button>
-        </mat-card-actions>
+            <mat-card-actions>
+                <button mat-raised-button matStepperPrevious><mat-icon>arrow_back</mat-icon>
+                    Back
+                </button>
+                <button mat-raised-button matStepperNext color="primary" [disabled]="match.type == null">
+                    Next <mat-icon>arrow_forward</mat-icon>
+                </button>
+            </mat-card-actions>
 
-    </mat-card>
+        </mat-card>
     </mat-step>
 
-    <!-- <mat-step label="Step 2" [completed]="step2Complete">
-      <h4>Step 2</h4>
-
-       <div>
-       <button (click)="toggleStep2Complete()" mat-flat-button color="primary">{{ step2Complete === true ? "Toggle:Complete" : "Toggle:Incomplete"}}
-       </button>
-    </div>
-    <br/>
-
-        <button mat-raised-button matStepperPrevious>
-            <mat-icon>arrow_back</mat-icon>Back
-        </button>
-        <button mat-raised-button matStepperNext color="primary" [disabled]="!step2Complete" >
-            Next  <mat-icon>arrow_forward</mat-icon>
-        </button>
-
-    </mat-step> -->
-
     <mat-step label="Step 3" optional>
-         <p>Step 3</p>
+        <mat-card>
+            <mat-card-title>Step 3</mat-card-title>
+            <mat-card-content class="form-container">
 
+                <div *ngFor="let player of match.availablePlayers">
+                    <mat-checkbox (change)="addPlayer(player, $event.checked)"> {{ player.name }} </mat-checkbox>
+                </div>
 
-         <div *ngFor="let player of match.availablePlayers">
-            <mat-checkbox (change)="addPlayer(player, $event.checked)"> {{ player.name }} </mat-checkbox>
-         </div>
+            </mat-card-content>
 
+            <mat-card-actions>
+                <button mat-raised-button matStepperPrevious>
+                    <mat-icon>arrow_back</mat-icon>Back
+                </button>
+                <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="match.capacity() != 0">
+                    Next  <mat-icon>arrow_forward</mat-icon>
+                </button>
+            </mat-card-actions>
 
-        <button mat-raised-button matStepperPrevious>
-            <mat-icon>arrow_back</mat-icon>Back
-        </button>
-        <button mat-raised-button matStepperNext color="primary" >
-            Next  <mat-icon>arrow_forward</mat-icon>
-        </button>
+        </mat-card>
 
-         <div>
-           <button mat-button matStepperPrevious>Back</button>
-           <button mat-button (click)="onSubmit()">Create Match</button>
-         </div>
     </mat-step>
 
   </mat-horizontal-stepper> 

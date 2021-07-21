@@ -36,4 +36,16 @@ export class Match {
     faction.players.push(player);
     this.factions.push(faction);
   }
+
+  removePlayer(player:Player){
+    for (var i = this.factions.length - 1; i >= 0; i--) {
+      if (this.factions[i].players.includes(player)) {
+        this.factions.splice(i, 1);
+      }
+    }
+  }
+
+  capacity(){
+    return (this.factionCount - this.factions.length);
+  }
 }
