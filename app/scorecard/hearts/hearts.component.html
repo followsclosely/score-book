@@ -2,21 +2,15 @@
   <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay; let i=index;">
     <th mat-header-cell *matHeaderCellDef> {{column}} </th>
     <td mat-cell *matCellDef="let element">
-       <div *ngIf="i > 0; else elseBlock">
-         {{element.details[i-1].score}}
-         <mat-icon *ngIf="element.details[i-1].flags.includes('SHOOT_THE_MOON')">
-           dark_mode
-         </mat-icon>
-         <mat-icon *ngIf="element.details[i-1].flags.includes('STOPPED_SHOOT_THE_MOON')">
-           favorite_border
-         </mat-icon>
-       </div>
-       <ng-template #elseBlock>
-       {{element.number}} &nbsp;
-         <button mat-button>
-           <i class="material-icons">edit_note</i>
-         </button>
-         </ng-template>
+      <div *ngIf="i > 0; else elseBlock"> {{element.details[i-1].score}}
+        <mat-icon *ngIf="element.details[i-1].flags.includes('SHOOT_THE_MOON')">dark_mode</mat-icon>
+        <mat-icon *ngIf="element.details[i-1].flags.includes('STOPPED_SHOOT_THE_MOON')">favorite_border</mat-icon>
+      </div>
+      <ng-template #elseBlock> {{element.number}} &nbsp;
+        <button mat-button>
+          <mat-icon>edit_note</mat-icon>
+        </button>
+      </ng-template>
     </td>
     <td mat-footer-cell *matFooterCellDef>
       <div *ngIf="i > 0; else elseBlock2">
@@ -24,8 +18,7 @@
       </div>
       <ng-template #elseBlock2>
         <button mat-mini-fab (click)="openAddHandDialog()">
-          <i class="material-icons">add</i>
-        </button>
+        <i class="material-icons">add</i></button>
       </ng-template>
   </ng-container>
   
