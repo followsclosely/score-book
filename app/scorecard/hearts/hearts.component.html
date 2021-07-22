@@ -4,10 +4,10 @@
     <td mat-cell *matCellDef="let element">
        <div *ngIf="i > 0; else elseBlock">
          {{element.details[i-1].score}}
-         <mat-icon *ngIf="element.details[i-1].flags.includes('SHOOT_THE_MOON')" matBadgeColor="warn">
+         <mat-icon *ngIf="element.details[i-1].flags.includes('SHOOT_THE_MOON')">
            dark_mode
          </mat-icon>
-         <mat-icon *ngIf="element.details[i-1].flags.includes('STOPPED_SHOOT_THE_MOON')" matBadgeColor="warn">
+         <mat-icon *ngIf="element.details[i-1].flags.includes('STOPPED_SHOOT_THE_MOON')">
            favorite_border
          </mat-icon>
        </div>

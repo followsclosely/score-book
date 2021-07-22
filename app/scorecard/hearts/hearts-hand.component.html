@@ -1,5 +1,20 @@
-<ng-container *ngFor="let faction of parent.match.factions">
-  <div>
+<table>
+<tr *ngFor="let faction of parent.match.factions">
+  <td>
   {{ faction.name }}
-  </div>
-</ng-container>
+  </td>
+  <td>
+      <input type="number"  matInput [(ngModel)]="detail.score" name="score" placeholder="Score">
+  </td>
+  <td>
+
+
+  <mat-select placeholder="Flags">
+      <mat-option>Flag</mat-option>
+      <mat-option>Shot The Moon</mat-option>
+  </mat-select>
+
+
+  </td>
+</tr>
+</table>
