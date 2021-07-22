@@ -6,6 +6,8 @@ import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
 
 export class HandDetails {
+  public flags = new Array<string>();
+
   constructor(
     public score : number
   ){}
@@ -20,6 +22,19 @@ export class Hand {
     this.details.push(new HandDetails(score));
     return this;
   }
+
+  push2(score:number, shootMoon:boolean, stopShootMoon: boolean){
+    var detail = new HandDetails(score);
+    if( shootMoon ){
+      detail.flags.push("SHOOT_THE_MOON");
+    }
+    if( stopShootMoon ){
+      detail.flags.push("STOPPED_SHOOT_THE_MOON");
+    }
+    this.details.push(detail);
+    return this;
+  }
+
 }
 
 export interface Stink {
@@ -70,30 +85,33 @@ export class HeartsComponent implements OnInit {
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.logger.log(id);
-    //this.match = this.matchService.getMatch(id);
+    this.match = this.matchService.getMatch(id);
 
-    this.match = new Match(
-      id,
-      new GameType("hearts",  "Hearts",  4),
-      null,
-      null,
-      4,
-      false
-    );
+    if( this.match == null)
+    {
+      this.match = new Match(
+        id,
+        new GameType("hearts",  "Hearts",  4),
+        null,
+        null,
+        4,
+        false
+      );
 
-    this.match.factions.push(new Faction("Matthew"));
-    this.match.factions.push(new Faction("Estella"));
-    this.match.factions.push(new Faction("Joel"));
-    this.match.factions.push(new Faction("Emily"));
+      this.match.factions.push(new Faction("Matthew"));
+      this.match.factions.push(new Faction("Estella"));
+      this.match.factions.push(new Faction("Joel"));
+      this.match.factions.push(new Faction("Emily"));
+
+      this.dataSource2.push(new Hand(1).push(10).push(3).push(7).push(6));
+      this.dataSource2.push(new Hand(2).push(0).push(23).push2(3, false, true).push(0));
+      this.dataSource2.push(new Hand(3).push2(0, true, false).push(26).push(26).push(26));
+    }
 
     this.columnsToDisplay.push("Hand");
     this.match.factions.forEach(faction => {
       this.columnsToDisplay.push(faction.name);
     });
-
-    this.dataSource2.push(new Hand(1).push(10).push(3).push(7).push(6));
-    this.dataSource2.push(new Hand(2).push(2).push(23).push(1).push(0));
-    this.dataSource2.push(new Hand(3).push(2).push(23).push(1).push(0));
 
   }
 

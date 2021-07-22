@@ -2,16 +2,16 @@
   <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay; let i=index;">
     <th mat-header-cell *matHeaderCellDef> {{column}} </th>
     <td mat-cell *matCellDef="let element">
-       <div *ngIf="i == 0; else elseBlock">
-         {{element.number}}
-       </div>
-       <ng-template #elseBlock>
+       <div *ngIf="i > 0; else elseBlock">
          {{element.details[i-1].score}}
-         
-         <mat-icon matBadgeColor="warn">dark_mode</mat-icon>
-         <mat-icon matBadgeColor="warn">favorite_border</mat-icon>
-         
-       </ng-template>
+         <mat-icon *ngIf="element.details[i-1].flags.includes('SHOOT_THE_MOON')" matBadgeColor="warn">
+           dark_mode
+         </mat-icon>
+         <mat-icon *ngIf="element.details[i-1].flags.includes('STOPPED_SHOOT_THE_MOON')" matBadgeColor="warn">
+           favorite_border
+         </mat-icon>
+       </div>
+       <ng-template #elseBlock>{{element.number}}</ng-template>
     </td>
   </ng-container>
 
