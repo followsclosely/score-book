@@ -1,11 +1,5 @@
-<table width="100%" ng-if="!match">
-  <tr>
-    <th *ngFor="let faction of match.factions">{{ faction.name }}</th>
-  </tr>
-</table>
-
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+  <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay">
     <th mat-header-cell *matHeaderCellDef> {{column}} </th>
     <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
   </ng-container>

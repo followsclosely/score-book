@@ -32,8 +32,7 @@ const ELEMENT_DATA: Hand[] = [
 })
 export class HeartsComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'weight', 'symbol', 'position'];
-  columnsToDisplay: string[] = this.displayedColumns.slice();
+  columnsToDisplay: string[] = [];
 
 
   public match:Match = null;
@@ -68,6 +67,11 @@ export class HeartsComponent implements OnInit {
     this.match.factions.push(new Faction("Estella"));
     this.match.factions.push(new Faction("Joel"));
     this.match.factions.push(new Faction("Emily"));
+
+    this.columnsToDisplay.push("Hand");
+    this.match.factions.forEach(faction => {
+      this.columnsToDisplay.push(faction.name);
+    });
   }
 
 }
