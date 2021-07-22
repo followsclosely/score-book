@@ -137,7 +137,7 @@ export class GenericHandComponent implements OnInit {
 
   ngOnInit() {
     this.logger.log('GenericHandComponent#ngOnInit()');
-    this.hand = new Hand(55);
+    this.hand = new Hand();
     this.parent.match.factions.forEach(faction => {
       this.hand.details.push(new HandDetails(0));
     });
