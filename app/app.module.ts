@@ -51,17 +51,18 @@ import { PreferencesFormComponent } from './preferences-form/preferences-form.co
 import { MatchFormComponent } from './match-form/match-form.component';
 import { GroupService } from './group.service';
 import { PlayerFormComponent } from './player-form/player-form.component';
-import { HeartsComponent } from './scorecard/hearts/hearts.component';
+import { HeartsComponent, GenericHandComponent } from './scorecard/hearts/hearts.component';
 
 
 @NgModule({
-  entryComponents: [PreferencesFormComponent, MatchFormComponent, PlayerFormComponent],
+  entryComponents: [PreferencesFormComponent, MatchFormComponent, PlayerFormComponent, GenericHandComponent],
   declarations: [
     AppComponent,
     PreferencesFormComponent,
     MatchFormComponent,
     PlayerFormComponent,
-    HeartsComponent
+    HeartsComponent,
+    GenericHandComponent
   ],
   imports: [
     BrowserModule,

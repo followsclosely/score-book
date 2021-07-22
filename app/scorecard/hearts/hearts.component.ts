@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 import { Match, GameType, Faction } from '../../match';
 import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
+import {MatDialog, MatDialogRef} from '@angular/material';
+
 
 export class HandDetails {
   public flags = new Array<string>();
@@ -34,50 +36,28 @@ export class Hand {
     this.details.push(detail);
     return this;
   }
-
 }
 
-export interface Stink {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
 
-const ELEMENT_DATA: Stink[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 
 @Component({
-  selector: 'app-hearts',
   templateUrl: './hearts.component.html',
   styleUrls: ['./hearts.component.css']
 })
 export class HeartsComponent implements OnInit {
 
-  columnsToDisplay: string[] = [];
-
-
+  public columnsToDisplay: string[] = [];
   public match:Match = null;
+  public dataSource = new Array<Hand>();
 
-
-  public dataSource = ELEMENT_DATA;
-  public dataSource2 = new Array<Hand>();
+  private handDialogRef: MatDialogRef<GenericHandComponent>;
 
   constructor(
     private logger: LogService,
     private route: ActivatedRoute,
     private location: Location,
     private matchService:MatchService, 
+    private dialog: MatDialog,
   ) { 
 
   }
@@ -103,9 +83,9 @@ export class HeartsComponent implements OnInit {
       this.match.factions.push(new Faction("Joel"));
       this.match.factions.push(new Faction("Emily"));
 
-      this.dataSource2.push(new Hand(1).push(10).push(3).push(7).push(6));
-      this.dataSource2.push(new Hand(2).push(0).push(23).push2(3, false, true).push(0));
-      this.dataSource2.push(new Hand(3).push2(0, true, false).push(26).push(26).push(26));
+      this.dataSource.push(new Hand(1).push(10).push(3).push(7).push(6));
+      this.dataSource.push(new Hand(2).push(0).push(23).push2(3, false, true).push(0));
+      this.dataSource.push(new Hand(3).push2(0, true, false).push(26).push(26).push(26));
     }
 
     this.columnsToDisplay.push("Hand");
@@ -115,4 +95,25 @@ export class HeartsComponent implements OnInit {
 
   }
 
+  openAddHandDialog(){
+    this.handDialogRef = this.dialog.open(GenericHandComponent);
+    this.handDialogRef.componentInstance.parent = this;
+  }
+
+}
+
+@Component({
+  templateUrl: './hearts-hand.component.html',
+  styleUrls: ['./hearts.component.css']
+})
+export class GenericHandComponent implements OnInit {
+
+  public parent : HeartsComponent;
+
+  constructor(
+    private logger: LogService,
+  ) { }
+
+  ngOnInit() {
+  }
 }
