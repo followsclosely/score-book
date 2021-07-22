@@ -6,16 +6,18 @@ import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
 
 export class HandDetails {
-
+  constructor(
+    public score : number
+  ){}
 }
 export class Hand {
   public details = new Array<HandDetails>();
   constructor(
-    public score : number
+    public number : number
   ){}
 
-  push(details:HandDetails){
-    this.details.push(details);
+  push(score:number){
+    this.details.push(new HandDetails(score));
     return this;
   }
 }
@@ -54,6 +56,7 @@ export class HeartsComponent implements OnInit {
 
 
   public dataSource = ELEMENT_DATA;
+  public dataSource2 = new Array<Hand>();
 
   constructor(
     private logger: LogService,
@@ -87,6 +90,11 @@ export class HeartsComponent implements OnInit {
     this.match.factions.forEach(faction => {
       this.columnsToDisplay.push(faction.name);
     });
+
+    this.dataSource2.push(new Hand(1).push(10).push(3).push(7).push(6));
+    this.dataSource2.push(new Hand(2).push(2).push(23).push(1).push(0));
+    this.dataSource2.push(new Hand(3).push(2).push(23).push(1).push(0));
+
   }
 
 }
