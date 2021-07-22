@@ -17,7 +17,7 @@ export class HandDetails {
 export class Hand {
   public details = new Array<HandDetails>();
   constructor(
-    public number : number
+    public number? : number
   ){}
 
   push(score:number){
@@ -83,9 +83,9 @@ export class HeartsComponent implements OnInit {
       this.match.factions.push(new Faction("Joel"));
       this.match.factions.push(new Faction("Emily"));
 
-      this.dataSource.push(new Hand(1).push(10).push(3).push(7).push(6));
-      this.dataSource.push(new Hand(2).push(0).push(23).push2(3, false, true).push(0));
-      this.dataSource.push(new Hand(3).push2(0, true, false).push(26).push(26).push(26));
+      this.addHand(new Hand(1).push(10).push(3).push(7).push(6));
+      this.addHand(new Hand(2).push(0).push(23).push2(3, false, true).push(0));
+      this.addHand(new Hand(3).push2(0, true, false).push(26).push(26).push(26));
     }
 
     this.columnsToDisplay.push("Hand");
@@ -95,6 +95,11 @@ export class HeartsComponent implements OnInit {
 
   }
 
+  addHand(hand:Hand){
+    this.logger.log('HeartsComponent#addHand()');
+    this.logger.log( this.dataSource.length );
+    this.dataSource.push(hand);
+  }
   openAddHandDialog(){
     this.handDialogRef = this.dialog.open(GenericHandComponent);
     this.handDialogRef.componentInstance.parent = this;
@@ -109,13 +114,45 @@ export class HeartsComponent implements OnInit {
 export class GenericHandComponent implements OnInit {
 
   public parent : HeartsComponent;
-  public details:HandDetails
+  public hand:Hand;
 
   constructor(
     private logger: LogService,
+    private dialogRef:  MatDialogRef<GenericHandComponent>,
   ) { }
 
   ngOnInit() {
-    this.details = new HandDetails(55);
+    this.logger.log('GenericHandComponent#ngOnInit()');
+    this.hand = new Hand(55);
+    this.parent.match.factions.forEach(faction => {
+      this.hand.details.push(new HandDetails(0));
+    });
+  }
+
+  shootTheMoonChange(i, event){
+    if( event.checked ){
+      //Add the flag
+      this.hand.details[i].flags.push("SHOOT_THE_MOON");
+      if( this.hand.details[i].score == 0 ){
+        this.hand.details.forEach((detail, index) => {
+          if( index != i ){
+            detail.score = 26;
+          }
+        });
+      }
+    } else {
+      //Remove the flag
+      const index = this.hand.details[i].flags.indexOf("SHOOT_THE_MOON", 0);
+      if (index > -1) {
+        this.hand.details[i].flags.splice(index, 1);
+      } 
+    }
+    this.logger.log(event.checked);
+  }
+
+  onSubmit(){
+    this.logger.log(this.parent.dataSource);
+    this.parent.addHand(this.hand);
+    this.dialogRef.close();
   }
 }

@@ -1,25 +1,20 @@
 
-    <div *ngFor="let faction of parent.match.factions; let i=index;">
+<div *ngFor="let faction of parent.match.factions; let i=index;">
     
+  <h4>{{ faction.name }}</h4>
 
-    <h4>{{ faction.name }}</h4>
+  <mat-form-field class="example-full-width" [style.width.px]=60>
+    <mat-label>Score</mat-label>
+    <input width="3" matInput type="number" value="0" [(ngModel)]="hand.details[i].score">
+  </mat-form-field>
 
-    <mat-form-field class="example-full-width" [style.width.px]=60>
-      <mat-label>Score</mat-label>
-      <input width="3" matInput type="number" value="0">
-    </mat-form-field>
+  &nbsp;<mat-slide-toggle (change)="shootTheMoonChange(i, $event)" [disabled]="hand.details[i].score > 0">
+    <mat-icon>dark_mode</mat-icon>
+  </mat-slide-toggle>
 
-    <mat-button-toggle value="bold">
-      <mat-icon>dark_mode</mat-icon>
-    </mat-button-toggle>
+</div>
 
-    <mat-button-toggle value="bold">
-      <mat-icon>favorite_border</mat-icon>
-    </mat-button-toggle>
-
-    </div>
-  
-    <div>
-    <button mat-raised-button>Cancel</button>
-    <button mat-raised-button color="primary">Add Hand</button>
-    </div>
+<div>
+  <button mat-raised-button>Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()">Add Hand</button>
+</div>

@@ -80,6 +80,7 @@ import { HeartsComponent, GenericHandComponent } from './scorecard/hearts/hearts
     MatCardModule,
     MatTableModule,
     MatButtonToggleModule,
+    MatSlideToggleModule,
     RouterModule.forRoot([
       {path: 'scorecard/hearts/:id', component: HeartsComponent},
     ]),
