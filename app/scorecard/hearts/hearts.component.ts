@@ -109,11 +109,13 @@ export class HeartsComponent implements OnInit {
 export class GenericHandComponent implements OnInit {
 
   public parent : HeartsComponent;
+  public details:HandDetails
 
   constructor(
     private logger: LogService,
   ) { }
 
   ngOnInit() {
+    this.details = new HandDetails(55);
   }
 }
