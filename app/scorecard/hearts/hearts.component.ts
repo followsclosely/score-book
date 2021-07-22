@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Match, GameType } from '../../match';
+import { Match, GameType, Faction } from '../../match';
 import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
 
@@ -53,7 +53,21 @@ export class HeartsComponent implements OnInit {
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.logger.log(id);
-    this.match = this.matchService.getMatch(id);
+    //this.match = this.matchService.getMatch(id);
+
+    this.match = new Match(
+      id,
+      new GameType("hearts",  "Hearts",  4),
+      null,
+      null,
+      4,
+      false
+    );
+
+    this.match.factions.push(new Faction("Matthew"));
+    this.match.factions.push(new Faction("Estella"));
+    this.match.factions.push(new Faction("Joel"));
+    this.match.factions.push(new Faction("Emily"));
   }
 
 }
