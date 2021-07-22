@@ -47,9 +47,7 @@ export class MatchFormComponent implements OnInit {
     this.dialogRef.close();
     
     this.router.navigate(['scorecard', this.match.type.path, this.match.id]);
-
-    //this.router.navigateByUrl('/scorecard/'+this.match.type.path+'/1234');
-    this.location.go('/scorecard/'+this.match.type.path+'/'+ this.match.id);
+    //this.location.go('/scorecard/'+this.match.type.path+'/'+ this.match.id);
   }
 
   gameTypeChanged(event){
