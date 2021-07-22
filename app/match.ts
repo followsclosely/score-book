@@ -30,6 +30,7 @@ export class Match {
     public dateTime: string = formatDate(Date.now(), 'yyyy-MM-dd hh:mm', 'en-US'),
     public factionCount?: number,
     public sharedFactions?: boolean,
+    public maxPoints?: number,
   ) {}
 
   addPlayer(player:Player){
