@@ -5,6 +5,7 @@ import { Match, GameType, Faction } from '../../match';
 import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
 import {MatDialog, MatDialogRef} from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 export class HandDetails {
@@ -48,7 +49,9 @@ export class HeartsComponent implements OnInit {
 
   public columnsToDisplay: string[] = [];
   public match:Match = null;
-  public dataSource = new Array<Hand>();
+
+  public dataSource = new MatTableDataSource<Hand>();
+  public hands = new Array<Hand>();
 
   private handDialogRef: MatDialogRef<GenericHandComponent>;
 
@@ -83,9 +86,10 @@ export class HeartsComponent implements OnInit {
       this.match.factions.push(new Faction("Joel"));
       this.match.factions.push(new Faction("Emily"));
 
-      this.addHand(new Hand(1).push(10).push(3).push(7).push(6));
-      this.addHand(new Hand(2).push(0).push(23).push2(3, false, true).push(0));
-      this.addHand(new Hand(3).push2(0, true, false).push(26).push(26).push(26));
+      this.hands.push(new Hand(1).push(10).push(3).push(7).push(6));
+      this.hands.push(new Hand(2).push(0).push(23).push2(3, false, true).push(0));
+      this.hands.push(new Hand(3).push2(0, true, false).push(26).push(26).push(26));
+      this.dataSource.data = this.hands;
     }
 
     this.columnsToDisplay.push("Hand");
@@ -96,9 +100,12 @@ export class HeartsComponent implements OnInit {
   }
 
   addHand(hand:Hand){
-    this.logger.log('HeartsComponent#addHand()');
-    this.logger.log( this.dataSource.length );
-    this.dataSource.push(hand);
+    //this.logger.log('HeartsComponent#addHand()');
+    //this.logger.log( this.dataSource.data.length );
+    hand.number = this.hands.length+1;
+    this.hands.push(hand);
+    this.dataSource.data = this.hands;
+    
   }
   openAddHandDialog(){
     this.handDialogRef = this.dialog.open(GenericHandComponent);
@@ -151,7 +158,7 @@ export class GenericHandComponent implements OnInit {
   }
 
   onSubmit(){
-    this.logger.log(this.parent.dataSource);
+    //this.logger.log(this.parent.dataSource);
     this.parent.addHand(this.hand);
     this.dialogRef.close();
   }
