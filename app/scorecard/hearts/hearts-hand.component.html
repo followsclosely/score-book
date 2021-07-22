@@ -1,20 +1,16 @@
-<table>
-<tr *ngFor="let faction of parent.match.factions">
-  <td>
-  {{ faction.name }}
-  </td>
-  <td>
-      <input type="number"  matInput [(ngModel)]="detail.score" name="score" placeholder="Score">
-  </td>
-  <td>
+<mat-card *ngFor="let faction of parent.match.factions; let i=index;">
+  <mat-card-title>{{ faction.name }}</mat-card-title>
+  <mat-card-content class="form-container">
 
+    <!-- <input type="number" matInput [(ngModel)]="detail.score" name="score" placeholder="Score"> -->
 
-  <mat-select placeholder="Flags">
-      <mat-option>Flag</mat-option>
-      <mat-option>Shot The Moon</mat-option>
-  </mat-select>
+    <mat-button-toggle value="bold">
+      <mat-icon>dark_mode</mat-icon>
+    </mat-button-toggle>
 
+    <mat-button-toggle value="bold">
+      <mat-icon>favorite_border</mat-icon>
+    </mat-button-toggle>
 
-  </td>
-</tr>
-</table>
+  </mat-card-content>
+</mat-card>

@@ -79,6 +79,7 @@ import { HeartsComponent, GenericHandComponent } from './scorecard/hearts/hearts
     MatStepperModule,
     MatCardModule,
     MatTableModule,
+    MatButtonToggleModule,
     RouterModule.forRoot([
       {path: 'scorecard/hearts/:id', component: HeartsComponent},
     ]),
