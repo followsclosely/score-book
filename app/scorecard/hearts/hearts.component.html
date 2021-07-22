@@ -13,15 +13,18 @@
        </div>
        <ng-template #elseBlock>{{element.number}}</ng-template>
     </td>
+    <td mat-footer-cell *matFooterCellDef>
+      <div *ngIf="i > 0; else elseBlock2">
+        <b> {{ getTotal(i) }} </b>
+      </div>
+      <ng-template #elseBlock2>
+        <button mat-mini-fab (click)="openAddHandDialog()">
+          <i class="material-icons">add</i>
+        </button>
+      </ng-template>
   </ng-container>
-
+  
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
   <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-  <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+  <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
 </table>
-
-<div>
-  <button mat-mini-fab (click)="openAddHandDialog()">
-    <i class="material-icons">add</i>
-  </button>
-</div>

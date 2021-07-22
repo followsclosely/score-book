@@ -90,6 +90,8 @@ export class HeartsComponent implements OnInit {
       this.hands.push(new Hand(2).push(0).push(23).push2(3, false, true).push(0));
       this.hands.push(new Hand(3).push2(0, true, false).push(26).push(26).push(26));
       this.dataSource.data = this.hands;
+
+      
     }
 
     this.columnsToDisplay.push("Hand");
@@ -110,6 +112,11 @@ export class HeartsComponent implements OnInit {
   openAddHandDialog(){
     this.handDialogRef = this.dialog.open(GenericHandComponent);
     this.handDialogRef.componentInstance.parent = this;
+  }
+
+  getTotal(i : number) {
+    if (i == 0 ) return "";
+    return this.hands.map(hand => hand.details[i-1].score).reduce((acc, value) => acc + value, 0);
   }
 
 }
