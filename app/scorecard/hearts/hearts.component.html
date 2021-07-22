@@ -18,3 +18,9 @@
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
   <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
 </table>
+
+<div>
+  <button mat-fab color="accent" (click)="clickMenu()">
+    <i class="material-icons">post_add</i>
+  </button>
+</div>
