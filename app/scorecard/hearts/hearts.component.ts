@@ -5,14 +5,29 @@ import { Match, GameType, Faction } from '../../match';
 import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
 
-export interface Hand {
+export class HandDetails {
+
+}
+export class Hand {
+  public details = new Array<HandDetails>();
+  constructor(
+    public score : number
+  ){}
+
+  push(details:HandDetails){
+    this.details.push(details);
+    return this;
+  }
+}
+
+export interface Stink {
   name: string;
   position: number;
   weight: number;
   symbol: string;
 }
 
-const ELEMENT_DATA: Hand[] = [
+const ELEMENT_DATA: Stink[] = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
