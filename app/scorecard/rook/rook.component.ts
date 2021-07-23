@@ -6,7 +6,15 @@ import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import { MatTableDataSource } from '@angular/material/table';
+import { Player } from '../../player';
 
+export class Bid {
+  constructor(
+    public player? : Player,
+    public points? : number,
+    public trump?
+  ){}
+}
 
 export class HandDetails {
   public flags = new Array<string>();
@@ -18,12 +26,17 @@ export class HandDetails {
 export class Hand {
   public details = new Array<HandDetails>();
   constructor(
-    public number? : number
+    public number? : number,
+    public bid? : Bid,
   ){}
 
   push(score:number){
     this.details.push(new HandDetails(score));
     return this;
+  }
+  setBid(player? : Player, points? : number, trump?){
+    this.bid = new Bid(player, points, trump);
+    return this; 
   }
 
   getTotal() {
@@ -60,13 +73,40 @@ export class RookComponent implements OnInit {
     this.logger.log(id);
     this.match = this.matchService.getMatch(id);
 
+
+    if( this.match == null)
+    {
+      this.match = new Match(
+        id,
+        new GameType("rook",  "Rook"),
+        null,
+        null,
+        2,
+        true
+      );
+
+      var parents = new Faction("Parents");
+      parents.addPlayer(new Player(100, "Matthew"));
+      parents.addPlayer(new Player(101, "Estella"));
+      this.match.factions.push(parents);
+
+      var kids = new Faction("Kids");
+      parents.addPlayer(new Player(102, "Hannah"));
+      parents.addPlayer(new Player(103, "Olivia"));
+      this.match.factions.push(kids);
+
+      this.hands.push(new Hand(1).push(10).push(3).setBid(new Player(100, "Matthew"), 125, "Green" ));
+      this.hands.push(new Hand(1).push(0).push(0).setBid(new Player(102, "Hannah"), 135, "Red" ));
+      this.dataSource.data = this.hands;
+  
+    }
+
     this.columnsToDisplay.push("Hand");
     this.match.factions.forEach(faction => {
       if( faction.name != null ){
         this.columnsToDisplay.push(faction.name);
       } else {
-        var name = faction.players.map(p => p.name).join('/');;
-        this.columnsToDisplay.push(name);
+        this.columnsToDisplay.push(faction.players.map(p => p.name).join('/'));
       }
     });
   }
@@ -90,7 +130,7 @@ export class RookComponent implements OnInit {
 }
 
 @Component({
-  templateUrl: './rook-hand.component.html',
+  templateUrl: './hand.component.html',
   styleUrls: ['./rook.component.css']
 })
 export class RookHandComponent implements OnInit {
