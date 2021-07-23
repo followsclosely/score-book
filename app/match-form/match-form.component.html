@@ -98,7 +98,7 @@
                 <button mat-raised-button matStepperPrevious>
                     <mat-icon>arrow_back</mat-icon>Back
                 </button>
-                <button mat-raised-button color="primary" (click)="onSubmit()">
+                <button mat-raised-button color="primary" (click)="onSubmitFaction()" [disabled]="faction.players.length == 0">
                     Next  <mat-icon>arrow_forward</mat-icon>
                 </button>
             </mat-card-actions>

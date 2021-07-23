@@ -59,17 +59,11 @@ export class MatchFormComponent implements OnInit {
   }
 
   addPlayer(player, isAdd){
-    // this.logger.log('addPlayer('+player.name+', '+isAdd+')');
     if( isAdd ){
       this.match.addPlayer(player);
     } else {
       this.match.removePlayer(player);
     }
-
-    // for (var i = this.match.factions.length - 1; i >= 0; i--) {
-    //   this.logger.log(' - ' + this.match.factions[i].players[0].name);
-    // }
-
   }
 
   addPlayerToFaction(player, isAdd){
@@ -80,6 +74,19 @@ export class MatchFormComponent implements OnInit {
       this.faction.addPlayer(player);
     } else {
       this.faction.removePlayer(player);
+    }
+  }
+
+  onSubmitFaction(){
+    if( this.match.factions.length == this.match.factionCount){
+      this.onSubmit();
+    } else {
+
+      //Disable the players already in a match
+      this.match.availablePlayers = this.match.availablePlayers.filter( player => this.faction.players.indexOf( player ) == -1);
+
+      this.faction = new Faction();
+      this.currentFaction++;
     }
   }
 }
