@@ -53,7 +53,7 @@ import { GroupService } from './group.service';
 import { PlayerFormComponent } from './player-form/player-form.component';
 import { HeartsComponent, HeartsHandComponent } from './scorecard/hearts/hearts.component';
 import { GenericComponent } from './scorecard/generic/generic.component';
-import { RookComponent } from './scorecard/rook/rook.component';
+import { RookComponent, RookHandComponent } from './scorecard/rook/rook.component';
 
 
 @NgModule({
@@ -62,7 +62,7 @@ import { RookComponent } from './scorecard/rook/rook.component';
     MatchFormComponent, 
     PlayerFormComponent, 
     HeartsHandComponent, 
-    RookComponent, 
+    RookHandComponent,
     GenericComponent
   ],
   declarations: [
@@ -70,10 +70,9 @@ import { RookComponent } from './scorecard/rook/rook.component';
     PreferencesFormComponent,
     MatchFormComponent,
     PlayerFormComponent,
-    HeartsComponent,
-    HeartsHandComponent,
+    HeartsComponent, HeartsHandComponent,
     GenericComponent,
-    RookComponent
+    RookComponent, RookHandComponent
   ],
   imports: [
     BrowserModule,
