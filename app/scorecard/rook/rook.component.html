@@ -1,9 +1,8 @@
-<!-- <table class="mat-table">
+<table class="styled-table">
   <thead>
-    <tr class="mat-header-row">
-      <th class="mat-header-cell">Hand</th>
-      <th class="mat-header-cell"
-      *ngFor="let faction of match.factions; let i=index;">
+    <tr>
+      <th>Hand</th>
+      <th *ngFor="let faction of match.factions; let i=index;" colspan="2">
       {{faction.name}}
       </th>
     </tr>
@@ -11,24 +10,28 @@
 
   <tbody>
     <tr *ngFor="let hand of hands" class="mat-row">
-      <td class="mat-cell">
+      <td>
         {{hand.number}}
         <button mat-button><mat-icon>edit_note</mat-icon></button>
         {{hand.bid.points}} <mat-icon>east</mat-icon>
       </td>
-      <td *ngFor="let detail of hand.details" class="mat-cell">
-        {{detail.score}}
+
+      <td *ngFor="let detail of hand.details" colspan="2">
+        <div text-align="left">100</div>
+        <div text-align="right">{{detail.score}}*</div>
+        
       </td>
+
     </tr>
   </tbody>
 
   <tfoot>
-    <tr class="mat-footer-row">
-      <td class="mat-footer-cell cdk-column-Parents mat-column-Parents">
+    <tr>
+      <td >
         <button mat-mini-fab (click)="openAddHandDialog()" >
         <i class="material-icons">add</i></button>
       </td>
-      <td *ngFor="let faction of match.factions; let i=index;" class="mat-footer-cell cdk-column-Parents mat-column-Parents">
+      <td *ngFor="let faction of match.factions; let i=index;">
         <b> {{ getTotal(i+1) }} </b>
       </td>
     </tr>
@@ -36,25 +39,23 @@
   
 </table>
 
-<hr> -->
+<hr>
 
-<table mat-table [dataSource]="dataSource">
+<!-- <table mat-table [dataSource]="dataSource">
 
 <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay; let i=index;">
 
   <th mat-header-cell *matHeaderCellDef> {{column}} </th>
   
   <td mat-cell *matCellDef="let element" >
-    <div *ngIf="i > 0; else elseBlock"> 
+    <div *ngIf="i > 0; else elseBlock">
+
+      <mat-icon *ngIf="element.details[i-1].winner != null" class="material-icons color_{{element.bid.trump}}">arrow_forward</mat-icon>
       {{element.details[i-1].score}}
     </div>
     <ng-template #elseBlock> {{element.number}} &nbsp;
       <button mat-button><mat-icon>edit_note</mat-icon></button>
-      
-      <!--  <mat-icon class="material-icons color_{{element.bid.trump}}">style</mat-icon> -->
-      <mat-icon class="material-icons color_{{element.bid.trump}}">arrow_back</mat-icon>
       {{element.bid.points}}
-     <mat-icon class="material-icons color_{{element.bid.trump}}">arrow_forward</mat-icon>
     </ng-template>
   </td>
 
@@ -73,4 +74,4 @@
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
   <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
   <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
-</table>
+</table> -->
