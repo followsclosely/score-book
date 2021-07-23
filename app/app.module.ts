@@ -53,10 +53,18 @@ import { GroupService } from './group.service';
 import { PlayerFormComponent } from './player-form/player-form.component';
 import { HeartsComponent, HeartsHandComponent } from './scorecard/hearts/hearts.component';
 import { GenericComponent } from './scorecard/generic/generic.component';
+import { RookComponent } from './scorecard/rook/rook.component';
 
 
 @NgModule({
-  entryComponents: [PreferencesFormComponent, MatchFormComponent, PlayerFormComponent, HeartsHandComponent, GenericComponent],
+  entryComponents: [
+    PreferencesFormComponent, 
+    MatchFormComponent, 
+    PlayerFormComponent, 
+    HeartsHandComponent, 
+    RookComponent, 
+    GenericComponent
+  ],
   declarations: [
     AppComponent,
     PreferencesFormComponent,
@@ -64,7 +72,8 @@ import { GenericComponent } from './scorecard/generic/generic.component';
     PlayerFormComponent,
     HeartsComponent,
     HeartsHandComponent,
-    GenericComponent
+    GenericComponent,
+    RookComponent
   ],
   imports: [
     BrowserModule,
@@ -84,8 +93,9 @@ import { GenericComponent } from './scorecard/generic/generic.component';
     MatButtonToggleModule,
     MatSlideToggleModule,
     RouterModule.forRoot([
-      {path: 'scorecard/hearts/:id', component: HeartsComponent},
       {path: 'scorecard/chess/:id', component: GenericComponent},
+      {path: 'scorecard/hearts/:id', component: HeartsComponent},
+      {path: 'scorecard/rook/:id', component: RookComponent},
     ]),
   ],
   providers: [MatchService, LogService, PreferencesService, GroupService ],
