@@ -50,8 +50,11 @@
     </div>
     <ng-template #elseBlock> {{element.number}} &nbsp;
       <button mat-button><mat-icon>edit_note</mat-icon></button>
-      {{element.bid.points}} <mat-icon class="material-icons color_{{element.bid.trump}}">style</mat-icon>
-      <!-- <mat-icon class="material-icons color_{{element.bid.trump}}">east</mat-icon> -->
+      
+      <!--  <mat-icon class="material-icons color_{{element.bid.trump}}">style</mat-icon> -->
+      <mat-icon class="material-icons color_{{element.bid.trump}}">arrow_back</mat-icon>
+      {{element.bid.points}}
+     <mat-icon class="material-icons color_{{element.bid.trump}}">arrow_forward</mat-icon>
     </ng-template>
   </td>
 
