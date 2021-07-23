@@ -1,3 +1,8 @@
 table {
   width: 100%;
 }
+
+.material-icons.color_green { color: #009600; }
+.material-icons.color_red { color: #ff0000; }
+.material-icons.color_yellow { color: #c5c200; }
+.material-icons.color_black { color: #000000; }
