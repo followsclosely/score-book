@@ -95,9 +95,9 @@ export class RookComponent implements OnInit {
       parents.addPlayer(new Player(103, "Olivia"));
       this.match.factions.push(kids);
 
-      this.hands.push(new Hand(1).push(10).push(3).setBid(new Player(100, "Matthew"), 125, "green" ));
-      this.hands.push(new Hand(1).push(0).push(0).setBid(new Player(102, "Hannah"), 135, "red" ));
-      this.hands.push(new Hand(1).push(0).push(0).setBid(new Player(102, "Olivia"), 115, "black" ));
+      this.hands.push(new Hand(1).push(145).push(35).setBid(new Player(100, "Matthew"), 125, "green" ));
+      this.hands.push(new Hand(1).push(20).push(160).setBid(new Player(102, "Hannah"), 135, "red" ));
+      this.hands.push(new Hand(1).push(45).push(135).setBid(new Player(102, "Olivia"), 115, "black" ));
       this.hands.push(new Hand(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
       this.dataSource.data = this.hands;
   

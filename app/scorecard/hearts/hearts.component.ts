@@ -41,6 +41,26 @@ export class Hand {
   getTotal() {
     return this.details.map(detail => detail.score).reduce((acc, value) => acc + value, 0);
   }
+
+  public getDirection(size:number){
+    console.log("number: " + size);
+    var number = (this.number) % size;
+
+    switch(number) { 
+      case 1: { 
+        return 'north_east'
+      }
+      case 2: { 
+        return 'north_west';
+      }
+      case 3: {
+        return 'arrow_upward';
+      }
+      default: { 
+        return 'do_not_disturb';
+      } 
+   } 
+  }
 }
 
 

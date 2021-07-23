@@ -6,10 +6,15 @@
         <mat-icon *ngIf="element.details[i-1].flags.includes('SHOOT_THE_MOON')">dark_mode</mat-icon>
         <mat-icon *ngIf="element.details[i-1].flags.includes('STOPPED_SHOOT_THE_MOON')">favorite_border</mat-icon>
       </div>
-      <ng-template #elseBlock> {{element.number}} &nbsp;
+      <ng-template #elseBlock> 
+        
+        {{element.number}} 
+
         <button mat-button>
           <mat-icon>edit_note</mat-icon>
         </button>
+        <mat-icon >{{element.getDirection(match.factions.length)}}</mat-icon>
+
       </ng-template>
     </td>
     <td mat-footer-cell *matFooterCellDef>

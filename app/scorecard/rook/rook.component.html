@@ -1,8 +1,8 @@
 <!-- <table class="mat-table">
   <thead>
     <tr class="mat-header-row">
-      <th class="mat-header-cell cdk-column-Hand mat-column-Hand">Hand</th>
-      <th class="mat-header-cell cdk-column-Hand mat-column-Hand"
+      <th class="mat-header-cell">Hand</th>
+      <th class="mat-header-cell"
       *ngFor="let faction of match.factions; let i=index;">
       {{faction.name}}
       </th>
@@ -10,20 +10,20 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let hand of hands">
-      <td class="mat-cell cdk-column-Hand mat-column-Hand">
+    <tr *ngFor="let hand of hands" class="mat-row">
+      <td class="mat-cell">
         {{hand.number}}
         <button mat-button><mat-icon>edit_note</mat-icon></button>
         {{hand.bid.points}} <mat-icon>east</mat-icon>
       </td>
-      <td *ngFor="let detail of hand.details" class="mat-cell cdk-column-Hand mat-column-Hand">
+      <td *ngFor="let detail of hand.details" class="mat-cell">
         {{detail.score}}
       </td>
     </tr>
   </tbody>
 
   <tfoot>
-    <tr>
+    <tr class="mat-footer-row">
       <td class="mat-footer-cell cdk-column-Parents mat-column-Parents">
         <button mat-mini-fab (click)="openAddHandDialog()" >
         <i class="material-icons">add</i></button>
@@ -39,7 +39,7 @@
 <hr> -->
 
 <table mat-table [dataSource]="dataSource">
-  
+
 <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay; let i=index;">
 
   <th mat-header-cell *matHeaderCellDef> {{column}} </th>
