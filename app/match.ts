@@ -14,6 +14,7 @@ export class GameType {
     public name?: string,
     public defaultFactionCount?: number,
     public defaultSharedFactions?: boolean,
+    public defaultMaxPoints?: number,
   ) {}
 }
 
