@@ -169,6 +169,8 @@ export class GenericHandComponent implements OnInit {
         this.hand.details[i].flags.splice(index, 1);
       } 
     }
+
+    this.onScoreChange(null);
     this.logger.log(event.checked);
   }
 
