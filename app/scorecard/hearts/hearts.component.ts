@@ -37,6 +37,10 @@ export class Hand {
     this.details.push(detail);
     return this;
   }
+
+  getTotal() {
+    return this.details.map(detail => detail.score).reduce((acc, value) => acc + value, 0);
+  }
 }
 
 
@@ -129,6 +133,7 @@ export class GenericHandComponent implements OnInit {
 
   public parent : HeartsComponent;
   public hand:Hand;
+  public totalPoints = 0;
 
   constructor(
     private logger: LogService,
@@ -141,6 +146,9 @@ export class GenericHandComponent implements OnInit {
     this.parent.match.factions.forEach(faction => {
       this.hand.details.push(new HandDetails(0));
     });
+  }
+  onScoreChange(event){
+    this.totalPoints = this.hand.getTotal();
   }
 
   shootTheMoonChange(i, event){
