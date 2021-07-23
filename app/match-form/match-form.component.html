@@ -2,7 +2,7 @@
 
 <mat-horizontal-stepper linear>
 
-    <mat-step label="Step 1" [completed]="match.type != null">
+    <mat-step [completed]="match.type != null">
 
         <mat-card>
             <!-- <mat-card-title>Step 1</mat-card-title> -->
@@ -48,7 +48,7 @@
         </mat-card>
     </mat-step>
 
-    <mat-step label="Step 2" optional>
+    <mat-step>
         <mat-card>
             <mat-card-title>Step 2</mat-card-title>
             <mat-card-content class="form-container">
@@ -78,7 +78,7 @@
 
     </mat-step>
 
-    <mat-step label="Step 3" optional>
+    <mat-step>
         <mat-card>
             <mat-card-title>Step 3</mat-card-title>
             <mat-card-content class="form-container">

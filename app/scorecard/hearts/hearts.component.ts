@@ -57,7 +57,7 @@ export class HeartsComponent implements OnInit {
   public dataSource = new MatTableDataSource<Hand>();
   public hands = new Array<Hand>();
 
-  private handDialogRef: MatDialogRef<GenericHandComponent>;
+  private handDialogRef: MatDialogRef<HeartsHandComponent>;
 
   constructor(
     private logger: LogService,
@@ -114,7 +114,7 @@ export class HeartsComponent implements OnInit {
     
   }
   openAddHandDialog(){
-    this.handDialogRef = this.dialog.open(GenericHandComponent);
+    this.handDialogRef = this.dialog.open(HeartsHandComponent);
     this.handDialogRef.componentInstance.parent = this;
   }
 
@@ -129,7 +129,7 @@ export class HeartsComponent implements OnInit {
   templateUrl: './hearts-hand.component.html',
   styleUrls: ['./hearts.component.css']
 })
-export class GenericHandComponent implements OnInit {
+export class HeartsHandComponent implements OnInit {
 
   public parent : HeartsComponent;
   public hand:Hand;
@@ -137,7 +137,7 @@ export class GenericHandComponent implements OnInit {
 
   constructor(
     private logger: LogService,
-    private dialogRef:  MatDialogRef<GenericHandComponent>,
+    private dialogRef:  MatDialogRef<HeartsHandComponent>,
   ) { }
 
   ngOnInit() {
