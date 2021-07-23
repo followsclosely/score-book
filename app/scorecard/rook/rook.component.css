@@ -6,3 +6,12 @@ table {
 .material-icons.color_red { color: #ff0000; }
 .material-icons.color_yellow { color: #dbd80e; }
 .material-icons.color_black { color: #000000; }
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container > * {
+  width: 100%;
+}

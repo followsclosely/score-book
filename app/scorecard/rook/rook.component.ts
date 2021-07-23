@@ -27,7 +27,7 @@ export class Hand {
   public details = new Array<HandDetails>();
   constructor(
     public number? : number,
-    public bid? : Bid,
+    public bid : Bid = new Bid(),
   ){}
 
   push(score:number){
@@ -55,6 +55,8 @@ export class RookComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<Hand>();
   public hands = new Array<Hand>();
+
+  public players = new Array<Player>();
 
   private handDialogRef: MatDialogRef<RookHandComponent>;
 
@@ -103,13 +105,18 @@ export class RookComponent implements OnInit {
   
     }
 
+    
     this.columnsToDisplay.push("Hand");
     this.match.factions.forEach(faction => {
+
+      this.players.push(...faction.players);
+
       if( faction.name != null ){
         this.columnsToDisplay.push(faction.name);
       } else {
         this.columnsToDisplay.push(faction.players.map(p => p.name).join('/'));
       }
+
     });
   }
 

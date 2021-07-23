@@ -1,1 +1,30 @@
-STINK!
+
+
+  <mat-form-field name="bid" class="example-full-width" [style.width.px]=60>
+    <mat-label>Bid</mat-label>
+    <input matInput type="number" [(ngModel)]="hand.bid.points" (change)="onScoreChange($event)">
+  </mat-form-field>
+
+  <mat-form-field>
+  <mat-select name="type" placeholder="Winner">
+      <mat-option *ngFor="let player of parent.players" [(ngModel)]="hand.bid.player" [value]="player">{{player.name}}</mat-option>
+  </mat-select>
+  </mat-form-field>
+  <div>
+
+  <div>
+  <mat-button-toggle-group name="color" [(ngModel)]="hand.bid.trump">
+    <mat-button-toggle value="red">Red</mat-button-toggle>
+    <mat-button-toggle value="black">Black</mat-button-toggle>
+    <mat-button-toggle value="yellow">Yellow</mat-button-toggle>
+    <mat-button-toggle value="green">Green</mat-button-toggle>
+  </mat-button-toggle-group>
+  </div>
+
+  <br>
+
+  <div>
+  <button mat-raised-button>Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()">Add Hand</button>
+  </div>
+  <div>
