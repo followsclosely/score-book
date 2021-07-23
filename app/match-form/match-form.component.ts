@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatDialogRef} from '@angular/material';
 
-import { Match, GameType } from '../match';
+import { Match, GameType, Faction } from '../match';
 import { MatchService } from '../match-service.service';
 import { LogService } from '../log-service.service';
 
@@ -20,7 +20,9 @@ import { Player } from '../player';
 export class MatchFormComponent implements OnInit {
 
   match = new Match();
-  gameOptions = Array<GameType>()
+  gameOptions = Array<GameType>();
+  currentFaction = 1;
+  public faction = new Faction();
 
   constructor(
     private dialogRef:  MatDialogRef<MatchFormComponent>,
@@ -68,5 +70,16 @@ export class MatchFormComponent implements OnInit {
     //   this.logger.log(' - ' + this.match.factions[i].players[0].name);
     // }
 
+  }
+
+  addPlayerToFaction(player, isAdd){
+    if( isAdd ){
+      if( this.match.factions.length < this.currentFaction ){
+        this.match.factions.push(this.faction);
+      }
+      this.faction.addPlayer(player);
+    } else {
+      this.faction.removePlayer(player);
+    }
   }
 }

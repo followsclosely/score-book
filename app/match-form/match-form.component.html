@@ -80,12 +80,17 @@
 
     <mat-step *ngIf="match.sharedFactions">
         <mat-card>
-            <mat-card-title>Step 3</mat-card-title>
+            <mat-card-title>Step 3 ({{currentFaction}}/{{match.factionCount}})</mat-card-title>
             <mat-card-content class="form-container">
 
                 <div *ngFor="let player of match.availablePlayers">
-                    <mat-checkbox (change)="addPlayer(player, $event.checked)"> {{ player.name }} </mat-checkbox>
+                    <mat-checkbox (change)="addPlayerToFaction(player, $event.checked)"> {{ player.name }} </mat-checkbox>
                 </div>
+
+                <mat-form-field >
+                    <input matInput [(ngModel)]="faction.name" name="faction">
+                    <mat-hint>team name</mat-hint>
+                </mat-form-field>
 
             </mat-card-content>
 
@@ -93,7 +98,7 @@
                 <button mat-raised-button matStepperPrevious>
                     <mat-icon>arrow_back</mat-icon>Back
                 </button>
-                <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="match.capacity() != 0">
+                <button mat-raised-button color="primary" (click)="onSubmit()">
                     Next  <mat-icon>arrow_forward</mat-icon>
                 </button>
             </mat-card-actions>

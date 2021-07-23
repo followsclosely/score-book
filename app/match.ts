@@ -6,6 +6,16 @@ export class Faction {
   constructor(
     public name?: string,
   ) {}
+
+  addPlayer(player:Player){
+    this.players.push(player);
+  }
+  removePlayer(player:Player){
+    var index = this.players.indexOf(player);
+    if( index != -1 ){
+      this.players.splice(index, 1);
+    }
+  }
 }
 
 export class GameType {
