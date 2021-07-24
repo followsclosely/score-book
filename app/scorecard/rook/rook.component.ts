@@ -125,16 +125,16 @@ export class RookComponent implements OnInit {
 
     hand.number = this.hands.length+1;
     this.logger.log("hand.number: " + hand.number);
-    this.hands.push(hand);
-
-    for(var i=1; i<this.hands.length; i++){
-      var lastHand = this.hands[i-1];
-      var hand = this.hands[i];
+    
+    if( hand.number > 1) {
+      var lastHand = this.hands[this.hands.length-1];
       for( var j=0; j<hand.details.length; j++){
-        hand.details[j].totalScore+= lastHand.details[j].totalScore;
+        hand.details[j].totalScore = lastHand.details[j].totalScore + lastHand.details[j].score;
+        this.logger.log("hand["+hand.number+"].details["+j+"].totalScore: " + hand.details[j].totalScore);
       }
     }
 
+    this.hands.push(hand);
     this.dataSource.data = this.hands;
     
   }
