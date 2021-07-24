@@ -54,3 +54,16 @@ table {
   font-weight: bold;
   color: #009879;
 }
+
+.score {
+  display:flex; 
+  white-space: nowrap;
+}
+
+.score-hand {
+  font-size: 0.9em;
+}
+
+.score-total {
+  font-size: 1.4em;
+}

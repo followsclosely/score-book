@@ -20,7 +20,8 @@ export class HandDetails {
   public flags = new Array<string>();
 
   constructor(
-    public score : number
+    public score : number,
+    public totalScore : number = 0,
   ){}
 }
 export class Hand {
@@ -97,10 +98,10 @@ export class RookComponent implements OnInit {
       parents.addPlayer(new Player(103, "Olivia"));
       this.match.factions.push(kids);
 
-      this.hands.push(new Hand(1).push(145).push(35).setBid(new Player(100, "Matthew"), 125, "green" ));
-      this.hands.push(new Hand(1).push(20).push(160).setBid(new Player(102, "Hannah"), 135, "red" ));
-      this.hands.push(new Hand(1).push(45).push(135).setBid(new Player(102, "Olivia"), 115, "black" ));
-      this.hands.push(new Hand(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
+      this.addHand(new Hand(1).push(145).push(35).setBid(new Player(100, "Matthew"), 125, "green" ));
+      this.addHand(new Hand(1).push(20).push(160).setBid(new Player(102, "Hannah"), 135, "red" ));
+      this.addHand(new Hand(1).push(45).push(135).setBid(new Player(102, "Olivia"), 115, "black" ));
+      this.addHand(new Hand(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
       this.dataSource.data = this.hands;
   
     }
@@ -121,8 +122,19 @@ export class RookComponent implements OnInit {
   }
 
   addHand(hand:Hand){
+
     hand.number = this.hands.length+1;
+    this.logger.log("hand.number: " + hand.number);
     this.hands.push(hand);
+
+    for(var i=1; i<this.hands.length; i++){
+      var lastHand = this.hands[i-1];
+      var hand = this.hands[i];
+      for( var j=0; j<hand.details.length; j++){
+        hand.details[j].totalScore+= lastHand.details[j].totalScore;
+      }
+    }
+
     this.dataSource.data = this.hands;
     
   }

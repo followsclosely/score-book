@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th>Hand</th>
-      <th *ngFor="let faction of match.factions; let i=index;" colspan="2">
+      <th *ngFor="let faction of match.factions; let i=index;">
       {{faction.name}}
       </th>
     </tr>
@@ -13,13 +13,18 @@
       <td>
         {{hand.number}}
         <button mat-button><mat-icon>edit_note</mat-icon></button>
-        {{hand.bid.points}} <mat-icon>east</mat-icon>
+        {{hand.bid.points}} 
+        <mat-icon class="material-icons color_{{hand.bid.trump}}">arrow_forward</mat-icon>
+
       </td>
 
-      <td *ngFor="let detail of hand.details" colspan="2">
-        <div text-align="left">100</div>
-        <div text-align="right">{{detail.score}}*</div>
+      <td *ngFor="let detail of hand.details">
         
+        <div class="score">
+          <div class="score-total">{{detail.totalScore}}</div>
+          <div class="score-hand">+{{detail.score}}</div>
+        </div>
+
       </td>
 
     </tr>
@@ -32,7 +37,7 @@
         <i class="material-icons">add</i></button>
       </td>
       <td *ngFor="let faction of match.factions; let i=index;">
-        <b> {{ getTotal(i+1) }} </b>
+        <div class="score-total"> {{ getTotal(i+1) }} </div>
       </td>
     </tr>
   </tfoot>
