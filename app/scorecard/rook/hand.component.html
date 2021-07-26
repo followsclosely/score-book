@@ -1,6 +1,8 @@
-<mat-vertical-stepper [selectedIndex]="parent.currentStep">
+<mat-horizontal-stepper [selectedIndex]="(parent.handMode == parent.HandMode.Create ) ? 0 : 1" >
 
   <mat-step>  
+
+    
     <ng-template matStepLabel>Bid</ng-template>
     <div>
 
@@ -29,29 +31,47 @@
       </mat-button-toggle-group>
     </div>
 
+    <br/>
+
+    <div>
+      <button mat-raised-button>Cancel</button>
+      
+      <!-- *ngIf="parent.handMode=='Create'"  -->
+      <button mat-raised-button color="primary" (click)="onSubmit()"
+      *ngIf="parent.handMode == parent.HandMode.Create">Add Hand</button>
+
+      <button mat-raised-button matStepperNext color="primary" 
+      *ngIf="parent.handMode == parent.HandMode.Edit">
+        Next <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </div>
+
   </mat-step>
 
-  <mat-step *ngIf="parent.handEditMode" title="Bid">
-    <ng-template matStepLabel>Score / Hand Completed</ng-template>
+  <mat-step *ngIf="parent.handMode == parent.HandMode.Edit" title="Bid">
+    <ng-template matStepLabel>Score</ng-template>
 
     <div *ngFor="let faction of parent.match.factions; let i=index;">
     
       <h4>{{ faction.name }}</h4>
     
-      <!-- <mat-form-field class="example-full-width" [style.width.px]=60>
+      <mat-form-field class="example-full-width" [style.width.px]=60>
         <mat-label>Score</mat-label>
-        <input width="3" matInput type="number" value="0" [(ngModel)]="hand.details[i].score" (change)="onScoreChange($event)">
-      </mat-form-field> -->
+        <input width="3" matInput type="number" value="0" [(ngModel)]="parent.hand.details[i].score" (change)="onScoreChange($event)">
+      </mat-form-field>
     
     </div>
 
+    <div>
+      <button mat-raised-button matStepperPrevious>
+        <mat-icon>arrow_back</mat-icon>Back
+      </button>
+      <button mat-raised-button matStepperNext color="primary">
+        Next <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
 
 
   </mat-step>
-</mat-vertical-stepper>
+</mat-horizontal-stepper>
 
-<div>
-  <button mat-raised-button>Cancel</button>
-  <button mat-raised-button color="primary" (click)="onSubmit()">Add Hand</button>
-  </div>
-<div>

@@ -34,6 +34,11 @@ export class RookHand extends AbstractHand {
   }
 }
 
+enum HandMode {
+  Create,
+  Edit
+}
+
 @Component({
   selector: 'app-rook',
   templateUrl: './rook.component.html',
@@ -41,8 +46,8 @@ export class RookHand extends AbstractHand {
 })
 export class RookComponent extends AbstractTurnBasedGame<RookHand> implements OnInit {
 
-  public handEditMode = false;
-  public currentStep = 0;
+  public HandMode = HandMode;
+  public handMode = HandMode.Create;
   public hand:RookHand;
 
   public match:Match = null;
@@ -112,7 +117,7 @@ export class RookComponent extends AbstractTurnBasedGame<RookHand> implements On
     this.handDialogRef = this.dialog.open(RookHandComponent);
 
     this.hand = new RookHand();
-    this.handEditMode = false;
+    this.handMode = HandMode.Create;
 
     this.match.factions.forEach(faction => {
       this.hand.details.push(new HandDetails(0));
@@ -127,8 +132,7 @@ export class RookComponent extends AbstractTurnBasedGame<RookHand> implements On
     this.handDialogRef = this.dialog.open(RookHandComponent);
 
     this.hand = hand;
-    this.currentStep = 1;
-    this.handEditMode = true;
+    this.handMode = HandMode.Edit;
     this.handDialogRef.componentInstance.parent = this;
 
   }
@@ -138,7 +142,7 @@ export class RookComponent extends AbstractTurnBasedGame<RookHand> implements On
   templateUrl: './hand.component.html',
   styleUrls: ['./rook.component.css']
 })
-export class RookHandComponent implements OnInit  {
+export class RookHandComponent {
 
   public parent : RookComponent;
   public totalPoints = 0;
@@ -147,10 +151,6 @@ export class RookHandComponent implements OnInit  {
     private logger: LogService,
     private dialogRef:  MatDialogRef<RookHandComponent>
   ) { }
-
-  ngOnInit() {
-    this.logger.log("RookHandComponent#ngOnInit: " + this.parent.hand.number);
-  }
 
   onScoreChange(event){
     this.totalPoints = this.parent.hand.getTotal();
