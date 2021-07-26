@@ -9,7 +9,7 @@
             <mat-icon *ngIf="element.details[i-1].flags.includes('STOPPED_SHOOT_THE_MOON')">favorite_border</mat-icon>
             <ng-container *ngIf="element.number > 1 && element.details[i-1].totalScore !=0">{{element.details[i-1].totalScore}}</ng-container>
           </div>
-          <div class="score-hand">+{{element.details[i-1].score}}</div>
+          <div class="score-hand">{{element.details[i-1].score | score}}</div>
         </div>
       </div>
       <ng-template #elseBlock> 

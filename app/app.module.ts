@@ -53,6 +53,7 @@ import { PlayerFormComponent } from './player-form/player-form.component';
 import { HeartsComponent, HeartsHandComponent } from './scorecard/hearts/hearts.component';
 import { GenericComponent } from './scorecard/generic/generic.component';
 import { RookComponent, RookHandComponent } from './scorecard/rook/rook.component';
+import { ScorePipe } from './score.pipe';
 
 @NgModule({
   entryComponents: [
@@ -70,7 +71,7 @@ import { RookComponent, RookHandComponent } from './scorecard/rook/rook.componen
     PlayerFormComponent,
     HeartsComponent, HeartsHandComponent,
     GenericComponent,
-    RookComponent, RookHandComponent
+    RookComponent, RookHandComponent, ScorePipe
   ],
   imports: [
     BrowserModule,
