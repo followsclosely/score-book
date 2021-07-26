@@ -34,7 +34,7 @@
     <br/>
 
     <div>
-      <button mat-raised-button>Cancel</button>
+      <button mat-raised-button (click)="onCancel()">Cancel</button>
       
       <!-- *ngIf="parent.handMode=='Create'"  -->
       <button mat-raised-button color="primary" (click)="onSubmit()"

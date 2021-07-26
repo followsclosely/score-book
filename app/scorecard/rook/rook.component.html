@@ -27,6 +27,7 @@
         <div class="score">
           <div class="score-total">{{detail.totalScore}}</div>
           <div *ngIf="detail.score > 0" class="score-hand">+{{detail.score}}</div>
+          <div *ngIf="detail.score < 0" class="score-hand">{{detail.score}}</div>
         </div>
       </td>
     </tr>

@@ -93,7 +93,7 @@ export class RookComponent extends AbstractTurnBasedGame<RookHand> implements On
       this.addHand(new RookHand(1).push(145).push(35).setBid(new Player(100, "Matthew"), 125, "green" ));
       this.addHand(new RookHand(1).push(20).push(160).setBid(new Player(102, "Hannah"), 135, "red" ));
       this.addHand(new RookHand(1).push(45).push(135).setBid(new Player(102, "Olivia"), 115, "black" ));
-      this.addHand(new RookHand(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
+      //this.addHand(new RookHand(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
       this.dataSource.data = this.hands;
   
     }
@@ -159,6 +159,10 @@ export class RookHandComponent {
   onSubmit(){
     //this.logger.log(this.parent.dataSource);
     this.parent.addHand(this.parent.hand);
+    this.dialogRef.close();
+  }
+
+  onCancel(){
     this.dialogRef.close();
   }
 }
