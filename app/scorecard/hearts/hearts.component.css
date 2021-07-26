@@ -1,3 +1,23 @@
 table {
   width: 100%;
 }
+
+.score {
+  vertical-align: top;
+  display:flex; 
+  white-space: nowrap;
+}
+
+.score-total {
+  vertical-align: top;
+  text-align: right;
+  min-width: 50px;
+  font-size: 1.4em;
+}
+
+.score-hand {
+  vertical-align: top;
+  text-align: left;
+  padding: 0px 5px;
+  font-size: 0.9em;
+}
