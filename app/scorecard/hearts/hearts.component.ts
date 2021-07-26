@@ -5,26 +5,15 @@ import { Match, GameType, Faction } from '../../match';
 import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
 import {MatDialog, MatDialogRef} from '@angular/material';
-import { MatTableDataSource } from '@angular/material/table';
 
+import { AbstractTurnBasedGame, HandDetails, AbstractHand } from '../abstract-turn-based-game';
 
-export class HandDetails {
-  public flags = new Array<string>();
-
-  constructor(
-    public score : number,
-    public totalScore : number = 0,
-  ){}
-}
-export class Hand {
+export class HeartsHand extends AbstractHand {
   public details = new Array<HandDetails>();
   constructor(
     public number? : number
-  ){}
-
-  push(score:number){
-    this.details.push(new HandDetails(score));
-    return this;
+  ){
+    super(number);
   }
 
   push2(score:number, shootMoon:boolean, stopShootMoon: boolean){
@@ -37,10 +26,6 @@ export class Hand {
     }
     this.details.push(detail);
     return this;
-  }
-
-  getTotal() {
-    return this.details.map(detail => detail.score).reduce((acc, value) => acc + value, 0);
   }
 
   public getDirection(size:number){
@@ -70,24 +55,22 @@ export class Hand {
   templateUrl: './hearts.component.html',
   styleUrls: ['./hearts.component.css']
 })
-export class HeartsComponent implements OnInit {
+export class HeartsComponent extends AbstractTurnBasedGame<HeartsHand> implements OnInit {
 
   public columnsToDisplay: string[] = [];
   public match:Match = null;
 
-  public dataSource = new MatTableDataSource<Hand>();
-  public hands = new Array<Hand>();
 
   private handDialogRef: MatDialogRef<HeartsHandComponent>;
 
   constructor(
-    private logger: LogService,
-    private route: ActivatedRoute,
-    private location: Location,
-    private matchService:MatchService, 
-    private dialog: MatDialog,
+    logger: LogService,
+    protected route: ActivatedRoute,
+    protected location: Location,
+    protected matchService:MatchService, 
+    protected dialog: MatDialog,
   ) { 
-
+    super(logger);
   }
 
   ngOnInit() {
@@ -111,9 +94,9 @@ export class HeartsComponent implements OnInit {
       this.match.factions.push(new Faction("Joel"));
       this.match.factions.push(new Faction("Emily"));
 
-      this.addHand(new Hand(1).push(10).push(3).push(7).push(6));
-      this.addHand(new Hand(2).push(0).push(23).push2(3, false, true).push(0));
-      this.addHand(new Hand(3).push2(0, true, false).push(26).push(26).push(26));
+      this.addHand(new HeartsHand(1).push(10).push(3).push(7).push(6));
+      this.addHand(new HeartsHand(2).push(0).push(23).push2(3, false, true).push(0));
+      this.addHand(new HeartsHand(3).push2(0, true, false).push(26).push(26).push(26));
       this.dataSource.data = this.hands;
 
       
@@ -126,20 +109,6 @@ export class HeartsComponent implements OnInit {
 
   }
 
-  addHand(hand:Hand){
-    hand.number = this.hands.length+1;
-
-    if( hand.number > 1) {
-      var lastHand = this.hands[this.hands.length-1];
-      for( var j=0; j<hand.details.length; j++){
-        hand.details[j].totalScore = lastHand.details[j].totalScore + lastHand.details[j].score;
-      }
-    }
-
-    this.hands.push(hand);
-    this.dataSource.data = this.hands;
-    
-  }
   openAddHandDialog(){
     this.handDialogRef = this.dialog.open(HeartsHandComponent);
     this.handDialogRef.componentInstance.parent = this;
@@ -159,7 +128,7 @@ export class HeartsComponent implements OnInit {
 export class HeartsHandComponent implements OnInit {
 
   public parent : HeartsComponent;
-  public hand:Hand;
+  public hand:HeartsHand;
   public totalPoints = 0;
 
   constructor(
@@ -169,7 +138,7 @@ export class HeartsHandComponent implements OnInit {
 
   ngOnInit() {
     this.logger.log('GenericHandComponent#ngOnInit()');
-    this.hand = new Hand();
+    this.hand = new HeartsHand();
     this.parent.match.factions.forEach(faction => {
       this.hand.details.push(new HandDetails(0));
     });

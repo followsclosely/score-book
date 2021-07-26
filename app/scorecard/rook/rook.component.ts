@@ -4,8 +4,9 @@ import { Match, GameType, Faction } from '../../match';
 import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
 import {MatDialog, MatDialogRef} from '@angular/material';
-import { MatTableDataSource } from '@angular/material/table';
 import { Player } from '../../player';
+
+import { AbstractTurnBasedGame, HandDetails, AbstractHand } from '../abstract-turn-based-game';
 
 import {
   Component, OnInit
@@ -19,25 +20,15 @@ export class Bid {
   ){}
 }
 
-export class HandDetails {
-  public flags = new Array<string>();
-
-  constructor(
-    public score : number,
-    public totalScore : number = 0,
-  ){}
-}
-export class Hand {
+export class RookHand extends AbstractHand {
   public details = new Array<HandDetails>();
   constructor(
     public number? : number,
     public bid : Bid = new Bid(),
-  ){}
-
-  push(score:number){
-    this.details.push(new HandDetails(score));
-    return this;
+  ){
+    super(number);
   }
+
   setBid(player? : Player, points? : number, trump?){
     this.bid = new Bid(player, points, trump);
     return this; 
@@ -53,27 +44,23 @@ export class Hand {
   templateUrl: './rook.component.html',
   styleUrls: ['./rook.component.css']
 })
-export class RookComponent implements OnInit {
+export class RookComponent extends AbstractTurnBasedGame<RookHand> implements OnInit {
   public columnsToDisplay: string[] = [];
   public match:Match = null;
 
   public showPlayerNames = true;
-
-  public dataSource = new MatTableDataSource<Hand>();
-  public hands = new Array<Hand>();
-
   public players = new Array<Player>();
 
   private handDialogRef: MatDialogRef<RookHandComponent>;
 
   constructor(
-    private logger: LogService,
+    logger: LogService,
     private route: ActivatedRoute,
     private location: Location,
     private matchService:MatchService, 
     private dialog: MatDialog,
   ) { 
-
+    super(logger);
   }
 
   ngOnInit() {
@@ -103,10 +90,10 @@ export class RookComponent implements OnInit {
       kids.addPlayer(new Player(103, "Olivia"));
       this.match.factions.push(kids);
 
-      this.addHand(new Hand(1).push(145).push(35).setBid(new Player(100, "Matthew"), 125, "green" ));
-      this.addHand(new Hand(1).push(20).push(160).setBid(new Player(102, "Hannah"), 135, "red" ));
-      this.addHand(new Hand(1).push(45).push(135).setBid(new Player(102, "Olivia"), 115, "black" ));
-      this.addHand(new Hand(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
+      this.addHand(new RookHand(1).push(145).push(35).setBid(new Player(100, "Matthew"), 125, "green" ));
+      this.addHand(new RookHand(1).push(20).push(160).setBid(new Player(102, "Hannah"), 135, "red" ));
+      this.addHand(new RookHand(1).push(45).push(135).setBid(new Player(102, "Olivia"), 115, "black" ));
+      this.addHand(new RookHand(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
       this.dataSource.data = this.hands;
   
     }
@@ -124,21 +111,6 @@ export class RookComponent implements OnInit {
       }
 
     });
-  }
-
-  addHand(hand:Hand){
-
-    hand.number = this.hands.length+1;
-    
-    if( hand.number > 1) {
-      var lastHand = this.hands[this.hands.length-1];
-      for( var j=0; j<hand.details.length; j++){
-        hand.details[j].totalScore = lastHand.details[j].totalScore + lastHand.details[j].score;
-      }
-    }
-
-    this.hands.push(hand);
-    this.dataSource.data = this.hands;
   }
 
   openAddHandDialog(){
@@ -164,7 +136,7 @@ export class RookComponent implements OnInit {
 export class RookHandComponent implements OnInit {
 
   public parent : RookComponent;
-  public hand:Hand;
+  public hand:RookHand;
   public totalPoints = 0;
 
   constructor(
@@ -174,7 +146,7 @@ export class RookHandComponent implements OnInit {
 
   ngOnInit() {
     this.logger.log('GenericHandComponent#ngOnInit()');
-    this.hand = new Hand();
+    this.hand = new RookHand();
     this.parent.match.factions.forEach(faction => {
       this.hand.details.push(new HandDetails(0));
     });
