@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { Match, GameType, Faction } from '../../match';
 import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
-import {MatDialog, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogRef, MatStepper} from '@angular/material';
 import { Player } from '../../player';
 
 import { AbstractTurnBasedGame, HandDetails, AbstractHand } from '../abstract-turn-based-game';
@@ -41,11 +41,12 @@ export class RookHand extends AbstractHand {
 })
 export class RookComponent extends AbstractTurnBasedGame<RookHand> implements OnInit {
 
+  public handEditMode = false;
+  public currentStep = 0;
+  public hand:RookHand;
+
   public match:Match = null;
-
   public showPlayerNames = true;
-  
-
   private handDialogRef: MatDialogRef<RookHandComponent>;
 
   constructor(
@@ -109,40 +110,55 @@ export class RookComponent extends AbstractTurnBasedGame<RookHand> implements On
 
   openAddHandDialog(){
     this.handDialogRef = this.dialog.open(RookHandComponent);
+
+    this.hand = new RookHand();
+    this.handEditMode = false;
+
+    this.match.factions.forEach(faction => {
+      this.hand.details.push(new HandDetails(0));
+    });
+
     this.handDialogRef.componentInstance.parent = this;
   }
 
+  openEditHandDialog(hand : RookHand){
+    this.logger.log("RookComponent#openEditHandDialog: " + hand.number);
+
+    this.handDialogRef = this.dialog.open(RookHandComponent);
+
+    this.hand = hand;
+    this.currentStep = 1;
+    this.handEditMode = true;
+    this.handDialogRef.componentInstance.parent = this;
+
+  }
 }
 
 @Component({
   templateUrl: './hand.component.html',
   styleUrls: ['./rook.component.css']
 })
-export class RookHandComponent implements OnInit {
+export class RookHandComponent implements OnInit  {
 
   public parent : RookComponent;
-  public hand:RookHand;
   public totalPoints = 0;
 
   constructor(
     private logger: LogService,
-    private dialogRef:  MatDialogRef<RookHandComponent>,
+    private dialogRef:  MatDialogRef<RookHandComponent>
   ) { }
 
   ngOnInit() {
-    this.logger.log('GenericHandComponent#ngOnInit()');
-    this.hand = new RookHand();
-    this.parent.match.factions.forEach(faction => {
-      this.hand.details.push(new HandDetails(0));
-    });
+    this.logger.log("RookHandComponent#ngOnInit: " + this.parent.hand.number);
   }
+
   onScoreChange(event){
-    this.totalPoints = this.hand.getTotal();
+    this.totalPoints = this.parent.hand.getTotal();
   }
 
   onSubmit(){
     //this.logger.log(this.parent.dataSource);
-    this.parent.addHand(this.hand);
+    this.parent.addHand(this.parent.hand);
     this.dialogRef.close();
   }
 }

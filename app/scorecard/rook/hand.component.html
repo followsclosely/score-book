@@ -1,33 +1,54 @@
-<div>
+<mat-vertical-stepper [selectedIndex]="parent.currentStep">
 
-  <mat-form-field [style.width.px]=60>
-    <mat-label>Bid</mat-label>
-    <input matInput type="number" [(ngModel)]="hand.bid.points" (change)="onScoreChange($event)">
-  </mat-form-field>
+  <mat-step>  
+    <ng-template matStepLabel>Bid</ng-template>
+    <div>
+
+      <mat-form-field [style.width.px]=60>
+        <mat-label>Bid</mat-label>
+        <input matInput type="number" [(ngModel)]="parent.hand.bid.points" (change)="onScoreChange($event)">
+      </mat-form-field>
+      <mat-form-field >
+        <mat-select name="player" placeholder="Winner">
+            <mat-option ngDefaultControl *ngFor="let player of parent.players" [(ngModel)]="parent.hand.bid.player" [value]="player">
+              {{player.name}}
+            </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div> 
 
 
-  <mat-form-field >
-  <mat-select name="player" placeholder="Winner">
-      <mat-option ngDefaultControl *ngFor="let player of parent.players" [(ngModel)]="hand.bid.player" [value]="player">
-        {{player.name}}
-      </mat-option>
-  </mat-select>
-  </mat-form-field>
 
- <div> 
+    <div>
+      <mat-button-toggle-group name="color" [(ngModel)]="parent.hand.bid.trump">
+        <mat-button-toggle value="red">Red</mat-button-toggle>
+        <mat-button-toggle value="black">Black</mat-button-toggle>
+        <mat-button-toggle value="yellow">Yellow</mat-button-toggle>
+        <mat-button-toggle value="green">Green</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+  </mat-step>
+
+  <mat-step *ngIf="parent.handEditMode" title="Bid">
+    <ng-template matStepLabel>Score / Hand Completed</ng-template>
+
+    <div *ngFor="let faction of parent.match.factions; let i=index;">
+    
+      <h4>{{ faction.name }}</h4>
+    
+      <!-- <mat-form-field class="example-full-width" [style.width.px]=60>
+        <mat-label>Score</mat-label>
+        <input width="3" matInput type="number" value="0" [(ngModel)]="hand.details[i].score" (change)="onScoreChange($event)">
+      </mat-form-field> -->
+    
+    </div>
 
 
 
-<div>
-  <mat-button-toggle-group name="color" [(ngModel)]="hand.bid.trump">
-    <mat-button-toggle value="red">Red</mat-button-toggle>
-    <mat-button-toggle value="black">Black</mat-button-toggle>
-    <mat-button-toggle value="yellow">Yellow</mat-button-toggle>
-    <mat-button-toggle value="green">Green</mat-button-toggle>
-  </mat-button-toggle-group>
-</div>
-
-<br>
+  </mat-step>
+</mat-vertical-stepper>
 
 <div>
   <button mat-raised-button>Cancel</button>

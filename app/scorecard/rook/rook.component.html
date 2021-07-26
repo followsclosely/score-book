@@ -18,7 +18,7 @@
     <tr *ngFor="let hand of hands" class="mat-row">
       <td>
         {{hand.number}}
-        <button mat-button><mat-icon>edit_note</mat-icon></button>
+        <button mat-button (click)="openEditHandDialog(hand)"><mat-icon>edit_note</mat-icon></button>
         {{hand.bid.points}} 
         <mat-icon class="material-icons color_{{hand.bid.trump}}">arrow_forward</mat-icon>
       </td>
