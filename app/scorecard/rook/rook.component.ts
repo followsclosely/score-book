@@ -1,5 +1,4 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Match, GameType, Faction } from '../../match';
 import { LogService } from '../../log-service.service';
@@ -7,6 +6,10 @@ import { MatchService } from '../../match-service.service';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import { MatTableDataSource } from '@angular/material/table';
 import { Player } from '../../player';
+
+import {
+  Component, OnInit
+} from '@angular/core';
 
 export class Bid {
   constructor(
@@ -54,6 +57,8 @@ export class RookComponent implements OnInit {
   public columnsToDisplay: string[] = [];
   public match:Match = null;
 
+  public showPlayerNames = true;
+
   public dataSource = new MatTableDataSource<Hand>();
   public hands = new Array<Hand>();
 
@@ -94,8 +99,8 @@ export class RookComponent implements OnInit {
       this.match.factions.push(parents);
 
       var kids = new Faction("Kids");
-      parents.addPlayer(new Player(102, "Hannah"));
-      parents.addPlayer(new Player(103, "Olivia"));
+      kids.addPlayer(new Player(102, "Hannah"));
+      kids.addPlayer(new Player(103, "Olivia"));
       this.match.factions.push(kids);
 
       this.addHand(new Hand(1).push(145).push(35).setBid(new Player(100, "Matthew"), 125, "green" ));
@@ -124,20 +129,18 @@ export class RookComponent implements OnInit {
   addHand(hand:Hand){
 
     hand.number = this.hands.length+1;
-    this.logger.log("hand.number: " + hand.number);
     
     if( hand.number > 1) {
       var lastHand = this.hands[this.hands.length-1];
       for( var j=0; j<hand.details.length; j++){
         hand.details[j].totalScore = lastHand.details[j].totalScore + lastHand.details[j].score;
-        this.logger.log("hand["+hand.number+"].details["+j+"].totalScore: " + hand.details[j].totalScore);
       }
     }
 
     this.hands.push(hand);
     this.dataSource.data = this.hands;
-    
   }
+
   openAddHandDialog(){
     this.handDialogRef = this.dialog.open(RookHandComponent);
     this.handDialogRef.componentInstance.parent = this;
@@ -146,6 +149,10 @@ export class RookComponent implements OnInit {
   getTotal(i : number) {
     if (i == 0 ) return "";
     return this.hands.map(hand => hand.details[i-1].score).reduce((acc, value) => acc + value, 0);
+  }
+
+  getPlayersAsString(faction:Faction, delim:string){
+    return faction.players.map(player => player.name).join(delim);
   }
 
 }
