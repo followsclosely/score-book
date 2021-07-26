@@ -9,9 +9,8 @@ import {MatDialog, MatDialogRef} from '@angular/material';
 import { AbstractTurnBasedGame, HandDetails, AbstractHand } from '../abstract-turn-based-game';
 
 export class HeartsHand extends AbstractHand {
-  public details = new Array<HandDetails>();
   constructor(
-    public number? : number
+    number? : number
   ){
     super(number);
   }
@@ -49,17 +48,13 @@ export class HeartsHand extends AbstractHand {
   }
 }
 
-
-
 @Component({
   templateUrl: './hearts.component.html',
   styleUrls: ['./hearts.component.css']
 })
 export class HeartsComponent extends AbstractTurnBasedGame<HeartsHand> implements OnInit {
 
-  public columnsToDisplay: string[] = [];
   public match:Match = null;
-
 
   private handDialogRef: MatDialogRef<HeartsHandComponent>;
 
@@ -98,25 +93,14 @@ export class HeartsComponent extends AbstractTurnBasedGame<HeartsHand> implement
       this.addHand(new HeartsHand(2).push(0).push(23).push2(3, false, true).push(0));
       this.addHand(new HeartsHand(3).push2(0, true, false).push(26).push(26).push(26));
       this.dataSource.data = this.hands;
-
-      
     }
 
-    this.columnsToDisplay.push("Hand");
-    this.match.factions.forEach(faction => {
-      this.columnsToDisplay.push(faction.name);
-    });
-
+    super._ngOnInit(this.match);
   }
 
   openAddHandDialog(){
     this.handDialogRef = this.dialog.open(HeartsHandComponent);
     this.handDialogRef.componentInstance.parent = this;
-  }
-
-  getTotal(i : number) {
-    if (i == 0 ) return "";
-    return this.hands.map(hand => hand.details[i-1].score).reduce((acc, value) => acc + value, 0);
   }
 
 }

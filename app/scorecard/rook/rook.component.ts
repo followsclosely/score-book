@@ -21,9 +21,8 @@ export class Bid {
 }
 
 export class RookHand extends AbstractHand {
-  public details = new Array<HandDetails>();
   constructor(
-    public number? : number,
+    number? : number,
     public bid : Bid = new Bid(),
   ){
     super(number);
@@ -33,10 +32,6 @@ export class RookHand extends AbstractHand {
     this.bid = new Bid(player, points, trump);
     return this; 
   }
-
-  getTotal() {
-    return this.details.map(detail => detail.score).reduce((acc, value) => acc + value, 0);
-  }
 }
 
 @Component({
@@ -45,11 +40,11 @@ export class RookHand extends AbstractHand {
   styleUrls: ['./rook.component.css']
 })
 export class RookComponent extends AbstractTurnBasedGame<RookHand> implements OnInit {
-  public columnsToDisplay: string[] = [];
+
   public match:Match = null;
 
   public showPlayerNames = true;
-  public players = new Array<Player>();
+  
 
   private handDialogRef: MatDialogRef<RookHandComponent>;
 
@@ -67,7 +62,6 @@ export class RookComponent extends AbstractTurnBasedGame<RookHand> implements On
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.logger.log(id);
     this.match = this.matchService.getMatch(id);
-
 
     if( this.match == null)
     {
@@ -98,33 +92,24 @@ export class RookComponent extends AbstractTurnBasedGame<RookHand> implements On
   
     }
 
-    
-    this.columnsToDisplay.push("Hand");
-    this.match.factions.forEach(faction => {
+    this._ngOnInit(this.match);
+    // this.columnsToDisplay.push("Hand");
+    // this.match.factions.forEach(faction => {
 
-      this.players.push(...faction.players);
+    //   this.players.push(...faction.players);
 
-      if( faction.name != null ){
-        this.columnsToDisplay.push(faction.name);
-      } else {
-        this.columnsToDisplay.push(faction.players.map(p => p.name).join('/'));
-      }
+    //   if( faction.name != null ){
+    //     this.columnsToDisplay.push(faction.name);
+    //   } else {
+    //     this.columnsToDisplay.push(faction.players.map(p => p.name).join('/'));
+    //   }
 
-    });
+    // });
   }
 
   openAddHandDialog(){
     this.handDialogRef = this.dialog.open(RookHandComponent);
     this.handDialogRef.componentInstance.parent = this;
-  }
-
-  getTotal(i : number) {
-    if (i == 0 ) return "";
-    return this.hands.map(hand => hand.details[i-1].score).reduce((acc, value) => acc + value, 0);
-  }
-
-  getPlayersAsString(faction:Faction, delim:string){
-    return faction.players.map(player => player.name).join(delim);
   }
 
 }
