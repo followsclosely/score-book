@@ -6,13 +6,12 @@
         
         <div class="score">
           <div class="score-total">
-            <mat-icon *ngIf="element.details[i-1].flags.includes('SHOOT_THE_MOON')">dark_mode</mat-icon>
-            <mat-icon *ngIf="element.details[i-1].flags.includes('STOPPED_SHOOT_THE_MOON')">favorite_border</mat-icon>
-            {{element.details[i-1].totalScore}}
+            <ng-container *ngIf="element.details[i-1].totalScore !=0">{{element.details[i-1].totalScore}</ng-container>
           </div>
           <div class="score-hand">+{{element.details[i-1].score}}</div>
         </div>
- 
+        <mat-icon *ngIf="element.details[i-1].flags.includes('SHOOT_THE_MOON')">dark_mode</mat-icon>
+        <mat-icon *ngIf="element.details[i-1].flags.includes('STOPPED_SHOOT_THE_MOON')">favorite_border</mat-icon>
       </div>
       <ng-template #elseBlock> 
         {{element.number}} 
@@ -23,7 +22,7 @@
 
       </ng-template>
     </td>
-    <td mat-footer-cell *matFooterCellDef>
+    <td *matFooterCellDef style="align: right">
       <div *ngIf="i > 0; else elseBlock2">
         <b> {{ getTotal(i) }} </b>
       </div>

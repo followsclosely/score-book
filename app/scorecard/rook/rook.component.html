@@ -24,27 +24,23 @@
       </td>
 
       <td *ngFor="let detail of hand.details">
-        
         <div class="score">
           <div class="score-total">{{detail.totalScore}}</div>
           <div *ngIf="detail.score > 0" class="score-hand">+{{detail.score}}</div>
         </div>
-
       </td>
-
     </tr>
   </tbody>
 
   <tfoot>
     <tr>
-      <td >
+      <td>
         <button mat-mini-fab (click)="openAddHandDialog()" >
         <i class="material-icons">add</i></button>
       </td>
       <th *ngFor="let faction of match.factions; let i=index;">
         <div> {{ getTotal(i+1) }} </div>
       </th>
-
     </tr>
   </tfoot>
 </table>
