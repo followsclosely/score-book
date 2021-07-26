@@ -1,10 +1,10 @@
 
 <div *ngFor="let faction of parent.match.factions; let i=index;">
     
-  <h4>{{ faction.name }}</h4>
+  <!-- <h4>{{ faction.name }}</h4> -->
 
   <mat-form-field class="example-full-width" [style.width.px]=60>
-    <mat-label>Score</mat-label>
+    <mat-label>{{ faction.name }}</mat-label>
     <input width="3" matInput type="number" value="0" [(ngModel)]="hand.details[i].score" (change)="onScoreChange($event)">
   </mat-form-field>
 
@@ -16,7 +16,7 @@
 
 
 <div>
-  <button mat-raised-button>Cancel</button>
+  <button mat-raised-button (click)="onCancel()">Cancel</button>
   <button mat-raised-button color="primary" (click)="onSubmit()">Add Hand</button>
 </div>
 <div>

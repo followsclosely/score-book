@@ -159,4 +159,8 @@ export class HeartsHandComponent implements OnInit {
     this.parent.addHand(this.hand);
     this.dialogRef.close();
   }
+
+  onCancel(){
+    this.dialogRef.close();
+  }
 }
