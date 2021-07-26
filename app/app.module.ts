@@ -42,7 +42,6 @@ import {
   MatTooltipModule,
 } from '@angular/material';
 
-
 import { AppComponent } from './app.component';
 import { MatchService } from './match-service.service';
 import { LogService } from './log-service.service';
@@ -54,7 +53,6 @@ import { PlayerFormComponent } from './player-form/player-form.component';
 import { HeartsComponent, HeartsHandComponent } from './scorecard/hearts/hearts.component';
 import { GenericComponent } from './scorecard/generic/generic.component';
 import { RookComponent, RookHandComponent } from './scorecard/rook/rook.component';
-
 
 @NgModule({
   entryComponents: [
