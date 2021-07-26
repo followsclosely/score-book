@@ -45,15 +45,14 @@ export class AbstractTurnBasedGame<H extends AbstractHand> {
 
     this.columnsToDisplay.push("Hand");
     match.factions.forEach(faction => {
-
       this.players.push(...faction.players);
 
+      //Default the faction name if none was specified
       if( faction.name != null ){
         this.columnsToDisplay.push(faction.name);
       } else {
         this.columnsToDisplay.push(faction.players.map(p => p.name).join('/'));
       }
-
     });
   }
 
