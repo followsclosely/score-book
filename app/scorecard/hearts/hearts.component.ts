@@ -1,10 +1,10 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { Match, GameType, Faction } from '../../match';
 import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
-import {MatDialog, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 import { AbstractTurnBasedGame, HandDetails, AbstractHand } from '../abstract-turn-based-game';
 
@@ -99,10 +99,28 @@ export class HeartsComponent extends AbstractTurnBasedGame<HeartsHand> implement
   }
 
   openAddHandDialog(){
-    this.handDialogRef = this.dialog.open(HeartsHandComponent);
+
+    var hand = new HeartsHand();
+    this.match.factions.forEach(faction => {
+      hand.details.push(new HandDetails(0));
+    });
+
+    this.handDialogRef = this.dialog.open(HeartsHandComponent, {
+      data: hand
+    });
     this.handDialogRef.componentInstance.parent = this;
   }
 
+  openEditHandDialog(hand : HeartsHand){
+    this.logger.log("HeartsComponent#openEditHandDialog: " + hand);
+
+    this.handDialogRef = this.dialog.open(HeartsHandComponent, {
+      data: hand
+    });
+    this.handDialogRef.componentInstance.parent = this;
+    this.handDialogRef.componentInstance.hand = hand;
+
+  }
 }
 
 @Component({
@@ -112,20 +130,18 @@ export class HeartsComponent extends AbstractTurnBasedGame<HeartsHand> implement
 export class HeartsHandComponent implements OnInit {
 
   public parent : HeartsComponent;
-  public hand:HeartsHand;
+  //public hand:HeartsHand;
   public totalPoints = 0;
 
   constructor(
     private logger: LogService,
     private dialogRef:  MatDialogRef<HeartsHandComponent>,
+    @Inject(MAT_DIALOG_DATA) public hand : HeartsHand
   ) { }
 
   ngOnInit() {
     this.logger.log('GenericHandComponent#ngOnInit()');
-    this.hand = new HeartsHand();
-    this.parent.match.factions.forEach(faction => {
-      this.hand.details.push(new HandDetails(0));
-    });
+    
   }
   onScoreChange(event){
     this.totalPoints = this.hand.getTotal();
