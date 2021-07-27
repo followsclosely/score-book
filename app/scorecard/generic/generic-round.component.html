@@ -1,0 +1,17 @@
+<div *ngFor="let faction of parent.match.factions; let i=index;">
+    
+  <mat-form-field class="example-full-width" [style.width.px]=60>
+    <mat-label>{{ faction.name }}</mat-label>
+    <input width="3" matInput type="number" value="0" [(ngModel)]="round.details[i].score" (change)="onScoreChange($event)">
+  </mat-form-field>
+
+</div>
+
+<div>
+  <button mat-raised-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()">Add round</button>
+</div>
+
+<div>
+  <br>Total Points: {{ totalPoints }}
+</div>

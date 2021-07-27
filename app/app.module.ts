@@ -51,7 +51,7 @@ import { MatchFormComponent } from './match-form/match-form.component';
 import { GroupService } from './group.service';
 import { PlayerFormComponent } from './player-form/player-form.component';
 import { HeartsComponent, HeartsRoundComponent } from './scorecard/hearts/hearts.component';
-import { GenericComponent } from './scorecard/generic/generic.component';
+import { GenericRoundBasedGame, GenericRoundComponent } from './scorecard/generic/generic.component';
 import { RookComponent, RookRoundComponent } from './scorecard/rook/rook.component';
 import { ScorePipe } from './score.pipe';
 
@@ -62,7 +62,8 @@ import { ScorePipe } from './score.pipe';
     PlayerFormComponent, 
     HeartsRoundComponent,
     RookRoundComponent,
-    GenericComponent
+    GenericRoundBasedGame,
+    GenericRoundComponent
   ],
   declarations: [
     AppComponent,
@@ -70,7 +71,7 @@ import { ScorePipe } from './score.pipe';
     MatchFormComponent,
     PlayerFormComponent,
     HeartsComponent, HeartsRoundComponent,
-    GenericComponent,
+    GenericRoundBasedGame, GenericRoundComponent,
     RookComponent, RookRoundComponent, ScorePipe
   ],
   imports: [
@@ -91,8 +92,8 @@ import { ScorePipe } from './score.pipe';
     MatButtonToggleModule,
     MatSlideToggleModule,
     RouterModule.forRoot([
-      {path: 'scorecard/generic/:id', component: GenericComponent},
-      {path: 'scorecard/chess/:id', component: GenericComponent},
+      {path: 'scorecard/generic/:id', component: GenericRoundBasedGame},
+      {path: 'scorecard/chess/:id', component: GenericRoundBasedGame},
       {path: 'scorecard/hearts/:id', component: HeartsComponent},
       {path: 'scorecard/rook/:id', component: RookComponent},
     ]),
