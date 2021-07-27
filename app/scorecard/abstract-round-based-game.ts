@@ -29,7 +29,7 @@ export class AbstractRound {
   }
 }
 
-export class AbstractTurnBasedGame<H extends AbstractRound> {
+export class AbstractRoundBasedGame<H extends AbstractRound> {
 
   public hands = new Array<H>();
   public dataSource = new MatTableDataSource<H>();

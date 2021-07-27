@@ -6,7 +6,7 @@ import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
-import { AbstractTurnBasedGame, RoundDetails, AbstractRound } from '../abstract-turn-based-game';
+import { AbstractRoundBasedGame, RoundDetails, AbstractRound } from '../abstract-round-based-game';
 
 export class HeartsHand extends AbstractRound {
   constructor(
@@ -52,7 +52,7 @@ export class HeartsHand extends AbstractRound {
   templateUrl: './hearts.component.html',
   styleUrls: ['./hearts.component.css']
 })
-export class HeartsComponent extends AbstractTurnBasedGame<HeartsHand> implements OnInit {
+export class HeartsComponent extends AbstractRoundBasedGame<HeartsHand> implements OnInit {
 
   public match:Match = null;
 
