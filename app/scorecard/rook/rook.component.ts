@@ -6,7 +6,7 @@ import { MatchService } from '../../match-service.service';
 import {MatDialog, MatDialogRef, MatStepper} from '@angular/material';
 import { Player } from '../../player';
 
-import { AbstractRoundBasedGame, RoundDetails, AbstractRound } from '../abstract-round-based-game';
+import { AbstractRoundBasedGame, RoundDetails, AbstractRound, RoundMode } from '../abstract-round-based-game';
 
 import {
   Component, OnInit
@@ -34,11 +34,6 @@ export class RookHand extends AbstractRound {
   }
 }
 
-enum RoundMode {
-  Create,
-  Edit
-}
-
 @Component({
   selector: 'app-rook',
   templateUrl: './rook.component.html',
@@ -46,8 +41,6 @@ enum RoundMode {
 })
 export class RookComponent extends AbstractRoundBasedGame<RookHand> implements OnInit {
 
-  public RoundMode = RoundMode;
-  public roundMode = RoundMode.Create;
   public round:RookHand;
 
   public match:Match = null;

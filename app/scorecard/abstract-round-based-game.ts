@@ -3,6 +3,10 @@ import { LogService } from '../log-service.service';
 import { Match, Faction } from '../match';
 import { Player } from '../player';
 
+export enum RoundMode {
+  Create,
+  Edit
+}
 
 export class RoundDetails {
   public flags = new Array<string>();
@@ -29,7 +33,18 @@ export class AbstractRound {
   }
 }
 
+export class RoundContext {
+  constructor(
+    public round : AbstractRound,
+    public mode : RoundMode,
+    public parent : any
+  ){}
+}
+
 export class AbstractRoundBasedGame<H extends AbstractRound> {
+
+  public RoundMode = RoundMode;
+  public roundMode : RoundMode;
 
   public rounds = new Array<H>();
   public dataSource = new MatTableDataSource<H>();
@@ -56,7 +71,7 @@ export class AbstractRoundBasedGame<H extends AbstractRound> {
     });
   }
 
-  addRound(round:H){
+  addRound(round : H){
     round.number = this.rounds.length+1;
     
     if( round.number > 1) {
@@ -68,6 +83,14 @@ export class AbstractRoundBasedGame<H extends AbstractRound> {
 
     this.rounds.push(round);
     this.dataSource.data = this.rounds;
+  }
+
+  removeRound(round : H){
+    const index: number = this.rounds.indexOf(round);
+    if (index !== -1) {
+      this.rounds.splice(index, 1);
+      this.dataSource.data = this.rounds;
+    } 
   }
 
   getTotal(i : number) {

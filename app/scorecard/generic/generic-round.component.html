@@ -1,15 +1,21 @@
-<div *ngFor="let faction of parent.match.factions; let i=index;">
+<h3>Add Round</h3>
+
+<div *ngFor="let faction of context.parent.match.factions; let i=index;">
     
-  <mat-form-field class="example-full-width" [style.width.px]=60>
+  <mat-form-field class="example-full-width">
     <mat-label>{{ faction.name }}</mat-label>
-    <input width="3" matInput type="number" value="0" [(ngModel)]="round.details[i].score" (change)="onScoreChange($event)">
+    <input width="3" matInput type="number" value="0" [(ngModel)]="context.round.details[i].score" (change)="onScoreChange($event)">
   </mat-form-field>
 
 </div>
 
-<div>
+<div *ngIf="context.mode == RoundMode.Create">
   <button mat-raised-button (click)="onCancel()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onSubmit()">Add round</button>
+  <button mat-raised-button color="primary" (click)="onCreate()">Done</button>
+</div>
+<div *ngIf="context.mode == RoundMode.Edit">
+  <button mat-raised-button (click)="onDelete()">Delete</button>
+  <button mat-raised-button color="primary" (click)="onCancel()">Done</button>
 </div>
 
 <div>

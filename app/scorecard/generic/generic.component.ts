@@ -6,7 +6,7 @@ import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
-import { AbstractRoundBasedGame, RoundDetails, AbstractRound } from '../abstract-round-based-game';
+import { AbstractRoundBasedGame, RoundDetails, AbstractRound, RoundContext, RoundMode } from '../abstract-round-based-game';
 
 @Component({
   selector: 'app-generic',
@@ -14,8 +14,8 @@ import { AbstractRoundBasedGame, RoundDetails, AbstractRound } from '../abstract
   styleUrls: ['./generic.component.css']
 })
 export class GenericRoundBasedGame extends AbstractRoundBasedGame<AbstractRound> implements OnInit {
-  public match:Match = null;
 
+  public match:Match = null;
   private roundDialogRef: MatDialogRef<GenericRoundComponent>;
 
   constructor(
@@ -63,15 +63,15 @@ export class GenericRoundBasedGame extends AbstractRoundBasedGame<AbstractRound>
       round.details.push(new RoundDetails(0));
     });
 
-    this.roundDialogRef = this.dialog.open(GenericRoundComponent, { data: round } );
-    this.roundDialogRef.componentInstance.parent = this;
+    this.roundDialogRef = this.dialog.open(GenericRoundComponent, { 
+      data: new RoundContext(round, RoundMode.Create, this) 
+    } );
   }
 
   openEditRoundDialog(round : AbstractRound){
     this.roundDialogRef = this.dialog.open(GenericRoundComponent, {
-      data: round
+      data: new RoundContext(round, RoundMode.Edit, this) 
     });
-    this.roundDialogRef.componentInstance.parent = this;
   }
 }
 
@@ -81,25 +81,32 @@ export class GenericRoundBasedGame extends AbstractRoundBasedGame<AbstractRound>
 })
 export class GenericRoundComponent {
 
-  public parent : GenericRoundBasedGame;
+  public RoundMode = RoundMode;
   public totalPoints = 0;
 
   constructor(
     private logger: LogService,
     private dialogRef:  MatDialogRef<GenericRoundComponent>,
-    @Inject(MAT_DIALOG_DATA) public round : AbstractRound
+    @Inject(MAT_DIALOG_DATA) public context : RoundContext
   ) {}
 
   onScoreChange(event){
-    this.totalPoints = this.round.getTotal();
-  }
-
-  onSubmit(){
-    this.parent.addRound(this.round);
-    this.dialogRef.close();
+    this.totalPoints = this.context.round.getTotal();
   }
 
   onCancel(){
     this.dialogRef.close();
+  }
+
+  onCreate(){
+    this.context.parent.addRound(this.context.round);
+    this.dialogRef.close();
+  }
+
+  onDelete(){
+    if(confirm("Are you sure to delete?")) {
+      this.context.parent.removeRound(this.context.round);
+      this.dialogRef.close();
+    }
   }
 }
