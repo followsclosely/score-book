@@ -6,7 +6,14 @@ import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
-import { AbstractRoundBasedGame, RoundDetails, AbstractRound, RoundContext, RoundMode } from '../abstract-round-based-game';
+import { 
+  AbstractRoundBasedGame, 
+  RoundDetails, 
+  AbstractRound, 
+  RoundContext, 
+  RoundMode, 
+  AbstractRoundFormComponent 
+} from '../abstract-round-based-game';
 
 @Component({
   selector: 'app-generic',
@@ -79,34 +86,12 @@ export class GenericRoundBasedGame extends AbstractRoundBasedGame<AbstractRound>
   templateUrl: './generic-round.component.html',
   styleUrls: ['./generic.component.css']
 })
-export class GenericRoundComponent {
-
-  public RoundMode = RoundMode;
-  public totalPoints = 0;
-
+export class GenericRoundComponent extends AbstractRoundFormComponent {
   constructor(
-    private logger: LogService,
-    private dialogRef:  MatDialogRef<GenericRoundComponent>,
-    @Inject(MAT_DIALOG_DATA) public context : RoundContext
-  ) {}
-
-  onScoreChange(event){
-    this.totalPoints = this.context.round.getTotal();
-  }
-
-  onCancel(){
-    this.dialogRef.close();
-  }
-
-  onCreate(){
-    this.context.parent.addRound(this.context.round);
-    this.dialogRef.close();
-  }
-
-  onDelete(){
-    if(confirm("Are you sure to delete?")) {
-      this.context.parent.removeRound(this.context.round);
-      this.dialogRef.close();
-    }
+    logger: LogService,
+    dialogRef:  MatDialogRef<AbstractRoundFormComponent>,
+    @Inject(MAT_DIALOG_DATA) context : RoundContext
+  ) {
+    super(logger, dialogRef, context);
   }
 }

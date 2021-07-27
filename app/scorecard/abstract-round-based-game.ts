@@ -3,6 +3,9 @@ import { LogService } from '../log-service.service';
 import { Match, Faction } from '../match';
 import { Player } from '../player';
 
+import { Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
 export enum RoundMode {
   Create,
   Edit
@@ -102,4 +105,36 @@ export class AbstractRoundBasedGame<H extends AbstractRound> {
     return faction.players.map(player => player.name).join(delim);
   }
 
+}
+
+export class AbstractRoundFormComponent {
+
+  public RoundMode = RoundMode;
+  public totalPoints = 0;
+
+  constructor(
+    private logger: LogService,
+    private dialogRef:  MatDialogRef<AbstractRoundFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public context : RoundContext
+  ) {}
+
+  onScoreChange(event){
+    this.totalPoints = this.context.round.getTotal();
+  }
+
+  onCancel(){
+    this.dialogRef.close();
+  }
+
+  onCreate(){
+    this.context.parent.addRound(this.context.round);
+    this.dialogRef.close();
+  }
+
+  onDelete(){
+    if(confirm("Are you sure to delete?")) {
+      this.context.parent.removeRound(this.context.round);
+      this.dialogRef.close();
+    }
+  }
 }
