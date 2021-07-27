@@ -1,4 +1,4 @@
-<mat-horizontal-stepper [selectedIndex]="(context.roundMode == RoundMode.Create ) ? 0 : 1" >
+<mat-horizontal-stepper [selectedIndex]="(context.mode == RoundMode.Create ) ? 0 : 1" >
 
   <mat-step>  
 
@@ -11,7 +11,7 @@
       </mat-form-field>
       <mat-form-field >
         <mat-select name="player" placeholder="Winner">
-            <mat-option ngDefaultControl *ngFor="let player of context.players" [(ngModel)]="context.round.bid.player" [value]="player">
+            <mat-option ngDefaultControl *ngFor="let player of context.parent.players" [(ngModel)]="context.round.bid.player" [value]="player">
               {{player.name}}
             </mat-option>
         </mat-select>
@@ -35,27 +35,25 @@
     <div>
       <button mat-raised-button (click)="onCancel()">Cancel</button>
       
-      <button mat-raised-button color="primary" (click)="onSubmit()"
-      *ngIf="context.roundMode == RoundMode.Create">Add round</button>
+      <button mat-raised-button color="primary" (click)="onCreate()"
+      *ngIf="context.mode == RoundMode.Create">Add Hand</button>
 
       <button mat-raised-button matStepperNext color="primary" 
-      *ngIf="context.roundMode == RoundMode.Edit">
+      *ngIf="context.mode == RoundMode.Edit">
         Next <mat-icon>arrow_forward</mat-icon>
     </button>
   </div>
 
   </mat-step>
 
-  <mat-step *ngIf="context.roundMode == RoundMode.Edit" title="Bid">
+  <mat-step *ngIf="context.mode == RoundMode.Edit" title="Bid">
     <ng-template matStepLabel>Score</ng-template>
 
-    <div *ngFor="let faction of context.match.factions; let i=index;">
+     <div *ngFor="let faction of context.parent.match.factions; let i=index;">
     
-      <h4>{{ faction.name }}</h4>
-    
-      <mat-form-field class="example-full-width" [style.width.px]=60>
-        <mat-label>Score</mat-label>
-        <input width="3" matInput type="number" value="0" [(ngModel)]="context.round.details[i].score" (change)="onScoreChange($event)">
+      <mat-form-field class="example-full-width">
+        <mat-label>{{ faction.name }}</mat-label>
+        <input matInput type="number" value="0" [(ngModel)]="context.round.details[i].score" (change)="onScoreChange($event)">
       </mat-form-field>
     
     </div>
@@ -64,11 +62,9 @@
       <button mat-raised-button matStepperPrevious>
         <mat-icon>arrow_back</mat-icon>Back
       </button>
-      <button mat-raised-button matStepperNext color="primary">
-        Next <mat-icon>arrow_forward</mat-icon>
-      </button>
+      <button mat-raised-button color="accent" (click)="onDelete()">Delete</button>
+      <button mat-raised-button color="primary" (click)="onCancel()">Done</button>
     </div>
-
 
   </mat-step>
 </mat-horizontal-stepper>

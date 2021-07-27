@@ -104,13 +104,13 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
   }
 
   openAddRoundDialog(){
-    var round = new RookHand();
+    var hand = new RookHand();
     this.match.factions.forEach(faction => {
-      round.details.push(new RoundDetails(0));
+      hand.details.push(new RoundDetails(0));
     });
 
     this.roundDialogRef = this.dialog.open(RookRoundComponent, { 
-      data: new RoundContext(round, RoundMode.Create, this) 
+      data: new RoundContext(hand, RoundMode.Create, this) 
     } );
   }
 
@@ -119,30 +119,6 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
       data: new RoundContext(round, RoundMode.Edit, this) 
     });
   }
-
-  // openAddRoundDialog(){
-  //   this.roundDialogRef = this.dialog.open(RookRoundComponent);
-
-  //   this.round = new RookHand();
-  //   this.roundMode = RoundMode.Create;
-
-  //   this.match.factions.forEach(faction => {
-  //     this.round.details.push(new RoundDetails(0));
-  //   });
-
-  //   this.roundDialogRef.componentInstance.parent = this;
-  // }
-
-  // openEditRoundDialog(round : RookHand){
-  //   this.logger.log("RookComponent#openEditRoundDialog: " + round.number);
-
-  //   this.roundDialogRef = this.dialog.open(RookRoundComponent);
-
-  //   this.round = round;
-  //   this.roundMode = RoundMode.Edit;
-  //   this.roundDialogRef.componentInstance.parent = this;
-
-  // }
 }
 
 @Component({
@@ -156,30 +132,5 @@ export class RookRoundComponent extends AbstractRoundFormComponent {
     @Inject(MAT_DIALOG_DATA) context : RoundContext
   ) {
     super(logger, dialogRef, context);
-  }
-}
-
-export class xRookRoundComponent {
-
-  public parent : RookComponent;
-  public totalPoints = 0;
-
-  constructor(
-    private logger: LogService,
-    private dialogRef:  MatDialogRef<RookRoundComponent>
-  ) { }
-
-  onScoreChange(event){
-    this.totalPoints = this.parent.round.getTotal();
-  }
-
-  onSubmit(){
-    //this.logger.log(this.parent.dataSource);
-    this.parent.addRound(this.parent.round);
-    this.dialogRef.close();
-  }
-
-  onCancel(){
-    this.dialogRef.close();
   }
 }
