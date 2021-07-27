@@ -46,11 +46,9 @@ export class GenericRoundBasedGame extends AbstractRoundBasedGame<AbstractRound>
 
       this.match.factions.push(new Faction("Matthew"));
       this.match.factions.push(new Faction("Estella"));
-      this.match.factions.push(new Faction("Joel"));
-      this.match.factions.push(new Faction("Emily"));
 
-      this.addRound(new AbstractRound(1).push(10).push(3).push(7).push(6));
-      this.addRound(new AbstractRound(2).push(0).push(23).push(0));
+      this.addRound(new AbstractRound(1).push(10).push(3));
+      this.addRound(new AbstractRound(2).push(0).push(23));
       this.dataSource.data = this.rounds;
     }
 
@@ -100,37 +98,13 @@ export class GenericRoundComponent implements OnInit {
 
   ngOnInit() {
     this.logger.log('GenericRoundComponent#ngOnInit()');
-    
   }
+
   onScoreChange(event){
     this.totalPoints = this.round.getTotal();
   }
 
-  shootTheMoonChange(i, event){
-    if( event.checked ){
-      //Add the flag
-      this.round.details[i].flags.push("SHOOT_THE_MOON");
-      if( this.round.details[i].score == 0 ){
-        this.round.details.forEach((detail, index) => {
-          if( index != i ){
-            detail.score = 26;
-          }
-        });
-      }
-    } else {
-      //Remove the flag
-      const index = this.round.details[i].flags.indexOf("SHOOT_THE_MOON", 0);
-      if (index > -1) {
-        this.round.details[i].flags.splice(index, 1);
-      } 
-    }
-
-    this.onScoreChange(null);
-    this.logger.log(event.checked);
-  }
-
   onSubmit(){
-    //this.logger.log(this.parent.dataSource);
     this.parent.addRound(this.round);
     this.dialogRef.close();
   }
