@@ -1,18 +1,17 @@
-<mat-horizontal-stepper [selectedIndex]="(parent.roundMode == parent.RoundMode.Create ) ? 0 : 1" >
+<mat-horizontal-stepper [selectedIndex]="(context.roundMode == RoundMode.Create ) ? 0 : 1" >
 
   <mat-step>  
 
-    
     <ng-template matStepLabel>Bid</ng-template>
     <div>
 
       <mat-form-field [style.width.px]=60>
         <mat-label>Bid</mat-label>
-        <input matInput type="number" [(ngModel)]="parent.round.bid.points" (change)="onScoreChange($event)">
+        <input matInput type="number" [(ngModel)]="context.round.bid.points" (change)="onScoreChange($event)">
       </mat-form-field>
       <mat-form-field >
         <mat-select name="player" placeholder="Winner">
-            <mat-option ngDefaultControl *ngFor="let player of parent.players" [(ngModel)]="parent.round.bid.player" [value]="player">
+            <mat-option ngDefaultControl *ngFor="let player of context.players" [(ngModel)]="context.round.bid.player" [value]="player">
               {{player.name}}
             </mat-option>
         </mat-select>
@@ -23,7 +22,7 @@
 
 
     <div>
-      <mat-button-toggle-group name="color" [(ngModel)]="parent.round.bid.trump">
+      <mat-button-toggle-group name="color" [(ngModel)]="context.round.bid.trump">
         <mat-button-toggle value="red">Red</mat-button-toggle>
         <mat-button-toggle value="black">Black</mat-button-toggle>
         <mat-button-toggle value="yellow">Yellow</mat-button-toggle>
@@ -36,28 +35,27 @@
     <div>
       <button mat-raised-button (click)="onCancel()">Cancel</button>
       
-      <!-- *ngIf="parent.roundMode=='Create'"  -->
       <button mat-raised-button color="primary" (click)="onSubmit()"
-      *ngIf="parent.roundMode == parent.RoundMode.Create">Add round</button>
+      *ngIf="context.roundMode == RoundMode.Create">Add round</button>
 
       <button mat-raised-button matStepperNext color="primary" 
-      *ngIf="parent.roundMode == parent.RoundMode.Edit">
+      *ngIf="context.roundMode == RoundMode.Edit">
         Next <mat-icon>arrow_forward</mat-icon>
     </button>
   </div>
 
   </mat-step>
 
-  <mat-step *ngIf="parent.roundMode == parent.RoundMode.Edit" title="Bid">
+  <mat-step *ngIf="context.roundMode == RoundMode.Edit" title="Bid">
     <ng-template matStepLabel>Score</ng-template>
 
-    <div *ngFor="let faction of parent.match.factions; let i=index;">
+    <div *ngFor="let faction of context.match.factions; let i=index;">
     
       <h4>{{ faction.name }}</h4>
     
       <mat-form-field class="example-full-width" [style.width.px]=60>
         <mat-label>Score</mat-label>
-        <input width="3" matInput type="number" value="0" [(ngModel)]="parent.round.details[i].score" (change)="onScoreChange($event)">
+        <input width="3" matInput type="number" value="0" [(ngModel)]="context.round.details[i].score" (change)="onScoreChange($event)">
       </mat-form-field>
     
     </div>

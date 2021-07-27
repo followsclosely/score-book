@@ -1,16 +1,13 @@
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Inject, Component, OnInit } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
 import { Match, GameType, Faction } from '../../match';
 import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
-import {MatDialog, MatDialogRef, MatStepper} from '@angular/material';
 import { Player } from '../../player';
-
-import { AbstractRoundBasedGame, RoundDetails, AbstractRound, RoundMode } from '../abstract-round-based-game';
-
-import {
-  Component, OnInit
-} from '@angular/core';
+import { AbstractRoundBasedGame, RoundDetails, AbstractRound, RoundMode, AbstractRoundFormComponent, RoundContext } from '../abstract-round-based-game';
 
 export class Bid {
   constructor(
@@ -107,35 +104,62 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
   }
 
   openAddRoundDialog(){
-    this.roundDialogRef = this.dialog.open(RookRoundComponent);
-
-    this.round = new RookHand();
-    this.roundMode = RoundMode.Create;
-
+    var round = new RookHand();
     this.match.factions.forEach(faction => {
-      this.round.details.push(new RoundDetails(0));
+      round.details.push(new RoundDetails(0));
     });
 
-    this.roundDialogRef.componentInstance.parent = this;
+    this.roundDialogRef = this.dialog.open(RookRoundComponent, { 
+      data: new RoundContext(round, RoundMode.Create, this) 
+    } );
   }
 
   openEditRoundDialog(round : RookHand){
-    this.logger.log("RookComponent#openEditRoundDialog: " + round.number);
-
-    this.roundDialogRef = this.dialog.open(RookRoundComponent);
-
-    this.round = round;
-    this.roundMode = RoundMode.Edit;
-    this.roundDialogRef.componentInstance.parent = this;
-
+    this.roundDialogRef = this.dialog.open(RookRoundComponent, {
+      data: new RoundContext(round, RoundMode.Edit, this) 
+    });
   }
+
+  // openAddRoundDialog(){
+  //   this.roundDialogRef = this.dialog.open(RookRoundComponent);
+
+  //   this.round = new RookHand();
+  //   this.roundMode = RoundMode.Create;
+
+  //   this.match.factions.forEach(faction => {
+  //     this.round.details.push(new RoundDetails(0));
+  //   });
+
+  //   this.roundDialogRef.componentInstance.parent = this;
+  // }
+
+  // openEditRoundDialog(round : RookHand){
+  //   this.logger.log("RookComponent#openEditRoundDialog: " + round.number);
+
+  //   this.roundDialogRef = this.dialog.open(RookRoundComponent);
+
+  //   this.round = round;
+  //   this.roundMode = RoundMode.Edit;
+  //   this.roundDialogRef.componentInstance.parent = this;
+
+  // }
 }
 
 @Component({
   templateUrl: './hand.component.html',
   styleUrls: ['./rook.component.css']
 })
-export class RookRoundComponent {
+export class RookRoundComponent extends AbstractRoundFormComponent {
+  constructor(
+    logger: LogService,
+    dialogRef:  MatDialogRef<AbstractRoundFormComponent>,
+    @Inject(MAT_DIALOG_DATA) context : RoundContext
+  ) {
+    super(logger, dialogRef, context);
+  }
+}
+
+export class xRookRoundComponent {
 
   public parent : RookComponent;
   public totalPoints = 0;
