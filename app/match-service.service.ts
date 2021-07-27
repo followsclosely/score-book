@@ -11,6 +11,7 @@ export class MatchService {
   //matches: Match[] = [];
 
   gameOptions = [
+    new GameType("generic", "Azule",    2, false, -1),
     new GameType("chess",   "Chess",   2, false, -1), 
     //new GameType("drmario", "Dr. Mario"), 
     new GameType("hearts",  "Hearts",  4, false, 100),

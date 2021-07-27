@@ -6,7 +6,7 @@ import { MatchService } from '../../match-service.service';
 import {MatDialog, MatDialogRef, MatStepper} from '@angular/material';
 import { Player } from '../../player';
 
-import { AbstractTurnBasedGame, HandDetails, AbstractHand } from '../abstract-turn-based-game';
+import { AbstractTurnBasedGame, HandDetails, AbstractRound } from '../abstract-turn-based-game';
 
 import {
   Component, OnInit
@@ -20,7 +20,7 @@ export class Bid {
   ){}
 }
 
-export class RookHand extends AbstractHand {
+export class RookHand extends AbstractRound {
   constructor(
     number? : number,
     public bid : Bid = new Bid(),

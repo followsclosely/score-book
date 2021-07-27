@@ -13,7 +13,7 @@ export class HandDetails {
   ){}
 }
 
-export class AbstractHand {
+export class AbstractRound {
   public details = new Array<HandDetails>();
   constructor(
     public number? : number
@@ -29,7 +29,7 @@ export class AbstractHand {
   }
 }
 
-export class AbstractTurnBasedGame<H extends AbstractHand> {
+export class AbstractTurnBasedGame<H extends AbstractRound> {
 
   public hands = new Array<H>();
   public dataSource = new MatTableDataSource<H>();

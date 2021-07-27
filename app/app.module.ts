@@ -91,6 +91,7 @@ import { ScorePipe } from './score.pipe';
     MatButtonToggleModule,
     MatSlideToggleModule,
     RouterModule.forRoot([
+      {path: 'scorecard/generic/:id', component: GenericComponent},
       {path: 'scorecard/chess/:id', component: GenericComponent},
       {path: 'scorecard/hearts/:id', component: HeartsComponent},
       {path: 'scorecard/rook/:id', component: RookComponent},

@@ -6,9 +6,9 @@ import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
-import { AbstractTurnBasedGame, HandDetails, AbstractHand } from '../abstract-turn-based-game';
+import { AbstractTurnBasedGame, HandDetails, AbstractRound } from '../abstract-turn-based-game';
 
-export class HeartsHand extends AbstractHand {
+export class HeartsHand extends AbstractRound {
   constructor(
     number? : number
   ){
