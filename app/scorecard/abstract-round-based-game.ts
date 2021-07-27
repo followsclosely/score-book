@@ -53,11 +53,11 @@ export class AbstractRoundBasedGame<H extends AbstractRound> {
   public dataSource = new MatTableDataSource<H>();
 
   public players = new Array<Player>();
-  public columnsToDisplay: string[] = [];
+  public columnsToDisplay = new Array<string>();
 
   constructor(
     protected logger: LogService,
-  ){ }
+  ){}
 
   _ngOnInit(match:Match){
 
@@ -118,7 +118,7 @@ export class AbstractRoundFormComponent {
     @Inject(MAT_DIALOG_DATA) public context : RoundContext
   ) {}
 
-  onScoreChange(event){
+  onScoreChange(event : any){
     this.totalPoints = this.context.round.getTotal();
   }
 
