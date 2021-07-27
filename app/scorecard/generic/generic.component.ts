@@ -32,26 +32,6 @@ export class GenericRoundBasedGame extends AbstractRoundBasedGame<AbstractRound>
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.logger.log(id);
     this.match = this.matchService.getMatch(id);
-
-    if( this.match == null)
-    {
-      this.match = new Match(
-        id,
-        new GameType("hearts",  "Hearts",  4),
-        null,
-        null,
-        4,
-        false
-      );
-
-      this.match.factions.push(new Faction("Matthew"));
-      this.match.factions.push(new Faction("Estella"));
-
-      this.addRound(new AbstractRound(1).push(10).push(3));
-      this.addRound(new AbstractRound(2).push(0).push(23));
-      this.dataSource.data = this.rounds;
-    }
-
     super._ngOnInit(this.match);
   }
 
@@ -69,14 +49,10 @@ export class GenericRoundBasedGame extends AbstractRoundBasedGame<AbstractRound>
   }
 
   openEditRoundDialog(round : AbstractRound){
-    this.logger.log("HeartsComponent#openEditRoundDialog: " + round);
-
     this.roundDialogRef = this.dialog.open(GenericRoundComponent, {
       data: round
     });
     this.roundDialogRef.componentInstance.parent = this;
-    this.roundDialogRef.componentInstance.round = round;
-
   }
 }
 
@@ -84,21 +60,16 @@ export class GenericRoundBasedGame extends AbstractRoundBasedGame<AbstractRound>
   templateUrl: './generic-round.component.html',
   styleUrls: ['./generic.component.css']
 })
-export class GenericRoundComponent implements OnInit {
+export class GenericRoundComponent {
 
   public parent : GenericRoundBasedGame;
-  //public round:HeartsRound;
   public totalPoints = 0;
 
   constructor(
     private logger: LogService,
     private dialogRef:  MatDialogRef<GenericRoundComponent>,
     @Inject(MAT_DIALOG_DATA) public round : AbstractRound
-  ) { }
-
-  ngOnInit() {
-    this.logger.log('GenericRoundComponent#ngOnInit()');
-  }
+  ) {}
 
   onScoreChange(event){
     this.totalPoints = this.round.getTotal();
