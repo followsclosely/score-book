@@ -42,9 +42,7 @@ export class GenericRoundBasedGame extends AbstractRoundBasedGame<AbstractRound>
       round.details.push(new RoundDetails(0));
     });
 
-    this.roundDialogRef = this.dialog.open(GenericRoundComponent, {
-      data: round
-    });
+    this.roundDialogRef = this.dialog.open(GenericRoundComponent, { data: round } );
     this.roundDialogRef.componentInstance.parent = this;
   }
 
