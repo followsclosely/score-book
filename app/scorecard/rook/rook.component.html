@@ -1,7 +1,7 @@
 <table class="styled-table">
   <thead>
     <tr>
-      <th rowspan="2">Hand</th>
+      <th rowspan="2">round</th>
       <th *ngFor="let faction of match.factions; let i=index;">
         {{faction.name}} 
         <a *ngIf="!showPlayerNames" [routerLink]="" (click)="showPlayerNames = true">+</a> 
@@ -15,18 +15,18 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let hand of hands" class="mat-row">
+    <tr *ngFor="let round of rounds" class="mat-row">
       <td>
-        {{hand.number}}
-        <button mat-button (click)="openEditHandDialog(hand)"><mat-icon>edit_note</mat-icon></button>
-        {{hand.bid.points}} 
-        <mat-icon class="material-icons color_{{hand.bid.trump}}">arrow_forward</mat-icon>
+        {{round.number}}
+        <button mat-button (click)="openEditRoundDialog(round)"><mat-icon>edit_note</mat-icon></button>
+        {{round.bid.points}}
+        <mat-icon class="material-icons color_{{round.bid.trump}}">arrow_forward</mat-icon>
       </td>
 
-      <td *ngFor="let detail of hand.details">
+      <td *ngFor="let detail of round.details">
         <div class="score">
           <div class="score-total">{{detail.totalScore}}</div>
-          <div class="score-hand">{{detail.score | score}}</div>
+          <div class="score-round">{{detail.score | score}}</div>
         </div>
       </td>
     </tr>
@@ -35,7 +35,7 @@
   <tfoot>
     <tr>
       <td>
-        <button mat-mini-fab (click)="openAddHandDialog()" >
+        <button mat-mini-fab (click)="openAddRoundDialog()" >
         <i class="material-icons">add</i></button>
       </td>
       <th *ngFor="let faction of match.factions; let i=index;">

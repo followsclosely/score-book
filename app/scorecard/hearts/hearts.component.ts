@@ -8,7 +8,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 import { AbstractRoundBasedGame, RoundDetails, AbstractRound } from '../abstract-round-based-game';
 
-export class HeartsHand extends AbstractRound {
+export class HeartsRound extends AbstractRound {
   constructor(
     number? : number
   ){
@@ -52,11 +52,11 @@ export class HeartsHand extends AbstractRound {
   templateUrl: './hearts.component.html',
   styleUrls: ['./hearts.component.css']
 })
-export class HeartsComponent extends AbstractRoundBasedGame<HeartsHand> implements OnInit {
+export class HeartsComponent extends AbstractRoundBasedGame<HeartsRound> implements OnInit {
 
   public match:Match = null;
 
-  private handDialogRef: MatDialogRef<HeartsHandComponent>;
+  private roundDialogRef: MatDialogRef<HeartsRoundComponent>;
 
   constructor(
     logger: LogService,
@@ -89,70 +89,70 @@ export class HeartsComponent extends AbstractRoundBasedGame<HeartsHand> implemen
       this.match.factions.push(new Faction("Joel"));
       this.match.factions.push(new Faction("Emily"));
 
-      this.addHand(new HeartsHand(1).push(10).push(3).push(7).push(6));
-      this.addHand(new HeartsHand(2).push(0).push(23).push2(3, false, true).push(0));
-      this.addHand(new HeartsHand(3).push2(0, true, false).push(26).push(26).push(26));
-      this.dataSource.data = this.hands;
+      this.addRound(new HeartsRound(1).push(10).push(3).push(7).push(6));
+      this.addRound(new HeartsRound(2).push(0).push(23).push2(3, false, true).push(0));
+      this.addRound(new HeartsRound(3).push2(0, true, false).push(26).push(26).push(26));
+      this.dataSource.data = this.rounds;
     }
 
     super._ngOnInit(this.match);
   }
 
-  openAddHandDialog(){
+  openAddRoundDialog(){
 
-    var hand = new HeartsHand();
+    var round = new HeartsRound();
     this.match.factions.forEach(faction => {
-      hand.details.push(new RoundDetails(0));
+      round.details.push(new RoundDetails(0));
     });
 
-    this.handDialogRef = this.dialog.open(HeartsHandComponent, {
-      data: hand
+    this.roundDialogRef = this.dialog.open(HeartsRoundComponent, {
+      data: round
     });
-    this.handDialogRef.componentInstance.parent = this;
+    this.roundDialogRef.componentInstance.parent = this;
   }
 
-  openEditHandDialog(hand : HeartsHand){
-    this.logger.log("HeartsComponent#openEditHandDialog: " + hand);
+  openEditRoundDialog(round : HeartsRound){
+    this.logger.log("HeartsComponent#openEditRoundDialog: " + round);
 
-    this.handDialogRef = this.dialog.open(HeartsHandComponent, {
-      data: hand
+    this.roundDialogRef = this.dialog.open(HeartsRoundComponent, {
+      data: round
     });
-    this.handDialogRef.componentInstance.parent = this;
-    this.handDialogRef.componentInstance.hand = hand;
+    this.roundDialogRef.componentInstance.parent = this;
+    this.roundDialogRef.componentInstance.round = round;
 
   }
 }
 
 @Component({
-  templateUrl: './hearts-hand.component.html',
+  templateUrl: './hearts-round.component.html',
   styleUrls: ['./hearts.component.css']
 })
-export class HeartsHandComponent implements OnInit {
+export class HeartsRoundComponent implements OnInit {
 
   public parent : HeartsComponent;
-  //public hand:HeartsHand;
+  //public round:HeartsRound;
   public totalPoints = 0;
 
   constructor(
     private logger: LogService,
-    private dialogRef:  MatDialogRef<HeartsHandComponent>,
-    @Inject(MAT_DIALOG_DATA) public hand : HeartsHand
+    private dialogRef:  MatDialogRef<HeartsRoundComponent>,
+    @Inject(MAT_DIALOG_DATA) public round : HeartsRound
   ) { }
 
   ngOnInit() {
-    this.logger.log('GenericHandComponent#ngOnInit()');
+    this.logger.log('GenericRoundComponent#ngOnInit()');
     
   }
   onScoreChange(event){
-    this.totalPoints = this.hand.getTotal();
+    this.totalPoints = this.round.getTotal();
   }
 
   shootTheMoonChange(i, event){
     if( event.checked ){
       //Add the flag
-      this.hand.details[i].flags.push("SHOOT_THE_MOON");
-      if( this.hand.details[i].score == 0 ){
-        this.hand.details.forEach((detail, index) => {
+      this.round.details[i].flags.push("SHOOT_THE_MOON");
+      if( this.round.details[i].score == 0 ){
+        this.round.details.forEach((detail, index) => {
           if( index != i ){
             detail.score = 26;
           }
@@ -160,9 +160,9 @@ export class HeartsHandComponent implements OnInit {
       }
     } else {
       //Remove the flag
-      const index = this.hand.details[i].flags.indexOf("SHOOT_THE_MOON", 0);
+      const index = this.round.details[i].flags.indexOf("SHOOT_THE_MOON", 0);
       if (index > -1) {
-        this.hand.details[i].flags.splice(index, 1);
+        this.round.details[i].flags.splice(index, 1);
       } 
     }
 
@@ -172,7 +172,7 @@ export class HeartsHandComponent implements OnInit {
 
   onSubmit(){
     //this.logger.log(this.parent.dataSource);
-    this.parent.addHand(this.hand);
+    this.parent.addRound(this.round);
     this.dialogRef.close();
   }
 

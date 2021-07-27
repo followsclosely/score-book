@@ -50,9 +50,9 @@ import { PreferencesFormComponent } from './preferences-form/preferences-form.co
 import { MatchFormComponent } from './match-form/match-form.component';
 import { GroupService } from './group.service';
 import { PlayerFormComponent } from './player-form/player-form.component';
-import { HeartsComponent, HeartsHandComponent } from './scorecard/hearts/hearts.component';
+import { HeartsComponent, HeartsRoundComponent } from './scorecard/hearts/hearts.component';
 import { GenericComponent } from './scorecard/generic/generic.component';
-import { RookComponent, RookHandComponent } from './scorecard/rook/rook.component';
+import { RookComponent, RookRoundComponent } from './scorecard/rook/rook.component';
 import { ScorePipe } from './score.pipe';
 
 @NgModule({
@@ -60,8 +60,8 @@ import { ScorePipe } from './score.pipe';
     PreferencesFormComponent, 
     MatchFormComponent, 
     PlayerFormComponent, 
-    HeartsHandComponent, 
-    RookHandComponent,
+    HeartsRoundComponent,
+    RookRoundComponent,
     GenericComponent
   ],
   declarations: [
@@ -69,9 +69,9 @@ import { ScorePipe } from './score.pipe';
     PreferencesFormComponent,
     MatchFormComponent,
     PlayerFormComponent,
-    HeartsComponent, HeartsHandComponent,
+    HeartsComponent, HeartsRoundComponent,
     GenericComponent,
-    RookComponent, RookHandComponent, ScorePipe
+    RookComponent, RookRoundComponent, ScorePipe
   ],
   imports: [
     BrowserModule,

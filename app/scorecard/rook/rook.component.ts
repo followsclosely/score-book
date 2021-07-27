@@ -20,7 +20,7 @@ export class Bid {
   ){}
 }
 
-export class RookHand extends AbstractRound {
+export class RookRound extends AbstractRound {
   constructor(
     number? : number,
     public bid : Bid = new Bid(),
@@ -34,7 +34,7 @@ export class RookHand extends AbstractRound {
   }
 }
 
-enum HandMode {
+enum RoundMode {
   Create,
   Edit
 }
@@ -44,15 +44,15 @@ enum HandMode {
   templateUrl: './rook.component.html',
   styleUrls: ['./rook.component.css']
 })
-export class RookComponent extends AbstractRoundBasedGame<RookHand> implements OnInit {
+export class RookComponent extends AbstractRoundBasedGame<RookRound> implements OnInit {
 
-  public HandMode = HandMode;
-  public handMode = HandMode.Create;
-  public hand:RookHand;
+  public RoundMode = RoundMode;
+  public roundMode = RoundMode.Create;
+  public round:RookRound;
 
   public match:Match = null;
   public showPlayerNames = true;
-  private handDialogRef: MatDialogRef<RookHandComponent>;
+  private roundDialogRef: MatDialogRef<RookRoundComponent>;
 
   constructor(
     logger: LogService,
@@ -90,16 +90,16 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
       kids.addPlayer(new Player(103, "Olivia"));
       this.match.factions.push(kids);
 
-      this.addHand(new RookHand(1).push(145).push(35).setBid(new Player(100, "Matthew"), 125, "green" ));
-      this.addHand(new RookHand(1).push(20).push(160).setBid(new Player(102, "Hannah"), 135, "red" ));
-      this.addHand(new RookHand(1).push(45).push(135).setBid(new Player(102, "Olivia"), 115, "black" ));
-      //this.addHand(new RookHand(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
-      this.dataSource.data = this.hands;
+      this.addRound(new RookRound(1).push(145).push(35).setBid(new Player(100, "Matthew"), 125, "green" ));
+      this.addRound(new RookRound(1).push(20).push(160).setBid(new Player(102, "Hannah"), 135, "red" ));
+      this.addRound(new RookRound(1).push(45).push(135).setBid(new Player(102, "Olivia"), 115, "black" ));
+      //this.addRound(new RookRound(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
+      this.dataSource.data = this.rounds;
   
     }
 
     this._ngOnInit(this.match);
-    // this.columnsToDisplay.push("Hand");
+    // this.columnsToDisplay.push("round");
     // this.match.factions.forEach(faction => {
 
     //   this.players.push(...faction.players);
@@ -113,52 +113,52 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
     // });
   }
 
-  openAddHandDialog(){
-    this.handDialogRef = this.dialog.open(RookHandComponent);
+  openAddRoundDialog(){
+    this.roundDialogRef = this.dialog.open(RookRoundComponent);
 
-    this.hand = new RookHand();
-    this.handMode = HandMode.Create;
+    this.round = new RookRound();
+    this.roundMode = RoundMode.Create;
 
     this.match.factions.forEach(faction => {
-      this.hand.details.push(new RoundDetails(0));
+      this.round.details.push(new RoundDetails(0));
     });
 
-    this.handDialogRef.componentInstance.parent = this;
+    this.roundDialogRef.componentInstance.parent = this;
   }
 
-  openEditHandDialog(hand : RookHand){
-    this.logger.log("RookComponent#openEditHandDialog: " + hand.number);
+  openEditRoundDialog(round : RookRound){
+    this.logger.log("RookComponent#openEditRoundDialog: " + round.number);
 
-    this.handDialogRef = this.dialog.open(RookHandComponent);
+    this.roundDialogRef = this.dialog.open(RookRoundComponent);
 
-    this.hand = hand;
-    this.handMode = HandMode.Edit;
-    this.handDialogRef.componentInstance.parent = this;
+    this.round = round;
+    this.roundMode = RoundMode.Edit;
+    this.roundDialogRef.componentInstance.parent = this;
 
   }
 }
 
 @Component({
-  templateUrl: './hand.component.html',
+  templateUrl: './round.component.html',
   styleUrls: ['./rook.component.css']
 })
-export class RookHandComponent {
+export class RookRoundComponent {
 
   public parent : RookComponent;
   public totalPoints = 0;
 
   constructor(
     private logger: LogService,
-    private dialogRef:  MatDialogRef<RookHandComponent>
+    private dialogRef:  MatDialogRef<RookRoundComponent>
   ) { }
 
   onScoreChange(event){
-    this.totalPoints = this.parent.hand.getTotal();
+    this.totalPoints = this.parent.round.getTotal();
   }
 
   onSubmit(){
     //this.logger.log(this.parent.dataSource);
-    this.parent.addHand(this.parent.hand);
+    this.parent.addRound(this.parent.round);
     this.dialogRef.close();
   }
 

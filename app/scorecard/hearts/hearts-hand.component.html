@@ -5,10 +5,10 @@
 
   <mat-form-field class="example-full-width" [style.width.px]=60>
     <mat-label>{{ faction.name }}</mat-label>
-    <input width="3" matInput type="number" value="0" [(ngModel)]="hand.details[i].score" (change)="onScoreChange($event)">
+    <input width="3" matInput type="number" value="0" [(ngModel)]="round.details[i].score" (change)="onScoreChange($event)">
   </mat-form-field>
 
-  &nbsp;<mat-slide-toggle (change)="shootTheMoonChange(i, $event)" [disabled]="hand.details[i].score > 0">
+  &nbsp;<mat-slide-toggle (change)="shootTheMoonChange(i, $event)" [disabled]="round.details[i].score > 0">
     <mat-icon>dark_mode</mat-icon>
   </mat-slide-toggle>
 
@@ -17,7 +17,7 @@
 
 <div>
   <button mat-raised-button (click)="onCancel()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onSubmit()">Add Hand</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()">Add round</button>
 </div>
 <div>
   <br>
