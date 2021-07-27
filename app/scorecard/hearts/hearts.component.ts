@@ -8,7 +8,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 import { AbstractRoundBasedGame, RoundDetails, AbstractRound } from '../abstract-round-based-game';
 
-export class HeartsRound extends AbstractRound {
+export class HeartsHand extends AbstractRound {
   constructor(
     number? : number
   ){
@@ -52,7 +52,7 @@ export class HeartsRound extends AbstractRound {
   templateUrl: './hearts.component.html',
   styleUrls: ['./hearts.component.css']
 })
-export class HeartsComponent extends AbstractRoundBasedGame<HeartsRound> implements OnInit {
+export class HeartsComponent extends AbstractRoundBasedGame<HeartsHand> implements OnInit {
 
   public match:Match = null;
 
@@ -89,9 +89,9 @@ export class HeartsComponent extends AbstractRoundBasedGame<HeartsRound> impleme
       this.match.factions.push(new Faction("Joel"));
       this.match.factions.push(new Faction("Emily"));
 
-      this.addRound(new HeartsRound(1).push(10).push(3).push(7).push(6));
-      this.addRound(new HeartsRound(2).push(0).push(23).push2(3, false, true).push(0));
-      this.addRound(new HeartsRound(3).push2(0, true, false).push(26).push(26).push(26));
+      this.addRound(new HeartsHand(1).push(10).push(3).push(7).push(6));
+      this.addRound(new HeartsHand(2).push(0).push(23).push2(3, false, true).push(0));
+      this.addRound(new HeartsHand(3).push2(0, true, false).push(26).push(26).push(26));
       this.dataSource.data = this.rounds;
     }
 
@@ -100,7 +100,7 @@ export class HeartsComponent extends AbstractRoundBasedGame<HeartsRound> impleme
 
   openAddRoundDialog(){
 
-    var round = new HeartsRound();
+    var round = new HeartsHand();
     this.match.factions.forEach(faction => {
       round.details.push(new RoundDetails(0));
     });
@@ -111,7 +111,7 @@ export class HeartsComponent extends AbstractRoundBasedGame<HeartsRound> impleme
     this.roundDialogRef.componentInstance.parent = this;
   }
 
-  openEditRoundDialog(round : HeartsRound){
+  openEditRoundDialog(round : HeartsHand){
     this.logger.log("HeartsComponent#openEditRoundDialog: " + round);
 
     this.roundDialogRef = this.dialog.open(HeartsRoundComponent, {
@@ -124,7 +124,7 @@ export class HeartsComponent extends AbstractRoundBasedGame<HeartsRound> impleme
 }
 
 @Component({
-  templateUrl: './hearts-round.component.html',
+  templateUrl: './hearts-hand.component.html',
   styleUrls: ['./hearts.component.css']
 })
 export class HeartsRoundComponent implements OnInit {
@@ -136,7 +136,7 @@ export class HeartsRoundComponent implements OnInit {
   constructor(
     private logger: LogService,
     private dialogRef:  MatDialogRef<HeartsRoundComponent>,
-    @Inject(MAT_DIALOG_DATA) public round : HeartsRound
+    @Inject(MAT_DIALOG_DATA) public round : HeartsHand
   ) { }
 
   ngOnInit() {

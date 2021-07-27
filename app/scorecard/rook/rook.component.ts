@@ -20,7 +20,7 @@ export class Bid {
   ){}
 }
 
-export class RookRound extends AbstractRound {
+export class RookHand extends AbstractRound {
   constructor(
     number? : number,
     public bid : Bid = new Bid(),
@@ -44,11 +44,11 @@ enum RoundMode {
   templateUrl: './rook.component.html',
   styleUrls: ['./rook.component.css']
 })
-export class RookComponent extends AbstractRoundBasedGame<RookRound> implements OnInit {
+export class RookComponent extends AbstractRoundBasedGame<RookHand> implements OnInit {
 
   public RoundMode = RoundMode;
   public roundMode = RoundMode.Create;
-  public round:RookRound;
+  public round:RookHand;
 
   public match:Match = null;
   public showPlayerNames = true;
@@ -90,10 +90,10 @@ export class RookComponent extends AbstractRoundBasedGame<RookRound> implements 
       kids.addPlayer(new Player(103, "Olivia"));
       this.match.factions.push(kids);
 
-      this.addRound(new RookRound(1).push(145).push(35).setBid(new Player(100, "Matthew"), 125, "green" ));
-      this.addRound(new RookRound(1).push(20).push(160).setBid(new Player(102, "Hannah"), 135, "red" ));
-      this.addRound(new RookRound(1).push(45).push(135).setBid(new Player(102, "Olivia"), 115, "black" ));
-      //this.addRound(new RookRound(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
+      this.addRound(new RookHand(1).push(145).push(35).setBid(new Player(100, "Matthew"), 125, "green" ));
+      this.addRound(new RookHand(1).push(20).push(160).setBid(new Player(102, "Hannah"), 135, "red" ));
+      this.addRound(new RookHand(1).push(45).push(135).setBid(new Player(102, "Olivia"), 115, "black" ));
+      //this.addRound(new RookHand(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
       this.dataSource.data = this.rounds;
   
     }
@@ -116,7 +116,7 @@ export class RookComponent extends AbstractRoundBasedGame<RookRound> implements 
   openAddRoundDialog(){
     this.roundDialogRef = this.dialog.open(RookRoundComponent);
 
-    this.round = new RookRound();
+    this.round = new RookHand();
     this.roundMode = RoundMode.Create;
 
     this.match.factions.forEach(faction => {
@@ -126,7 +126,7 @@ export class RookComponent extends AbstractRoundBasedGame<RookRound> implements 
     this.roundDialogRef.componentInstance.parent = this;
   }
 
-  openEditRoundDialog(round : RookRound){
+  openEditRoundDialog(round : RookHand){
     this.logger.log("RookComponent#openEditRoundDialog: " + round.number);
 
     this.roundDialogRef = this.dialog.open(RookRoundComponent);
@@ -139,7 +139,7 @@ export class RookComponent extends AbstractRoundBasedGame<RookRound> implements 
 }
 
 @Component({
-  templateUrl: './round.component.html',
+  templateUrl: './hand.component.html',
   styleUrls: ['./rook.component.css']
 })
 export class RookRoundComponent {
