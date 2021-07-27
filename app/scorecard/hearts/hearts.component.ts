@@ -1,12 +1,12 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Inject, Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Match, GameType, Faction } from '../../match';
 import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
-import { AbstractRoundBasedGame, RoundDetails, AbstractRound } from '../abstract-round-based-game';
+import { AbstractRoundBasedGame, RoundDetails, AbstractRound, RoundMode, AbstractRoundFormComponent, RoundContext } from '../abstract-round-based-game';
 
 export class HeartsHand extends AbstractRound {
   constructor(
@@ -99,60 +99,44 @@ export class HeartsComponent extends AbstractRoundBasedGame<HeartsHand> implemen
   }
 
   openAddRoundDialog(){
-
-    var round = new HeartsHand();
+    var hand = new HeartsHand();
     this.match.factions.forEach(faction => {
-      round.details.push(new RoundDetails(0));
+      hand.details.push(new RoundDetails(0));
     });
-
-    this.roundDialogRef = this.dialog.open(HeartsRoundComponent, {
-      data: round
-    });
-    this.roundDialogRef.componentInstance.parent = this;
+ 
+    this.dialog.open(HeartsRoundComponent, { 
+      data: new RoundContext(hand, RoundMode.Create, this) 
+    } );
   }
 
   openEditRoundDialog(round : HeartsHand){
-    this.logger.log("HeartsComponent#openEditRoundDialog: " + round);
-
-    this.roundDialogRef = this.dialog.open(HeartsRoundComponent, {
-      data: round
+    this.dialog.open(HeartsRoundComponent, {
+      data: new RoundContext(round, RoundMode.Edit, this) 
     });
-    this.roundDialogRef.componentInstance.parent = this;
-    this.roundDialogRef.componentInstance.round = round;
-
   }
+
 }
 
 @Component({
   templateUrl: './hearts-hand.component.html',
   styleUrls: ['./hearts.component.css']
 })
-export class HeartsRoundComponent implements OnInit {
-
-  public parent : HeartsComponent;
-  //public round:HeartsRound;
-  public totalPoints = 0;
-
+export class HeartsRoundComponent extends AbstractRoundFormComponent {
   constructor(
-    private logger: LogService,
-    private dialogRef:  MatDialogRef<HeartsRoundComponent>,
-    @Inject(MAT_DIALOG_DATA) public round : HeartsHand
-  ) { }
-
-  ngOnInit() {
-    this.logger.log('GenericRoundComponent#ngOnInit()');
-    
-  }
-  onScoreChange(event){
-    this.totalPoints = this.round.getTotal();
+    logger: LogService,
+    dialogRef:  MatDialogRef<HeartsRoundComponent>,
+    @Inject(MAT_DIALOG_DATA) context : RoundContext
+  ) {
+    super(logger, dialogRef, context);
   }
 
   shootTheMoonChange(i, event){
+    
     if( event.checked ){
       //Add the flag
-      this.round.details[i].flags.push("SHOOT_THE_MOON");
-      if( this.round.details[i].score == 0 ){
-        this.round.details.forEach((detail, index) => {
+      this.context.round.details[i].flags.push("SHOOT_THE_MOON");
+      if( this.context.round.details[i].score == 0 ){
+        this.context.round.details.forEach((detail, index) => {
           if( index != i ){
             detail.score = 26;
           }
@@ -160,23 +144,13 @@ export class HeartsRoundComponent implements OnInit {
       }
     } else {
       //Remove the flag
-      const index = this.round.details[i].flags.indexOf("SHOOT_THE_MOON", 0);
+      const index = this.context.round.details[i].flags.indexOf("SHOOT_THE_MOON", 0);
       if (index > -1) {
-        this.round.details[i].flags.splice(index, 1);
+        this.context.round.details[i].flags.splice(index, 1);
       } 
     }
 
     this.onScoreChange(null);
-    this.logger.log(event.checked);
   }
 
-  onSubmit(){
-    //this.logger.log(this.parent.dataSource);
-    this.parent.addRound(this.round);
-    this.dialogRef.close();
-  }
-
-  onCancel(){
-    this.dialogRef.close();
-  }
 }

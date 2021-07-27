@@ -40,7 +40,7 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
 
   public round:RookHand;
 
-  public match:Match = null;
+  
   public showPlayerNames = true;
 
   constructor(
