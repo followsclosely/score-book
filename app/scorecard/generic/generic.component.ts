@@ -32,6 +32,27 @@ export class GenericRoundBasedGame extends AbstractRoundBasedGame<AbstractRound>
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.logger.log(id);
     this.match = this.matchService.getMatch(id);
+
+    if( this.match == null)
+    {
+      this.match = new Match(
+        id,
+        new GameType("generic",  "Generic Game",  4),
+        null,
+        null,
+        4,
+        false
+      );
+
+      this.match.factions.push(new Faction("Matthew"));
+      this.match.factions.push(new Faction("Estella"));
+
+      this.addRound(new AbstractRound(1).push(10).push(3));
+      this.addRound(new AbstractRound(2).push(0).push(23));
+      this.addRound(new AbstractRound(3).push(26).push(26));
+      this.dataSource.data = this.rounds;
+    }
+
     super._ngOnInit(this.match);
   }
 
