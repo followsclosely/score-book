@@ -6,7 +6,7 @@ import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
-import { AbstractTurnBasedGame, HandDetails, AbstractRound } from '../abstract-turn-based-game';
+import { AbstractTurnBasedGame, RoundDetails, AbstractRound } from '../abstract-turn-based-game';
 
 export class HeartsHand extends AbstractRound {
   constructor(
@@ -16,7 +16,7 @@ export class HeartsHand extends AbstractRound {
   }
 
   push2(score:number, shootMoon:boolean, stopShootMoon: boolean){
-    var detail = new HandDetails(score);
+    var detail = new RoundDetails(score);
     if( shootMoon ){
       detail.flags.push("SHOOT_THE_MOON");
     }
@@ -102,7 +102,7 @@ export class HeartsComponent extends AbstractTurnBasedGame<HeartsHand> implement
 
     var hand = new HeartsHand();
     this.match.factions.forEach(faction => {
-      hand.details.push(new HandDetails(0));
+      hand.details.push(new RoundDetails(0));
     });
 
     this.handDialogRef = this.dialog.open(HeartsHandComponent, {

@@ -4,7 +4,7 @@ import { Match, Faction } from '../match';
 import { Player } from '../player';
 
 
-export class HandDetails {
+export class RoundDetails {
   public flags = new Array<string>();
 
   constructor(
@@ -14,13 +14,13 @@ export class HandDetails {
 }
 
 export class AbstractRound {
-  public details = new Array<HandDetails>();
+  public details = new Array<RoundDetails>();
   constructor(
     public number? : number
   ){}
 
   push(score:number){
-    this.details.push(new HandDetails(score));
+    this.details.push(new RoundDetails(score));
     return this;
   }
 

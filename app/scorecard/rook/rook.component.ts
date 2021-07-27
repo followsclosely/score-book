@@ -6,7 +6,7 @@ import { MatchService } from '../../match-service.service';
 import {MatDialog, MatDialogRef, MatStepper} from '@angular/material';
 import { Player } from '../../player';
 
-import { AbstractTurnBasedGame, HandDetails, AbstractRound } from '../abstract-turn-based-game';
+import { AbstractTurnBasedGame, RoundDetails, AbstractRound } from '../abstract-turn-based-game';
 
 import {
   Component, OnInit
@@ -120,7 +120,7 @@ export class RookComponent extends AbstractTurnBasedGame<RookHand> implements On
     this.handMode = HandMode.Create;
 
     this.match.factions.forEach(faction => {
-      this.hand.details.push(new HandDetails(0));
+      this.hand.details.push(new RoundDetails(0));
     });
 
     this.handDialogRef.componentInstance.parent = this;
