@@ -43,7 +43,7 @@ export class AbstractRoundBasedGame<H extends AbstractRound> {
 
   _ngOnInit(match:Match){
 
-    this.columnsToDisplay.push("round");
+    this.columnsToDisplay.push("Round");
     match.factions.forEach(faction => {
       this.players.push(...faction.players);
 
