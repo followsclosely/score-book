@@ -42,12 +42,10 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
 
   public match:Match = null;
   public showPlayerNames = true;
-  //private roundDialogRef: MatDialogRef<RookRoundComponent>;
 
   constructor(
     logger: LogService,
     private route: ActivatedRoute,
-    private location: Location,
     private matchService:MatchService, 
     private dialog: MatDialog,
   ) { 
@@ -78,7 +76,6 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
       this.addRound(new RookHand(1).push(45).push(135).setBid(new Player(102, "Olivia"), 115, "black" ));
       this.addRound(new RookHand(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
       this.dataSource.data = this.rounds;
-  
     }
 
     this._ngOnInit(this.match);
@@ -89,15 +86,13 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
     this.match.factions.forEach(faction => {
       hand.details.push(new RoundDetails(0));
     });
-
-    //this.roundDialogRef = 
+ 
     this.dialog.open(RookRoundComponent, { 
       data: new RoundContext(hand, RoundMode.Create, this) 
     } );
   }
 
   openEditRoundDialog(round : RookHand){
-    //this.roundDialogRef = 
     this.dialog.open(RookRoundComponent, {
       data: new RoundContext(round, RoundMode.Edit, this) 
     });
