@@ -1,3 +1,4 @@
+<h1>{{ match.type.name}} Score Card</h1>
 <table mat-table [dataSource]="dataSource">
 <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay; let i=index;">
   <th mat-header-cell *matHeaderCellDef> {{column}} </th>

@@ -44,7 +44,7 @@ export class GenericRoundBasedGame extends AbstractRoundBasedGame<AbstractRound>
     {
       this.match = new Match(
         id,
-        new GameType("generic",  "Generic Game",  4),
+        new GameType("generic",  "Generic",  4),
         null,
         null,
         4,
