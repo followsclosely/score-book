@@ -42,7 +42,7 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
 
   public match:Match = null;
   public showPlayerNames = true;
-  private roundDialogRef: MatDialogRef<RookRoundComponent>;
+  //private roundDialogRef: MatDialogRef<RookRoundComponent>;
 
   constructor(
     logger: LogService,
@@ -61,14 +61,7 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
 
     if( this.match == null)
     {
-      this.match = new Match(
-        id,
-        new GameType("rook",  "Rook"),
-        null,
-        null,
-        2,
-        true
-      );
+      this.match = new Match(id, new GameType("rook",  "Rook"), null, null, 2, true);
 
       var parents = new Faction("Parents");
       parents.addPlayer(new Player(100, "Matthew"));
@@ -83,24 +76,12 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
       this.addRound(new RookHand(1).push(145).push(35).setBid(new Player(100, "Matthew"), 125, "green" ));
       this.addRound(new RookHand(1).push(20).push(160).setBid(new Player(102, "Hannah"), 135, "red" ));
       this.addRound(new RookHand(1).push(45).push(135).setBid(new Player(102, "Olivia"), 115, "black" ));
-      //this.addRound(new RookHand(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
+      this.addRound(new RookHand(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
       this.dataSource.data = this.rounds;
   
     }
 
     this._ngOnInit(this.match);
-    // this.columnsToDisplay.push("round");
-    // this.match.factions.forEach(faction => {
-
-    //   this.players.push(...faction.players);
-
-    //   if( faction.name != null ){
-    //     this.columnsToDisplay.push(faction.name);
-    //   } else {
-    //     this.columnsToDisplay.push(faction.players.map(p => p.name).join('/'));
-    //   }
-
-    // });
   }
 
   openAddRoundDialog(){
@@ -109,13 +90,15 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
       hand.details.push(new RoundDetails(0));
     });
 
-    this.roundDialogRef = this.dialog.open(RookRoundComponent, { 
+    //this.roundDialogRef = 
+    this.dialog.open(RookRoundComponent, { 
       data: new RoundContext(hand, RoundMode.Create, this) 
     } );
   }
 
   openEditRoundDialog(round : RookHand){
-    this.roundDialogRef = this.dialog.open(RookRoundComponent, {
+    //this.roundDialogRef = 
+    this.dialog.open(RookRoundComponent, {
       data: new RoundContext(round, RoundMode.Edit, this) 
     });
   }
