@@ -42,14 +42,7 @@ export class GenericRoundBasedGame extends AbstractRoundBasedGame<AbstractRound>
 
     if( this.match == null)
     {
-      this.match = new Match(
-        id,
-        new GameType("generic",  "Generic",  4),
-        null,
-        null,
-        4,
-        false
-      );
+      this.match = new Match(id, new GameType("generic",  "Generic",  4), null, null, 4, false );
 
       this.match.factions.push(new Faction("Matthew"));
       this.match.factions.push(new Faction("Estella"));
