@@ -15,6 +15,10 @@ export class Bid {
     public points? : number,
     public trump?
   ){}
+
+  isBidWinner(faction : Faction){
+    return (faction.players.indexOf(this.player) !=- 1);
+  }
 }
 
 export class RookHand extends AbstractRound {
@@ -62,19 +66,23 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
       this.match = new Match(id, new GameType("rook",  "Rook"), null, null, 2, true);
 
       var parents = new Faction("Parents");
-      parents.addPlayer(new Player(100, "Matthew"));
-      parents.addPlayer(new Player(101, "Estella"));
+      var matthew = new Player(100, "Matthew");
+      parents.addPlayer(matthew);
+      var estella = new Player(101, "Estella");
+      parents.addPlayer(estella);
       this.match.factions.push(parents);
 
       var kids = new Faction("Kids");
-      kids.addPlayer(new Player(102, "Hannah"));
-      kids.addPlayer(new Player(103, "Olivia"));
+      var hannah = new Player(102, "Hannah");
+      kids.addPlayer(hannah);
+      var olivia = new Player(103, "Olivia");
+      kids.addPlayer(olivia);
       this.match.factions.push(kids);
 
-      this.addRound(new RookHand(1).push(145).push(35).setBid(new Player(100, "Matthew"), 125, "green" ));
-      this.addRound(new RookHand(1).push(20).push(160).setBid(new Player(102, "Hannah"), 135, "red" ));
-      this.addRound(new RookHand(1).push(45).push(135).setBid(new Player(102, "Olivia"), 115, "black" ));
-      this.addRound(new RookHand(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
+      this.addRound(new RookHand(1).push(145).push(35).setBid(matthew, 125, "green" ));
+      this.addRound(new RookHand(1).push(20).push(160).setBid(hannah, 135, "red" ));
+      this.addRound(new RookHand(1).push(45).push(135).setBid(olivia, 115, "black" ));
+      this.addRound(new RookHand(1).push(0).push(0).setBid(matthew, 120, "yellow" ));
       this.dataSource.data = this.rounds;
     }
 
