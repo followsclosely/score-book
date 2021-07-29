@@ -23,6 +23,7 @@ table {
   font-size: 0.9em;
   font-family: sans-serif;
   /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); */
+  
 }
 
 .styled-table thead th {
@@ -45,8 +46,8 @@ table {
 
 .styled-table th,
 .styled-table td {
-    padding: 3px 1px;
-    text-align: left;
+    padding: 2px 1px;
+    text-align: center;
 }
 
 /* .styled-table tbody tr {
@@ -65,6 +66,7 @@ table {
   font-weight: bold;
   color: #009879;
 }
+
 
 .score {
   vertical-align: top;
