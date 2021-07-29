@@ -76,9 +76,9 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
       this.match.factions.push(kids);
 
       this.addRound(new RookHand(1).push(145).push(35).setBid(matthew, 125, "green" ));
-      this.addRound(new RookHand(1).push(20).push(160).setBid(hannah, 135, "red" ));
-      this.addRound(new RookHand(1).push(45).push(135).setBid(olivia, 115, "black" ));
-      this.addRound(new RookHand(1).push(0).push(0).setBid(matthew, 120, "yellow" ));
+      this.addRound(new RookHand(2).push(20).push(160).setBid(hannah, 135, "red" ));
+      this.addRound(new RookHand(3).push(45).push(135).setBid(olivia, 115, "black" ));
+      this.addRound(new RookHand(4).push(0).push(0).setBid(matthew, 120, "yellow" ));
       this.dataSource.data = this.rounds;
     }
 

@@ -22,8 +22,9 @@
 
   <tbody>
     <tr *ngFor="let round of rounds" class="mat-row">
+      
       <td>
-        <!-- {{round.number}} -->
+        {{round.number}}
         <button mat-button (click)="openEditRoundDialog(round)"><mat-icon>edit_note</mat-icon></button>
       </td>
 
@@ -39,9 +40,11 @@
           arrow_back
         </mat-icon>
       </td>
+
       <td class="color_{{round.bid.trump}}">
         <b>{{round.bid.points}}</b>
       </td>
+
       <td class="color_{{round.bid.trump}}">
         <mat-icon *ngIf="round.bid.isBidWinner(match.factions[1])" class="material-icons color_{{round.bid.trump}}">
         arrow_forward
@@ -54,6 +57,7 @@
           <div class="score-round">{{round.details[1].score | score}}</div>
         </div>
       </td>
+
     </tr>
   </tbody>
 
