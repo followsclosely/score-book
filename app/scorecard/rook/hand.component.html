@@ -4,7 +4,7 @@
 
     <ng-template matStepLabel>Bid</ng-template>
     <div>
-
+      
       <mat-form-field [style.width.px]=60>
         <mat-label>Bid</mat-label>
         <input matInput type="number" [(ngModel)]="context.round.bid.points" (change)="onScoreChange($event)">
@@ -19,8 +19,6 @@
 
     </div> 
 
-
-
     <div>
       <mat-button-toggle-group name="color" [(ngModel)]="context.round.bid.trump">
         <mat-button-toggle value="red">Red</mat-button-toggle>
@@ -34,13 +32,8 @@
 
     <div>
       <button mat-raised-button (click)="onCancel()">Cancel</button>
-      
-      <button mat-raised-button color="primary" (click)="onCreate()"
-      *ngIf="context.mode == RoundMode.Create">Add Bid</button>
-
-      <button mat-raised-button matStepperNext color="primary" 
-      *ngIf="context.mode == RoundMode.Edit">
-        Next <mat-icon>arrow_forward</mat-icon>
+      <button mat-raised-button color="primary" (click)="onCreate()" *ngIf="context.mode == RoundMode.Create">Add Bid</button>
+      <button mat-raised-button matStepperNext color="primary" *ngIf="context.mode == RoundMode.Edit">Next<mat-icon>arrow_forward</mat-icon>
     </button>
   </div>
 
