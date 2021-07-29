@@ -74,16 +74,14 @@
   </tfoot>
 </table>
 
+
 <table *ngIf="match.factions.length != 2" class="styled-table">
   <thead>
     <tr>
       <th colspan="2" rowspan="2">Round</th>
-      <th *ngFor="let faction of match.factions; let i=index;">
-        {{faction.name}} 
-        <a *ngIf="!showPlayerNames" [routerLink]="" (click)="showPlayerNames = true">+</a> 
-      </th>
+      <th *ngFor="let faction of match.factions; let i=index;">{{faction.name}}</th>
     </tr>
-    <tr *ngIf="showPlayerNames">
+    <tr *ngIf="showPlayerNames && match.sharedFactions">
       <td *ngFor="let faction of match.factions; let i=index;">
         {{ getPlayersAsString(faction,' / ') }} <a [routerLink]="" (click)="showPlayerNames = false">-</a> 
       </td>
@@ -97,8 +95,9 @@
         <button mat-button (click)="openEditRoundDialog(round)"><mat-icon>edit_note</mat-icon></button>
       </td>
 
-      <td>  {{round.bid.points}}
-        <!-- {{round.bid.points}} <sup>{{round.bid.player.name.substr(0,3)}}</sup> -->
+      <td class="color_{{round.bid.trump}}">
+        {{round.bid.points}}
+        <sup>{{round.bid.player?.name.substr(0,2)}}</sup>
       </td>
 
       <td *ngFor="let detail of round.details">
