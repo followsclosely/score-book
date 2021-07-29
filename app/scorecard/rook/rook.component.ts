@@ -45,7 +45,7 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
   public round:RookHand;
 
   
-  public showPlayerNames = true;
+  
 
   constructor(
     logger: LogService,

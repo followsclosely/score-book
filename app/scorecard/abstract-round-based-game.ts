@@ -46,6 +46,8 @@ export class RoundContext {
 
 export class AbstractRoundBasedGame<H extends AbstractRound> {
 
+  public showPlayerNames = true;
+  
   public match:Match = null;
   
   public RoundMode = RoundMode;
