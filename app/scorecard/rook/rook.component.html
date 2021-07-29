@@ -1,3 +1,4 @@
+
 <table class="styled-table" *ngIf="match.factions.length == 2">
   <thead>
     <tr>
@@ -21,11 +22,11 @@
   <tbody>
     <tr *ngFor="let round of rounds" class="mat-row">
       <td>
-        {{round.number}}
+        <!-- {{round.number}} -->
         <button mat-button (click)="openEditRoundDialog(round)"><mat-icon>edit_note</mat-icon></button>
       </td>
 
-      <td>
+      <td style="float: right">
         <div class="score">
           <div class="score-total">{{round.details[0].totalScore}}</div>
           <div class="score-round">{{round.details[0].score | score}}</div>
@@ -46,7 +47,7 @@
         </mat-icon>
       </td>
 
-      <td>
+      <td style="float: left">
         <div class="score">
           <div class="score-total">{{round.details[0].totalScore}}</div>
           <div class="score-round">{{round.details[0].score | score}}</div>

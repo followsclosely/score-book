@@ -19,7 +19,7 @@ table {
 
 .styled-table {
   border-collapse: collapse;
-  margin: 1px 0px;
+  margin: 1px 0px 0px 0px;
   font-size: 0.9em;
   font-family: sans-serif;
   /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); */
@@ -69,22 +69,20 @@ table {
 
 
 .score {
-  vertical-align: top;
+  max-width: 110px;
+  overflow: hidden;
   display:flex; 
-  white-space: nowrap;
 }
 
 .score-total {
-  vertical-align: top;
   text-align: right;
-  min-width: 50px;
+  min-width: 60px;
   font-size: 1.4em;
 }
 
 .score-round {
-  vertical-align: top;
   text-align: left;
+  min-width: 40px;
   padding: 0px 5px;
   font-size: 0.9em;
 }
-
