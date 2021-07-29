@@ -11,7 +11,8 @@
       </mat-form-field>
       <mat-form-field >
         <mat-select name="player" placeholder="Winner">
-            <mat-option ngDefaultControl *ngFor="let player of context.parent.players" [(ngModel)]="context.round.bid.player" [value]="player">
+            <mat-option ngDefaultControl *ngFor="let player of context.parent.players" 
+                        [(ngModel)]="context.round.bid.player" [value]="player">
               {{player.name}}
             </mat-option>
         </mat-select>

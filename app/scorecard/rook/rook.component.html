@@ -95,8 +95,8 @@
         <button mat-button (click)="openEditRoundDialog(round)"><mat-icon>edit_note</mat-icon></button>
       </td>
 
-      <td>  
-        {{round.bid.points}} <sup>{{round.bid.player.name.substr(0,3)}}</sup>
+      <td>  {{round.bid.points}}
+        <!-- {{round.bid.points}} <sup>{{round.bid.player.name.substr(0,3)}}</sup> -->
       </td>
 
       <td *ngFor="let detail of round.details">
@@ -110,7 +110,7 @@
 
   <tfoot>
     <tr>
-      <td>
+      <td colspan="2">
         <button mat-mini-fab (click)="openAddRoundDialog()" >
         <i class="material-icons">add</i></button>
       </td>
