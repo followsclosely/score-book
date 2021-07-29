@@ -1,3 +1,63 @@
+<table class="styled-table" *ngIf="match.factions.length == 2">
+<thead>
+  <tr>
+    <th rowspan="2">Round</th>
+    <th> {{match.factions[0].name}} 
+      <a *ngIf="!showPlayerNames" [routerLink]="" (click)="showPlayerNames = true">+</a> 
+    </th>
+    <th rowspan="2">Score</th>
+    <th> {{match.factions[1].name}} 
+      <a *ngIf="!showPlayerNames" [routerLink]="" (click)="showPlayerNames = true">+</a> 
+    </th>
+  </tr>
+  <tr *ngIf="showPlayerNames">
+    <td>
+      {{ getPlayersAsString(match.factions[0],' / ') }} <a [routerLink]="" (click)="showPlayerNames = false">-</a> 
+    </td>
+    <td>
+    {{ getPlayersAsString(match.factions[1],' / ') }} <a [routerLink]="" (click)="showPlayerNames = false">-</a> 
+  </td>
+  </tr>
+</thead>
+
+<tbody>
+  <tr *ngFor="let round of rounds" class="mat-row">
+    <td>
+      {{round.number}}
+      <button mat-button (click)="openEditRoundDialog(round)"><mat-icon>edit_note</mat-icon></button>
+      
+      <mat-icon class="material-icons color_{{round.bid.trump}}">arrow_forward</mat-icon>
+    </td>
+
+    <td>
+      <div class="score">
+        <div class="score-total">{{round.details[0].totalScore}}</div>
+        <div class="score-round">{{round.details[0].score | score}}</div>
+      </div>
+    </td>
+    <td class="color_{{round.bid.trump}}">{{round.bid.points}}</td>
+    <td>
+      <div class="score">
+        <div class="score-total">{{round.details[0].totalScore}}</div>
+        <div class="score-round">{{round.details[0].score | score}}</div>
+      </div>
+    </td>
+  </tr>
+</tbody>
+
+<tfoot>
+  <tr>
+    <td>
+      <button mat-mini-fab (click)="openAddRoundDialog()" >
+      <i class="material-icons">add</i></button>
+    </td>
+    <th *ngFor="let faction of match.factions; let i=index;">
+      <div> {{ getTotal(i+1) }} </div>
+    </th>
+  </tr>
+</tfoot>
+</table>
+
 <table class="styled-table">
   <thead>
     <tr>

@@ -2,10 +2,10 @@ table {
   width: 100%;
 }
 
-.material-icons.color_green { color: #009600; }
-.material-icons.color_red { color: #ff0000; }
-.material-icons.color_yellow { color: #dbd80e; }
-.material-icons.color_black { color: #000000; }
+.color_green { color: #009600; font-weight: bold;}
+.color_red { color: #ff0000; font-weight: bold;}
+.color_yellow { color: #dbd80e; font-weight: bold;}
+.color_black { color: #000000; font-weight: bold;}
 
 .form-container {
   display: flex;
