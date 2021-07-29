@@ -19,7 +19,6 @@
         {{round.number}} 
         <button mat-button (click)="openEditRoundDialog(round)"><mat-icon>edit_note</mat-icon></button>
       </td>
-
       <td *ngFor="let detail of round.details">
         <div class="score">
           <div class="score-total">{{detail.totalScore}}</div>
@@ -36,7 +35,7 @@
         <i class="material-icons">add</i></button>
       </td>
       <th *ngFor="let faction of match.factions; let i=index;">
-        <div> {{ getTotal(i+1) }} </div>
+        <div> {{ getTotal(i) }} </div>
       </th>
     </tr>
   </tfoot>

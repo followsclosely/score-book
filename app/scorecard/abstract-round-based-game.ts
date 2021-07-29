@@ -47,7 +47,7 @@ export class RoundContext {
 export class AbstractRoundBasedGame<H extends AbstractRound> {
 
   public showPlayerNames = true;
-  
+
   public match:Match = null;
   
   public RoundMode = RoundMode;
@@ -98,8 +98,7 @@ export class AbstractRoundBasedGame<H extends AbstractRound> {
   }
 
   getTotal(i : number) {
-    if (i == 0 ) return "";
-    return this.rounds.map(round => round.details[i-1].score).reduce((acc, value) => acc + value, 0);
+    return this.rounds.map(round => round.details[i].score).reduce((acc, value) => acc + value, 0);
   }
 
   getPlayersAsString(faction:Faction, delim:string){

@@ -1,37 +1,44 @@
-<table mat-table [dataSource]="dataSource">
-  <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay; let i=index;">
-    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-    <td mat-cell *matCellDef="let element">
-      <div *ngIf="i > 0; else elseBlock"> 
-        <div class="score">
-          <div class="score-total">
-            <mat-icon *ngIf="element.details[i-1].flags.includes('SHOOT_THE_MOON')">dark_mode</mat-icon>
-            <mat-icon *ngIf="element.details[i-1].flags.includes('STOPPED_SHOOT_THE_MOON')">favorite_border</mat-icon>
-            <ng-container *ngIf="element.number > 1 && element.details[i-1].totalScore !=0">{{element.details[i-1].totalScore}}</ng-container>
-          </div>
-          <div class="score-round">{{element.details[i-1].score | score}}</div>
-        </div>
-      </div>
-      <ng-template #elseBlock> 
-        {{element.number}} 
-        <button mat-button (click)="openEditRoundDialog(element)">
-          <mat-icon>edit_note</mat-icon>
-        </button>
-        <!-- <mat-icon >{{element.getDirection(match.factions.length)}}</mat-icon> -->
-
-      </ng-template>
+<table class="styled-table">
+<thead>
+  <tr>
+    <th>Round</th>
+    <th *ngFor="let faction of match.factions; let i=index;">{{faction.name}}</th>
+  </tr>
+  <tr *ngIf="showPlayerNames && match.sharedFactions">
+    <td>&nbsp;</td>
+    <td *ngFor="let faction of match.factions; let i=index;">
+      {{ getPlayersAsString(faction,' / ') }}
+      <a [routerLink]="" (click)="showPlayerNames = false">-</a> 
     </td>
-    <td *matFooterCellDef style="align: right">
-      <div *ngIf="i > 0; else elseBlock2" class="score">
-        <div class="score-total"> {{ getTotal(i) }}  </div>
+  </tr>
+</thead>
+
+<tbody>
+  <tr *ngFor="let round of rounds" class="mat-row">
+    <td> 
+      {{round.number}} 
+      <button mat-button (click)="openEditRoundDialog(round)"><mat-icon>edit_note</mat-icon></button>
+    </td>
+    <td *ngFor="let detail of round.details">
+      <div class="score">
+        <div class="score-total">{{detail.totalScore}}</div>
+        <div class="score-round">{{detail.score | score}}</div>
+        <mat-icon *ngIf="detail.flags.includes('SHOOT_THE_MOON')">dark_mode</mat-icon>
+        <mat-icon *ngIf="detail.flags.includes('STOPPED_SHOOT_THE_MOON')">favorite_border</mat-icon>
       </div>
-      <ng-template #elseBlock2>
-        <button mat-mini-fab (click)="openAddRoundDialog()">
-        <i class="material-icons">add</i></button>
-      </ng-template>
-  </ng-container>
-  
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-  <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+    </td>
+  </tr>
+</tbody>
+
+<tfoot>
+  <tr>
+    <td>
+      <button mat-mini-fab (click)="openAddRoundDialog()" >
+      <i class="material-icons">add</i></button>
+    </td>
+    <th *ngFor="let faction of match.factions; let i=index;">
+      <div> {{ getTotal(i) }} </div>
+    </th>
+  </tr>
+</tfoot>
 </table>
