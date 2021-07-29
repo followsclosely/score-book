@@ -62,17 +62,14 @@ export class AbstractRoundBasedGame<H extends AbstractRound> {
   ){}
 
   _ngOnInit(match:Match){
-
     this.columnsToDisplay.push("Round");
     match.factions.forEach(faction => {
       this.players.push(...faction.players);
-
       //Default the faction name if none was specified
-      if( faction.name != null ){
-        this.columnsToDisplay.push(faction.name);
-      } else {
-        this.columnsToDisplay.push(faction.players.map(p => p.name).join('/'));
+      if( faction.name == null ){
+        faction.name = faction.players.map(p => p.name).join('/');
       }
+      this.columnsToDisplay.push(faction.name);
     });
   }
 
