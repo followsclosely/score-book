@@ -2,10 +2,10 @@ table {
   width: 100%;
 }
 
-.material-icons.color_green { color: #009600; }
-.material-icons.color_red { color: #ff0000; }
-.material-icons.color_yellow { color: #dbd80e; }
-.material-icons.color_black { color: #000000; }
+.color_green { color: #009600; }
+.color_red { color: #ff0000; }
+.color_yellow { color: #dbd80e; }
+.color_black { color: #000000; }
 
 .form-container {
   display: flex;
@@ -18,53 +18,48 @@ table {
 
 
 .styled-table {
-  border: 1;
   border-collapse: collapse;
-  margin: 5px 0;
+  margin: 1px 0px 0px 0px;
   font-size: 0.9em;
   font-family: sans-serif;
-  min-width: 400px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); */
+  
+}
+
+.styled-table thead th {
+  text-align: center;
+  font-weight: bold;
 }
 
 .styled-table thead tr {
-  /* background-color: #009879;
-  color: #ffffff; */
   text-align: center;
 }
 
 .styled-table tfoot tr td {
-  /* background-color: #009879;
-  color: #ffffff; */
   text-align: left;
-  min-width: 50px;
   font-size: 1.4em;
 }
 .styled-table tfoot tr th {
-  /* background-color: #009879;
-  color: #ffffff; */
   text-align: center;
-  min-width: 50px;
   font-size: 1.4em;
 }
 
 .styled-table th,
 .styled-table td {
-    padding: 3px 15px;
-    text-align: left;
-    /* border: 5px solid #dddddd; */
+    padding: 2px 1px;
+    text-align: center;
 }
 
-.styled-table tbody tr {
-  border-top: 1px solid #dddddd;
-}
+/* .styled-table tbody tr {
+  border-top: 1px solid #ffffff;
+} */
 
 .styled-table tbody tr:nth-of-type(even) {
   background-color: #f3f3f3;
 }
 
 .styled-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
+  border-bottom: 2px solid #0a0f0e;
 }
 
 .styled-table tbody tr.active-row {
@@ -72,23 +67,22 @@ table {
   color: #009879;
 }
 
+
 .score {
-  vertical-align: top;
+  max-width: 110px;
+  overflow: hidden;
   display:flex; 
-  white-space: nowrap;
 }
 
 .score-total {
-  vertical-align: top;
   text-align: right;
-  min-width: 50px;
+  min-width: 60px;
   font-size: 1.4em;
 }
 
-.score-hand {
-  vertical-align: top;
+.score-round {
   text-align: left;
+  min-width: 40px;
   padding: 0px 5px;
   font-size: 0.9em;
 }
-

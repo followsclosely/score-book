@@ -1,16 +1,13 @@
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Inject, Component, OnInit } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
 import { Match, GameType, Faction } from '../../match';
 import { LogService } from '../../log-service.service';
 import { MatchService } from '../../match-service.service';
-import {MatDialog, MatDialogRef, MatStepper} from '@angular/material';
 import { Player } from '../../player';
-
-import { AbstractRoundBasedGame, RoundDetails, AbstractRound } from '../abstract-round-based-game';
-
-import {
-  Component, OnInit
-} from '@angular/core';
+import { AbstractRoundBasedGame, RoundDetails, AbstractRound, RoundMode, AbstractRoundFormComponent, RoundContext } from '../abstract-round-based-game';
 
 export class Bid {
   constructor(
@@ -18,6 +15,10 @@ export class Bid {
     public points? : number,
     public trump?
   ){}
+
+  isBidWinner(faction : Faction){
+    return (faction.players.indexOf(this.player) !=- 1);
+  }
 }
 
 export class RookHand extends AbstractRound {
@@ -34,11 +35,6 @@ export class RookHand extends AbstractRound {
   }
 }
 
-enum HandMode {
-  Create,
-  Edit
-}
-
 @Component({
   selector: 'app-rook',
   templateUrl: './rook.component.html',
@@ -46,18 +42,14 @@ enum HandMode {
 })
 export class RookComponent extends AbstractRoundBasedGame<RookHand> implements OnInit {
 
-  public HandMode = HandMode;
-  public handMode = HandMode.Create;
-  public hand:RookHand;
+  public round:RookHand;
 
-  public match:Match = null;
+  
   public showPlayerNames = true;
-  private handDialogRef: MatDialogRef<RookHandComponent>;
 
   constructor(
     logger: LogService,
     private route: ActivatedRoute,
-    private location: Location,
     private matchService:MatchService, 
     private dialog: MatDialog,
   ) { 
@@ -71,70 +63,47 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
 
     if( this.match == null)
     {
-      this.match = new Match(
-        id,
-        new GameType("rook",  "Rook"),
-        null,
-        null,
-        2,
-        true
-      );
+      this.match = new Match(id, new GameType("rook",  "Rook"), null, null, 2, true);
 
       var parents = new Faction("Parents");
-      parents.addPlayer(new Player(100, "Matthew"));
-      parents.addPlayer(new Player(101, "Estella"));
+      var matthew = new Player(100, "Matthew");
+      parents.addPlayer(matthew);
+      var estella = new Player(101, "Estella");
+      parents.addPlayer(estella);
       this.match.factions.push(parents);
 
       var kids = new Faction("Kids");
-      kids.addPlayer(new Player(102, "Hannah"));
-      kids.addPlayer(new Player(103, "Olivia"));
+      var hannah = new Player(102, "Hannah");
+      kids.addPlayer(hannah);
+      var olivia = new Player(103, "Olivia");
+      kids.addPlayer(olivia);
       this.match.factions.push(kids);
 
-      this.addHand(new RookHand(1).push(145).push(35).setBid(new Player(100, "Matthew"), 125, "green" ));
-      this.addHand(new RookHand(1).push(20).push(160).setBid(new Player(102, "Hannah"), 135, "red" ));
-      this.addHand(new RookHand(1).push(45).push(135).setBid(new Player(102, "Olivia"), 115, "black" ));
-      //this.addHand(new RookHand(1).push(0).push(0).setBid(new Player(102, "Matthew"), 120, "yellow" ));
-      this.dataSource.data = this.hands;
-  
+      this.addRound(new RookHand(1).push(145).push(35).setBid(matthew, 125, "green" ));
+      this.addRound(new RookHand(1).push(20).push(160).setBid(hannah, 135, "red" ));
+      this.addRound(new RookHand(1).push(45).push(135).setBid(olivia, 115, "black" ));
+      this.addRound(new RookHand(1).push(0).push(0).setBid(matthew, 120, "yellow" ));
+      this.dataSource.data = this.rounds;
     }
 
     this._ngOnInit(this.match);
-    // this.columnsToDisplay.push("Hand");
-    // this.match.factions.forEach(faction => {
-
-    //   this.players.push(...faction.players);
-
-    //   if( faction.name != null ){
-    //     this.columnsToDisplay.push(faction.name);
-    //   } else {
-    //     this.columnsToDisplay.push(faction.players.map(p => p.name).join('/'));
-    //   }
-
-    // });
   }
 
-  openAddHandDialog(){
-    this.handDialogRef = this.dialog.open(RookHandComponent);
-
-    this.hand = new RookHand();
-    this.handMode = HandMode.Create;
-
+  openAddRoundDialog(){
+    var hand = new RookHand();
     this.match.factions.forEach(faction => {
-      this.hand.details.push(new RoundDetails(0));
+      hand.details.push(new RoundDetails(0));
     });
-
-    this.handDialogRef.componentInstance.parent = this;
+ 
+    this.dialog.open(RookRoundComponent, { 
+      data: new RoundContext(hand, RoundMode.Create, this) 
+    } );
   }
 
-  openEditHandDialog(hand : RookHand){
-    this.logger.log("RookComponent#openEditHandDialog: " + hand.number);
-
-    this.handDialogRef = this.dialog.open(RookHandComponent);
-
-    this.hand = hand;
-    this.handMode = HandMode.Edit;
-    this.handDialogRef.componentInstance.parent = this;
-
+  openEditRoundDialog(round : RookHand){
+    this.dialog.open(RookRoundComponent, {
+      data: new RoundContext(round, RoundMode.Edit, this) 
+    });
   }
 }
 
@@ -142,27 +111,12 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
   templateUrl: './hand.component.html',
   styleUrls: ['./rook.component.css']
 })
-export class RookHandComponent {
-
-  public parent : RookComponent;
-  public totalPoints = 0;
-
+export class RookRoundComponent extends AbstractRoundFormComponent {
   constructor(
-    private logger: LogService,
-    private dialogRef:  MatDialogRef<RookHandComponent>
-  ) { }
-
-  onScoreChange(event){
-    this.totalPoints = this.parent.hand.getTotal();
-  }
-
-  onSubmit(){
-    //this.logger.log(this.parent.dataSource);
-    this.parent.addHand(this.parent.hand);
-    this.dialogRef.close();
-  }
-
-  onCancel(){
-    this.dialogRef.close();
+    logger: LogService,
+    dialogRef:  MatDialogRef<AbstractRoundFormComponent>,
+    @Inject(MAT_DIALOG_DATA) context : RoundContext
+  ) {
+    super(logger, dialogRef, context);
   }
 }

@@ -50,9 +50,9 @@ import { PreferencesFormComponent } from './preferences-form/preferences-form.co
 import { MatchFormComponent } from './match-form/match-form.component';
 import { GroupService } from './group.service';
 import { PlayerFormComponent } from './player-form/player-form.component';
-import { HeartsComponent, HeartsHandComponent } from './scorecard/hearts/hearts.component';
-import { GenericComponent } from './scorecard/generic/generic.component';
-import { RookComponent, RookHandComponent } from './scorecard/rook/rook.component';
+import { HeartsComponent, HeartsRoundComponent } from './scorecard/hearts/hearts.component';
+import { GenericRoundBasedGame, GenericRoundComponent } from './scorecard/generic/generic.component';
+import { RookComponent, RookRoundComponent } from './scorecard/rook/rook.component';
 import { ScorePipe } from './score.pipe';
 
 @NgModule({
@@ -60,18 +60,19 @@ import { ScorePipe } from './score.pipe';
     PreferencesFormComponent, 
     MatchFormComponent, 
     PlayerFormComponent, 
-    HeartsHandComponent, 
-    RookHandComponent,
-    GenericComponent
+    HeartsRoundComponent,
+    RookRoundComponent,
+    GenericRoundBasedGame,
+    GenericRoundComponent
   ],
   declarations: [
     AppComponent,
     PreferencesFormComponent,
     MatchFormComponent,
     PlayerFormComponent,
-    HeartsComponent, HeartsHandComponent,
-    GenericComponent,
-    RookComponent, RookHandComponent, ScorePipe
+    HeartsComponent, HeartsRoundComponent,
+    GenericRoundBasedGame, GenericRoundComponent,
+    RookComponent, RookRoundComponent, ScorePipe
   ],
   imports: [
     BrowserModule,
@@ -91,8 +92,8 @@ import { ScorePipe } from './score.pipe';
     MatButtonToggleModule,
     MatSlideToggleModule,
     RouterModule.forRoot([
-      {path: 'scorecard/generic/:id', component: GenericComponent},
-      {path: 'scorecard/chess/:id', component: GenericComponent},
+      {path: 'scorecard/generic/:id', component: GenericRoundBasedGame},
+      {path: 'scorecard/chess/:id', component: GenericRoundBasedGame},
       {path: 'scorecard/hearts/:id', component: HeartsComponent},
       {path: 'scorecard/rook/:id', component: RookComponent},
     ]),
