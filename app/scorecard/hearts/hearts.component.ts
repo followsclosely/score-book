@@ -28,7 +28,6 @@ export class HeartsHand extends AbstractRound {
   }
 
   public getDirection(size:number){
-    console.log("number: " + size);
     var number = (this.number) % size;
 
     switch(number) { 
@@ -70,7 +69,6 @@ export class HeartsComponent extends AbstractRoundBasedGame<HeartsHand> implemen
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.logger.log(id);
     this.match = this.matchService.getMatch(id);
 
     if( this.match == null)

@@ -44,7 +44,7 @@ export class MatchFormComponent implements OnInit {
   onSubmit() {
     //alert('Thanks for submitting! Data: ' + JSON.stringify(this.game));
     this.match.availablePlayers.length = 0;
-    this.logger.log(this.match);
+    
     this.matchService.addMatch(this.match);
     this.dialogRef.close();
     

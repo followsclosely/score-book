@@ -55,7 +55,6 @@ export class RookComponent extends AbstractRoundBasedGame<RookHand> implements O
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.logger.log(id);
     this.match = this.matchService.getMatch(id);
 
     if( this.match == null)

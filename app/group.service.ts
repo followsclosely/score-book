@@ -26,7 +26,7 @@ export class GroupService {
   }
 
   public addPlayer(player:Player){
-    this.logger.log(player);
+    this.logger.log("Adding Player", player);
     this.players.push(player);
   }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Match, GameType } from './match';
+import { LogService } from './log-service.service';
 
 
 @Injectable()
@@ -18,7 +19,9 @@ export class MatchService {
     new GameType("rook",    "Rook",    2, true, 500)
   ] 
 
-  constructor() { }
+  constructor(
+    private logger:LogService
+  ) { }
 
   getMyGameOptions(){
     return this.gameOptions
@@ -27,6 +30,7 @@ export class MatchService {
   addMatch(match:Match){
     match.id = this.sequence++;
     this.matches.set(match.id, match);
+    this.logger.log("Saving Match", match);
   }
 
   getMatch(id:number){
