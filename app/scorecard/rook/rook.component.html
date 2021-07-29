@@ -2,12 +2,10 @@
   <thead>
     <tr>
       <th rowspan="2">&nbsp;</th>
-      <th> {{match.factions[0].name}} 
-        <a *ngIf="!showPlayerNames" [routerLink]="" (click)="showPlayerNames = true">+</a> 
+      <th> {{match.factions[0].name}}
       </th>
-      <th colspan="3" rowspan="2">bid</th>
-      <th> {{match.factions[1].name}} 
-        <a *ngIf="!showPlayerNames" [routerLink]="" (click)="showPlayerNames = true">+</a> 
+      <th colspan="3" rowspan="2">&nbsp;</th>
+      <th> {{match.factions[1].name}}
       </th>
     </tr>
     <tr *ngIf="showPlayerNames">
@@ -74,10 +72,10 @@
   </tfoot>
 </table>
 
-<table *ngIf="match.factions.length != 2" class="styled-table">
+<table *ngIf="match.factions.length == 2" class="styled-table">
   <thead>
     <tr>
-      <th rowspan="2">round</th>
+      <th colspan="2" rowspan="2">Round</th>
       <th *ngFor="let faction of match.factions; let i=index;">
         {{faction.name}} 
         <a *ngIf="!showPlayerNames" [routerLink]="" (click)="showPlayerNames = true">+</a> 
@@ -92,11 +90,13 @@
 
   <tbody>
     <tr *ngFor="let round of rounds" class="mat-row">
-      <td>
-        {{round.number}}
+      <td> 
+        {{round.number}} 
         <button mat-button (click)="openEditRoundDialog(round)"><mat-icon>edit_note</mat-icon></button>
-        {{round.bid.points}}
-        <mat-icon class="material-icons color_{{round.bid.trump}}">arrow_forward</mat-icon>
+      </td>
+
+      <td>  
+        {{round.bid.points}} <sup>{{round.bid.player.name.substr(0,3)}}</sup>
       </td>
 
       <td *ngFor="let detail of round.details">
