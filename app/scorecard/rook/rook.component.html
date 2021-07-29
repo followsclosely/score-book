@@ -26,7 +26,7 @@
       {{round.number}}
       <button mat-button (click)="openEditRoundDialog(round)"><mat-icon>edit_note</mat-icon></button>
       
-      <mat-icon class="material-icons color_{{round.bid.trump}}">arrow_forward</mat-icon>
+      
     </td>
 
     <td>
@@ -35,7 +35,10 @@
         <div class="score-round">{{round.details[0].score | score}}</div>
       </div>
     </td>
-    <td class="color_{{round.bid.trump}}">{{round.bid.points}}</td>
+    <td class="color_{{round.bid.trump}}">
+      {{round.bid.points}}
+      <mat-icon class="material-icons color_{{round.bid.trump}}">arrow_forward</mat-icon>
+    </td>
     <td>
       <div class="score">
         <div class="score-total">{{round.details[0].totalScore}}</div>
